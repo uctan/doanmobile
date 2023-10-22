@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">doanmobile</string>
+    <string name="default_web_client_id">347355882231-n6a42nvk78h661tmoj0afk6mtta9lr8n.apps.googleusercontent.com</string>
+    <string name="gmail">gmail</string>
+
+    <string name="__ng_k__string">ng k</string>
+
+    <string name="trang_mua_s_m_ti_n_l_i_string">Trang mua sm tin li</string>
+    <string name="__n_v_i_easyads_b_n_s_____c_mua_s_m_m_t_c_ch_thu_n_l_i_v_i_nhi_u_th__lo_i_h_ng_kh_ng_gi_i_h_n_thanh_to_n___t_h_ng_m_t_c_ch_thu_n_ti_n_string">n vi EasyADs bn s c mua sm mt cch thun li vi nhiu th loi hng khng gii hn thanh ton t hng mt cch thun tin</string>
+
+    <string name="sign_in_string">sign iN</string>
+    <string name="__ng_nh_p_t_i_kho_n_string">ng Nhp  ti khon</string>
+    <string name="easyads_string">EasyADS</string>
+    <string name="username___email___phone_number_string">Username , Email &amp; Phone Number</string>
+    <string name="password_string">Password</string>
+    <string name="__ng_nh_p_string">ng nhp</string>
+    <string name="qu_n_m_t_kh_u_string">Qun mt khu</string>
+
+    <string name="b_n_ch_a___ng_k__t_i_kho_n____ng_k__string">Bn cha ng k ti khon?  ng k</string>
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="join_string">join</string>
+    <string name="__ng_k__t_i_kho_n_string">ng k ti khon</string>
+    <string name="__ng_k__t_i_kho_n_ek1_string">ng k ti khon</string>
+    <string name="or_sign_up_with_string">Or Sign up With</string>
+
+    <string name="title_string">Forgot your password</string>
+    <string name="enter_your_email_and_we_will_send_you_a_code_to_reset_your_password__string">Enter your email and we will send you a code to reset your password.</string>
+    <string name="input_value_string">itika21real@gmail.com</string>
+    <string name="label_string">Email</string>
+    <string name="label_ek1_string">Get code</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- base from your XD file. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="rectangle" >
+	<solid android:color="@color/enter_your_email_and_we_will_send_you_a_code_to_reset_your_password__color" />
+</shape>
+

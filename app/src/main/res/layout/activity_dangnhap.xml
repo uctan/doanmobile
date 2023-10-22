@@ -1,0 +1,353 @@
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:id="@+id/frame_43957"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/content_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/page_frame_43957_ek1"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+
+                <View
+                    android:id="@+id/rectangle_39945"
+                    android:background="@drawable/rectangle_39945_shape"
+                    android:alpha="0.70999997854233"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="204dp" />
+
+                <TextView
+                    android:id="@+id/sign_in"
+                    android:textStyle="bold"
+                    android:alpha="0.1"
+                    android:gravity="end"
+                    android:textSize="90sp"
+                    android:textColor="@color/sign_in_color"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginTop="54dp"
+                    android:layout_width="357.8dp"
+                    android:layout_height="166.8dp"
+                    android:text="Sign In" />
+
+                <TextView
+                    android:id="@+id/__ng_nh_p_t_i_kho_n"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:textSize="24sp"
+                    android:textColor="@color/_bg__frame_43957_ek2_color"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="128dp"
+                    android:layout_width="318.4dp"
+                    android:layout_height="52.4dp"
+                    android:text="Đăng nhập tài khoản" />
+
+                <RelativeLayout
+                    android:id="@+id/frame_2"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginStart="51dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/easyads"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:textSize="21.05sp"
+                        android:textColor="@color/_bg__frame_43957_ek2_color"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="-0.5dp"
+                        android:layout_width="111.10526313782dp"
+                        android:layout_height="31.105263137817dp"
+                        android:text="EasyAds" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/sky_blue_modern_shopping_sale_and_discount_instagram_story_1"
+                    android:src="@drawable/sky_blue_modern_shopping_sale_and_discount_instagram_story_1"
+                    android:contentDescription="sky_blue_modern_shopping_sale_and_discount_instagram_story_1"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="29dp"
+                    android:layout_width="35dp"
+                    android:layout_height="38.5dp" />
+
+                <RelativeLayout
+                    android:id="@+id/group_1"
+                    android:layout_width="390dp"
+                    android:layout_height="53dp"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="243dp">
+
+
+
+                    <EditText
+                        android:id="@+id/Emaildangnhap"
+                        android:layout_width="390dp"
+                        android:layout_height="59dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/rectangle_27_shape"
+                        android:hint="Email"
+                        android:paddingStart="10dp"
+                        />
+
+
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/Matkhaudangnhap"
+                    android:background="@drawable/rectangle_28_shape"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="337dp"
+                    android:layout_width="390dp"
+                    android:layout_height="59dp"
+                    android:hint="Mật Khẩu"
+                    android:paddingStart="10dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/vector"
+                    android:src="@drawable/vector"
+                    android:contentDescription="vector"
+                    android:layout_marginStart="366dp"
+                    android:layout_marginTop="362dp"
+                    android:layout_width="20dp"
+                    android:layout_height="12.86dp" />
+
+
+
+                <View
+                    android:id="@+id/btnDangNhap"
+                    android:background="@drawable/rectangle_25_shape"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="465dp"
+                    android:layout_width="359dp"
+                    android:layout_height="59dp" />
+
+                <TextView android:id="@+id/haha"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal|center"
+                    android:gravity="center"
+                    android:textSize="22sp"
+                    android:textColor="@color/_bg__frame_43957_ek2_color"
+                    android:layout_marginLeft="162dp"
+                    android:layout_marginTop="475dp"
+                    android:layout_width="118.2dp"
+                    android:layout_height="34.2dp"
+                    android:text="Đăng nhập"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/quenmatkhau"
+                    android:textSize="15sp"
+                    android:textColor="@color/qu_n_m_t_kh_u_color"
+                    android:layout_marginLeft="292dp"
+                    android:layout_marginTop="417dp"
+                    android:layout_width="116.5dp"
+                    android:layout_height="23.5dp"
+                    android:text="Quên mật khẩu?"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground" />
+
+
+                <RelativeLayout
+                    android:id="@+id/group_103"
+                    android:layout_marginTop="545dp"
+                    android:layout_marginStart="33dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+
+                    <View
+                        android:id="@+id/rectangle_29"
+                        android:background="@drawable/rectangle_29_shape"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="132dp"
+                        android:layout_height="3dp" />
+
+                    <View
+                        android:id="@+id/rectangle_30"
+                        android:background="@drawable/rectangle_30_shape"
+                        android:layout_marginStart="237dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="132dp"
+                        android:layout_height="3dp" />
+
+                    <TextView
+                        android:id="@+id/or_sign_up_with"
+                        android:textSize="12sp"
+                        android:textColor="@color/or_sign_up_with_color"
+                        android:layout_marginLeft="139dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="96.2dp"
+                        android:layout_height="18.2dp"
+                        android:text="Đăng nhập với" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/group_55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="42dp"
+                    android:layout_marginTop="600dp">
+
+
+                    <RelativeLayout
+                        android:id="@+id/component_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp">
+
+                        <ImageButton
+
+                            android:layout_width="102dp"
+                            android:layout_height="58dp"
+                            android:background="@drawable/face" />
+
+                        <RelativeLayout
+                            android:id="@+id/facebook"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="13dp">
+
+                            <RelativeLayout
+                                android:id="@+id/symbol"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="0dp">
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/component_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="118dp"
+                        android:layout_marginTop="0dp">
+
+                        <ImageButton
+                            android:id="@+id/dangnhapgmail"
+                            android:layout_width="102dp"
+                            android:layout_height="58dp"
+                            android:background="@drawable/gmail" />
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/component_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="236dp"
+                        android:layout_marginTop="0dp">
+
+
+                        <ImageButton
+                            android:id="@+id/loginwithapple"
+                            android:layout_width="102dp"
+                            android:layout_height="58dp"
+                            android:layout_marginStart="-1dp"
+                            android:layout_marginTop="-1dp"
+                            android:background="@drawable/iphone" />
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/frame_5"
+                    android:layout_marginTop="742dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:id="@+id/_bg__frame_5_ek1"
+                        android:background="@drawable/phanduoi"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="430dp"
+                        android:layout_height="44dp" />
+
+                    <TextView
+
+                        android:layout_width="180dp"
+                        android:layout_height="23.6dp"
+                        android:layout_marginLeft="72.5dp"
+                        android:layout_marginTop="12.5dp"
+
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Bạn chưa có taài khoản?"
+                        android:textColor="@color/b_n_ch_a___ng_k__t_i_kho_n____ng_k__color"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/chuyensangdangkytaikhoan"
+                        android:layout_width="70dp"
+                        android:layout_height="23.6dp"
+                        android:layout_marginLeft="260dp"
+                        android:layout_marginTop="12.5dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Đăng ký"
+                        android:textColor="#FF5C00"
+                        android:textSize="16sp"
+
+                        />
+
+
+
+                </RelativeLayout>
+
+
+
+
+
+
+                <View
+                    android:id="@+id/_bg__group_55_ek1"
+                    android:layout_width="338dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="-26dp"
+                    android:layout_marginTop="-597dp"
+                    android:background="@drawable/_bg__group_55_ek1_shape" />
+
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</HorizontalScrollView>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:title="Home" />
+    <item
+        android:id="@+id/timkiem"
+        android:icon="@drawable/timkiem"
+        android:title="Shop" />
+    <item
+        android:id="@+id/yeuthich"
+        android:icon="@drawable/yeuthich"
+        android:title="Favorites" />
+    <item
+        android:id="@+id/donhang"
+        android:icon="@drawable/donhang"
+        android:title="Đơn hàng" />
+    <item
+        android:id="@+id/nguoidung"
+        android:icon="@drawable/nguoidung"
+        android:title="Profile"
+        />
+</menu>

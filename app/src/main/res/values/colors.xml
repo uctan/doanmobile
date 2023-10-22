@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="orange">#FF5C00</color>
+    <color name="_bg__frame_43958_color">#FFFFFF</color>
+    <color name="rectangle_25_color">#F3F3F3</color>
+    <color name="__ng_k__color">#535050</color>
+    <color name="easyads_color">#464444</color>
+
+    <color name="__n_v_i_easyads_b_n_s_____c_mua_s_m_m_t_c_ch_thu_n_l_i_v_i_nhi_u_th__lo_i_h_ng_kh_ng_gi_i_h_n_thanh_to_n___t_h_ng_m_t_c_ch_thu_n_ti_n_color">#000000</color>
+
+
+    <color name="_bg__frame_43957_ek2_color">#FFFFFF</color>
+
+    <color name="sign_in_color">#000000</color>
+    <color name="rectangle_27_color">#F3F3F3</color>
+    <color name="username___email___phone_number_color">#666161</color>
+
+    <color name="qu_n_m_t_kh_u_color">#2C2626</color>
+
+
+    <color name="b_n_ch_a___ng_k__t_i_kho_n____ng_k__color">#535050</color>
+
+
+    <color name="_bg__quenmatkhau_ek2_color">#FFFFFF</color>
+    <color name="_bg__frame_43959_ek1_color">#000000</color>
+    <color name="title_color">#FF5B00</color>
+    <color name="enter_your_email_and_we_will_send_you_a_code_to_reset_your_password__color">#131313</color>
+    <color name="input_value_color">#194562</color>
+
+
+
+
+
+
+
+
+
+
+    <color name="_bg__frame_43843_ek2_color">#FFFFFF</color>
+    <color name="rectangle_39945_color">#FF5C00</color>
+    <color name="join_color">#000000</color>
+    <color name="background_color">#F4F4F4</color>
+    <color name="rectangle_29_color">#ffffff</color>
+    <color name="or_sign_up_with_color">#555151</color>
+
+
+
+    <color name="momo_color">#E0078C</color>
+    <color name="btn_selected">#7d004c</color>
+</resources>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".dangkynguoiban.dangkylenguoiban">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".dknhaban.DKNhaBanActivity">
+
+        <ImageView
+            android:id="@+id/dongdangkyshop"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/nhaban_x" />
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Đăng ký cửa hàng"
+            android:textColor="#FF9800"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/nhaban3" />
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="178dp"
+                android:layout_height="120dp"
+                android:src="@drawable/nhaban1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="25dp"
+                android:text="Shop Store"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="275dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_nhaban" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="-300dp"
+                    android:gravity="center"
+                    android:text="Tên cửa hàng"
+                    android:textColor="#AFA6A6"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/nhaptencuahang"
+                    android:layout_width="195dp"
+                    android:layout_height="40dp"
+                    android:background="@color/white"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_nhaban" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="-300dp"
+                    android:gravity="center"
+                    android:text="Địa chỉ"
+                    android:textColor="#AFA6A6"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/nhaptendiachi"
+                    android:layout_width="195dp"
+                    android:layout_height="65dp"
+                    android:background="@color/white"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:background="@drawable/background_nhaban" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="-300dp"
+                    android:gravity="center"
+                    android:text="Mô tả"
+                    android:textColor="#AFA6A6"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/nhapmotacuahang"
+                    android:layout_width="195dp"
+                    android:layout_height="115dp"
+                    android:background="@color/white"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:textSize="14dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+            <CheckBox
+                android:id="@+id/nguoibanthuong"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:button="@drawable/cb_icon"
+                android:text="Người bán thường"
+                android:textColor="@color/black" />
+
+            <CheckBox
+                android:id="@+id/nguoibanvip"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:button="@drawable/cb_icon"
+                android:text="Người bán Vip"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/dknguoiban"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="dknguoiban"
+            android:src="@drawable/nhaban2" />
+    </LinearLayout>
+</ScrollView>

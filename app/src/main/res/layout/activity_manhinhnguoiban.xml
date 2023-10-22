@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dangkynguoiban.manhinhnguoiban">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+
+                >
+                <TextView
+                    android:layout_width="230dp"
+                    android:layout_height="60dp"
+                    android:gravity="left|center"
+                    android:text="Quản lý cửa hàng"
+                    android:textStyle="bold"
+                     android:layout_marginStart="30dp"
+                    android:textSize="22sp"
+                    />
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="340dp"
+                    android:background="@drawable/thanhcongcu"
+                    android:layout_marginTop="10dp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="90dp"
+                >
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/shop"
+                    android:layout_marginStart="20dp"
+                    />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="30dp"
+                    android:textStyle="bold"
+                    android:text="Cửa hàng"
+                    android:textSize="17sp"
+                    android:layout_marginStart="90dp"
+                    />
+                <TextView
+                    android:id="@+id/tencuahangshop"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="60dp"
+                    android:textStyle="bold"
+                    android:text="Cửa hàng"
+                    android:textSize="17sp"
+                    android:layout_marginStart="90dp"
+                    />
+                
+                
+            </RelativeLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:layout_marginTop="220dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="30dp"
+                    android:text="Quản lý tài khoản cửa hàng"
+                    android:layout_marginStart="20dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#F88735"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/profile"/>
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/nguoidung"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginStart="20dp"
+                            />
+                        <TextView
+                            android:layout_width="300dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="60dp"
+                            android:gravity="left|center"
+                            android:text="Quản lý sản phẩm"
+                            />
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/backprofile"
+                            android:layout_marginStart="400dp"
+                            android:layout_marginTop="15dp"
+                            android:foregroundGravity="right|center"
+                            />
+
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/profile"/>
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/donhangcuatoi"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginStart="20dp"
+                            />
+                        <TextView
+                            android:layout_width="300dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="60dp"
+                            android:gravity="left|center"
+                            android:text="Quản lý hóa đơn"
+                            />
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/backprofile"
+                            android:layout_marginStart="400dp"
+                            android:layout_marginTop="15dp"
+                            android:foregroundGravity="right|center"
+                            />
+
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/profile"/>
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/review"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginStart="20dp"
+                            />
+                        <TextView
+                            android:layout_width="300dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="60dp"
+                            android:gravity="left|center"
+                            android:text="Xem Đánh giá của khách hàng"
+                            />
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/backprofile"
+                            android:layout_marginStart="400dp"
+                            android:layout_marginTop="15dp"
+                            android:foregroundGravity="right|center"
+                            />
+
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/profile"/>
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/nhantin"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginStart="20dp"
+                            />
+                        <TextView
+                            android:layout_width="300dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="60dp"
+                            android:gravity="left|center"
+                            android:text="Nhắn tin với khách hàng"
+                            />
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/backprofile"
+                            android:layout_marginStart="400dp"
+                            android:layout_marginTop="15dp"
+                            android:foregroundGravity="right|center"
+                            />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/dangxuatnguoiban"
+                android:layout_width="343dp"
+                android:layout_height="60dp"
+                android:background="@drawable/dangxuat"
+                android:layout_marginTop="530dp"
+                android:layout_marginStart="50dp"
+                />
+        </RelativeLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

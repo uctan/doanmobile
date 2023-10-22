@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".quenmatkhau">
+
+    <RelativeLayout
+        android:id="@+id/content_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/page_quenmatkhau_ek1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <View
+                android:id="@+id/_bg__quenmatkhau_ek2"
+                android:layout_width="393dp"
+                android:layout_height="786dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/_bg__quenmatkhau_ek2_shape" />
+
+            <RelativeLayout android:id="@+id/frame_43959"
+                android:layout_marginTop="130dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <View   android:id="@+id/_bg__frame_43959_ek1"
+
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="335dp"
+                    android:layout_height="80dp" />
+
+
+                <RelativeLayout android:id="@+id/frame_20456"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <View
+                        android:id="@+id/_bg__frame_20456_ek1"
+
+                        android:layout_width="335dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp" />
+
+                    <TextView android:id="@+id/title"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal|center"
+                        android:gravity="center"
+                        android:textSize="24sp"
+                        android:textColor="@color/title_color"
+                        android:layout_marginLeft="-4dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="342.4dp"
+                        android:layout_height="39.4dp"
+                        android:text="@string/title_string"
+                        />
+
+                    <TextView android:id="@+id/enter_your_email_and_we_will_send_you_a_code_to_reset_your_password_"
+                        android:layout_gravity="center_horizontal|center"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/enter_your_email_and_we_will_send_you_a_code_to_reset_your_password__color"
+                        android:layout_marginLeft="28dp"
+                        android:layout_marginTop="42dp"
+                        android:layout_width="281.4dp"
+                        android:layout_height="42.4dp"
+                        android:text="Vui lòng nhập email đăng nhập của bạn để có thể thay đổi mật khẩu"
+                        />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout android:id="@+id/nav_field"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+
+                <RelativeLayout android:id="@+id/left_side_icons"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                    <RelativeLayout android:id="@+id/icon___back"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+
+
+                        <RelativeLayout
+                            android:id="@+id/_24___arrows___chevron_left"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <ImageView android:id="@+id/back"
+                            android:src="@drawable/back"
+                            android:contentDescription="back"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="9.04dp"
+                            android:layout_width="10.31dp"
+                            android:layout_height="17.92dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout android:id="@+id/frame_20462"
+                android:layout_marginTop="263dp"
+                android:layout_marginStart="49dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+
+                <RelativeLayout android:id="@+id/input"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                    <RelativeLayout android:id="@+id/base_ek1"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <EditText   android:id="@+id/Emailquenmatkhau"
+                            android:background="@drawable/base_ek3_shape"
+                            android:layout_marginStart="-0.3dp"
+                            android:layout_marginTop="-0.3dp"
+                            android:layout_width="295dp"
+                            android:layout_height="44dp"
+                            android:hint="Nhập email của bạn"
+                            android:paddingStart="10dp"
+                            />
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout android:id="@+id/button"
+                android:layout_marginTop="349dp"
+                android:layout_marginStart="42dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <View   android:id="@+id/btnSendResetLink"
+                    android:background="@drawable/base_ek4_shape"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="313dp"
+                    android:layout_height="44dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    />
+
+                <TextView android:id="@+id/label_ek1"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal|center"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="@color/_bg__quenmatkhau_ek2_color"
+                    android:layout_marginLeft="83dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="150dp"
+                    android:layout_height="23.4dp"
+                    android:text="Lấy mật khẩu"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
