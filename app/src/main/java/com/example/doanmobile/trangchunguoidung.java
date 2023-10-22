@@ -32,6 +32,7 @@ public class trangchunguoidung extends AppCompatActivity {
     ImageView profile;
     //congkhanh
 //thanhsy
+    //thong
 
     @SuppressLint("MissingInflatedId")
     @Override
