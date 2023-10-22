@@ -31,7 +31,7 @@ public class trangchunguoidung extends AppCompatActivity {
     TextView tennguoidungtrangchu;
     ImageView profile;
     //congkhanh
-
+//thanhsy
 
     @SuppressLint("MissingInflatedId")
     @Override
