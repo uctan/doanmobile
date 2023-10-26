@@ -2,7 +2,9 @@ package com.example.doanmobile.dangkynguoiban;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.doanmobile.R;
@@ -17,11 +19,20 @@ public class manhinhnguoiban extends AppCompatActivity {
 
     TextView tencuahangshop;
     FirebaseFirestore db;
+    View quanlysanphamcuahang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manhinhnguoiban);
         tencuahangshop = findViewById(R.id.tencuahangshop);
+        quanlysanphamcuahang = findViewById(R.id.quanlysanphamcuahang);
+        quanlysanphamcuahang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(manhinhnguoiban.this, quanlysanphamthemsanpham.class);
+                startActivity(intent);
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
 

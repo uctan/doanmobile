@@ -15,6 +15,21 @@
         android:theme="@style/Theme.Doanmobile"
         tools:targetApi="31">
         <activity
+            android:name=".dangsanpham.chitietsanpham"
+            android:exported="false" />
+        <activity
+            android:name=".dangkynguoiban.quanlysanphamthemsanpham"
+            android:exported="false" />
+        <activity
+            android:name=".dangsanpham.tranggiaodienbanhang"
+            android:exported="false" />
+        <activity
+            android:name=".dangsanpham.UploadCategory"
+            android:exported="false" />
+        <activity
+            android:name=".dangsanpham.Uploadproduct"
+            android:exported="false" />
+        <activity
             android:name=".dangkygmail"
             android:exported="false" />
         <activity
