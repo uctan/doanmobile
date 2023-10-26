@@ -156,6 +156,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/bansanphamtrangchu"
                             android:layout_width="88dp"
                             android:layout_height="142dp"
                             android:scaleType="center"
