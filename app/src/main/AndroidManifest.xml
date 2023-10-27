@@ -46,7 +46,13 @@
             android:exported="false" />
         <activity
             android:name=".trangchunguoidung"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".dangky"
             android:exported="false" />
@@ -56,11 +62,7 @@
         <activity
             android:name=".dangnhap"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

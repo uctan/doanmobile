@@ -30,10 +30,7 @@ import java.util.List;
 public class trangchunguoidung extends AppCompatActivity {
 
     TextView tennguoidungtrangchu;
-    ImageView profile,bansanphamtrangchu;
-    //congkhanh
-//thanhsy
-    //thong
+    ImageView profile, bansanphamtrangchu;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,27 +53,40 @@ public class trangchunguoidung extends AppCompatActivity {
         FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
         FirebaseUser user = fAuth.getCurrentUser();
-        String userId = user.getUid();
-        DocumentReference userRef = fStore.collection("KhachHang").document(userId);
-        userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String fullName = documentSnapshot.getString("tenDayDu");
+        if (user != null) {
+            String userId = user.getUid();
+            DocumentReference userRef = fStore.collection("KhachHang").document(userId);
+            userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    String fullName = documentSnapshot.getString("tenDayDu");
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        tennguoidungtrangchu.setText(fullName);
-                    }
-                });
-            }
-        });
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tennguoidungtrangchu.setText(fullName);
+                        }
+                    });
+                }
+            });
+        }
+        //không có tài khoản
+        else {
+            tennguoidungtrangchu.setText("Khách.");
+        }
+
 
         //chuyen sang trang profile
         profile = findViewById(R.id.profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //k co tk
+                if (user == null) {
+                    Toast.makeText(trangchunguoidung.this, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangchunguoidung.this, dangnhap.class);
+                    startActivity(intent);
+                }
                 Intent intent = new Intent(trangchunguoidung.this, profileuser.class);
                 startActivity(intent);
             }
