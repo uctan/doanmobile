@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="120dp"
+    android:layout_height="46dp"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/theloaiitem"
+    android:background="@drawable/roundbackground"
+    card_view:cardCornerRadius="12dp">
+    <View
+        android:id="@+id/viewtheloai"
+        android:layout_width="120dp"
+        android:layout_height="46dp"
+        android:background="@drawable/roundbackground"
+        >
+    </View>
+    <TextView
+        android:id="@+id/tentheloaiidnha"
+        android:layout_width="120dp"
+        android:layout_height="46dp"
+        android:text="Tên thể loại"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        />
+
+</androidx.cardview.widget.CardView>

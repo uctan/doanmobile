@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dangsanpham.tranggiaodienbanhang">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="10dp"
+                >
+                <ImageView
+                    android:id="@+id/backnguoiban"
+                    android:layout_width="13dp"
+                    android:layout_height="21dp"
+                    android:background="@drawable/back"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginStart="25dp"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    >
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/icongiohang"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="140dp"
+                        />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginStart="190dp"
+                        android:text="EASYADS"
+                        android:gravity="left|center"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                        android:layout_marginStart="380dp"
+                        android:layout_marginTop="22dp"
+                    android:background="@drawable/giohangden" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="90dp">
+                    <androidx.appcompat.widget.SearchView
+                        android:layout_width="340dp"
+                        android:layout_height="43dp"
+                        android:layout_marginStart="25dp"
+                        android:id="@+id/search"
+                        app:searchHintIcon="@null"
+                        app:queryHint="Search..."
+                        android:background="@drawable/search2"
+
+                        />
+                    <ImageView
+                        android:layout_width="39dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="380dp"
+                        android:background="@drawable/congcutimkiemnha"
+                        />
+
+                </RelativeLayout>
+            </RelativeLayout>
+            <ViewFlipper
+                android:layout_width="346dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="180dp"
+                android:autoStart="true"
+                android:flipInterval="2000"
+                android:inAnimation="@android:anim/fade_in"
+                android:outAnimation="@android:anim/fade_out">
+
+                <ImageView
+                    android:id="@+id/home1"
+                    android:layout_width="346dp"
+                    android:layout_height="180dp"
+                    android:background="@drawable/home1"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/home2"
+                    android:layout_width="346dp"
+                    android:layout_height="180dp"
+                    android:background="@drawable/home2"
+                    android:contentDescription="home1" />
+
+                <ImageView
+                    android:id="@+id/home3"
+                    android:layout_width="346dp"
+                    android:layout_height="180dp"
+                    android:background="@drawable/home3"
+                    android:contentDescription="home1" />
+
+            </ViewFlipper>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="370dp"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="165dp"
+                    android:layout_height="160dp"
+                    android:background="@drawable/home4" />
+
+                <ImageView
+                    android:layout_width="165dp"
+                    android:layout_height="160dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/home5" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="393dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="560dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thể loại"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-100dp"
+
+                    android:text="Show all"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+
+                    />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginLeft="-15dp"
+                    android:layout_marginTop="1dp"
+                    android:src="@drawable/arrows" />
+            </LinearLayout>
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/theloaisanphamnha"
+               android:layout_width="370dp"
+               android:layout_height="60dp"
+               android:layout_marginTop="610dp"
+               android:layout_marginStart="40dp"
+               android:orientation="horizontal"
+               />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="680dp"
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/congcutimkiemnha"
+                    />
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="100dp"
+                    android:text="Bộ lọc tìm kiếm"
+                    android:textStyle="bold"
+                    android:gravity="left|center"
+                    android:textSize="20sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="750dp"
+                >
+                <CheckBox
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:text="Tìm kiếm theo giá từ thấp lên cao"
+                    android:layout_marginStart="35dp"
+                    />
+                <CheckBox
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:text="Tìm kiếm số lượt yêu thích"
+                    android:layout_marginStart="250dp"
+                    />
+                <CheckBox
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:text="Tìm kiếm theo đánh giá sản phẩm"
+                    android:layout_marginStart="250dp"
+                    android:layout_marginTop="60dp"
+                    />
+                <CheckBox
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="60dp"
+                    android:text="Tìm kiếm theo giá từ cao lên thấp"
+                    android:layout_marginStart="35dp"
+                    />
+
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dangbansanphamitem"
+                android:layout_marginStart="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="390dp"
+                android:layout_marginTop="880dp"
+                />
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

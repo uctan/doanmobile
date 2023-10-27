@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.doanmobile.dangsanpham.tranggiaodienbanhang;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +30,7 @@ import java.util.List;
 public class trangchunguoidung extends AppCompatActivity {
 
     TextView tennguoidungtrangchu;
-    ImageView profile;
+    ImageView profile,bansanphamtrangchu;
     //congkhanh
 //thanhsy
     //thong
@@ -39,9 +40,15 @@ public class trangchunguoidung extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trangchunguoidung);
-
-
-
+        //chuyensangtrangbanhang
+        bansanphamtrangchu = findViewById(R.id.bansanphamtrangchu);
+        bansanphamtrangchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(trangchunguoidung.this, tranggiaodienbanhang.class);
+                startActivity(intent);
+            }
+        });
 
         // lấy tên khách hàng vào trang chủ để hiện tên
         tennguoidungtrangchu = findViewById(R.id.tennguoidungtrangchu);
