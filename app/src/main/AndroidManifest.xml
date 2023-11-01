@@ -21,9 +21,6 @@
             android:name=".chat.ShopChat"
             android:exported="false" />
         <activity
-            android:name=".chat.ShopChatListActivity"
-            android:exported="false" />
-        <activity
             android:name=".chat.ChatActivity"
             android:exported="false" />
         <activity
@@ -31,6 +28,12 @@
             android:exported="false" />
         <activity
             android:name=".giohang.GioHangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".coicuahangshopdetail.cuahangshopdetail"
+            android:exported="false" />
+        <activity
+            android:name=".yeuthichsanpham.yeuthichsanpham"
             android:exported="false" />
         <activity
             android:name=".dangsanpham.chitietsanpham"
@@ -63,7 +66,7 @@
             android:name=".profileuser"
             android:exported="false" />
         <activity
-            android:name=".trangchunguoidung"
+            android:name=".dangnhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -78,7 +81,7 @@
             android:name=".quenmatkhau"
             android:exported="false" />
         <activity
-            android:name=".dangnhap"
+            android:name=".trangchunguoidung"
             android:exported="true"></activity>
     </application>
 

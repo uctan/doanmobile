@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.doanmobile.R;
+import com.example.doanmobile.chat.ChatActivity;
 import com.example.doanmobile.dangkynguoiban.Shop;
 import com.example.doanmobile.giohang.GioHangActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,7 +33,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class chitietsanpham extends AppCompatActivity {
     TextView detailtensp,detailgia,detailmotasp,detailsoluong,tinhtiengiohangdetail,detailtencuahang;
     View detailtru,detailcong,themgiohang;
-    ImageView detailanh,backnguoibanchitiet,detailgiohang;
+    ImageView detailanh,backnguoibanchitiet,detailgiohang,nhantinvoishop;
     //Thêm hoặc giảm số lượng sản phẩm
     double giacade ;
     int soLuong = 1;
@@ -56,6 +57,7 @@ public class chitietsanpham extends AppCompatActivity {
         themgiohang = findViewById(R.id.themgiohang);
         db = FirebaseFirestore.getInstance();
 
+        nhantinvoishop = findViewById(R.id.nhantinvoishop);
         //quavetrangnguoiban
         backnguoibanchitiet = findViewById(R.id.backnguoibanchitiet);
         backnguoibanchitiet.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +112,20 @@ public class chitietsanpham extends AppCompatActivity {
             }
         }
 
+        //nhantin voi shop
+        nhantinvoishop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lấy tên cửa hàng từ TextView
+                String shopName = detailtencuahang.getText().toString();
+                int shopId = bundle.getInt("shopId", 0);
+                Intent intent = new Intent(chitietsanpham.this, ChatActivity.class);
+                intent.putExtra("shopName", shopName);
+                intent.putExtra("shopId",shopId);
+                startActivity(intent);
+
+            }
+        });
         //giảm số lượng sản phẩm
         detailtru.setOnClickListener(new View.OnClickListener() {
             @Override

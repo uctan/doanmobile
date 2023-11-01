@@ -8,10 +8,11 @@ public class Products {
     private String description;
     private double price;
     private String imageURL;
+    private int likeCount;
 
     public Products(){}
 
-    public Products(int productID, int shopID, int categoryID, String title, String description, double price, String imageURL) {
+    public Products(int productID, int shopID, int categoryID, String title, String description, double price, String imageURL, int likeCount) {
         this.productID = productID;
         this.shopID = shopID;
         this.categoryID = categoryID;
@@ -19,8 +20,15 @@ public class Products {
         this.description = description;
         this.price = price;
         this.imageURL = imageURL;
+        this.likeCount = likeCount;
+    }
+    public int getLikeCount() {
+        return likeCount;
     }
 
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
     public int getProductID() {
         return productID;
     }

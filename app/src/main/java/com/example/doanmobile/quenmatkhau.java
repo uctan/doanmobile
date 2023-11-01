@@ -3,6 +3,7 @@ package com.example.doanmobile;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,13 +22,14 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class quenmatkhau extends AppCompatActivity {
-    ImageView back;
+    ImageView backquenmatkhau;
     View btnSendResetLink;
     FirebaseAuth mAuth;
     FirebaseFirestore firestore;
     EditText Emailquenmatkhau;
     String email;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,14 @@ public class quenmatkhau extends AppCompatActivity {
 
 
         Emailquenmatkhau = findViewById(R.id.Emailquenmatkhau);
-        back = findViewById(R.id.back);
+        backquenmatkhau = findViewById(R.id.backquenmatkhau);
+        backquenmatkhau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(quenmatkhau.this,dangnhap.class);
+                startActivity(intent);
+            }
+        });
         btnSendResetLink = findViewById(R.id.btnSendResetLink);
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();

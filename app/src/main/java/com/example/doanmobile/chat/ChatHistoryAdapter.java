@@ -59,7 +59,7 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter<ChatHistoryAdapter.
             super(itemView);
             textShopOrUserName = itemView.findViewById(R.id.textShopOrUserName);
             nhantinnguoidungvashopnha = itemView.findViewById(R.id.nhantinnguoidungvashopnha);
-            nhantinnguoidungvashopnha.setOnClickListener(v -> {
+            itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {
                     onItemClickListener.onItemClick(chatHistoryList.get(position)); // Gửi tin nhắn được chọn đến ChatActivity

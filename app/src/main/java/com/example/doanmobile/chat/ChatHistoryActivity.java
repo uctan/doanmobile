@@ -50,12 +50,6 @@ private TextView textShopOrUserName;
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         chatHistoryRecyclerView.setLayoutManager(layoutManager);
         chatHistoryAdapter.notifyDataSetChanged();
-
-
-
-
-        fetchChatHistory();
-
         chatHistoryAdapter.setOnItemClickListener(chatMessage -> {
             Intent intent = new Intent(ChatHistoryActivity.this, ChatActivity.class);
             intent.putExtra("shopName", chatMessage.getShopName());
@@ -63,6 +57,12 @@ private TextView textShopOrUserName;
             intent.putExtra("userID", chatMessage.getUserID());
             startActivity(intent);
         });
+
+
+
+        fetchChatHistory();
+
+
     }
 
 

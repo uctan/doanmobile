@@ -7,7 +7,7 @@
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
     app:cardCornerRadius="8dp"
-    android:id="@+id/recCard"
+    android:id="@+id/recCardfvr"
     tools:ignore="InvalidId">
 
     <RelativeLayout
@@ -28,17 +28,17 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="-1dp"
             />
-        
+
     </RelativeLayout>
     <ImageView
-        android:id="@+id/anhsanpham"
+        android:id="@+id/anhsanphamfvr"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/anhdemo"
         />
     <TextView
-        android:id="@+id/tensanphamnha"
+        android:id="@+id/tensanphamnhafvr"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginTop="130dp"
@@ -53,7 +53,7 @@
         android:layout_marginTop="150dp"
         >
         <TextView
-            android:id="@+id/giasanphamnha"
+            android:id="@+id/giasanphamnhafvr"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"

@@ -242,7 +242,7 @@ public class Uploadproduct extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference productsCollection = db.collection("Products");
         currentProductID++;
-        Products product = new Products(currentProductID, shopID, categoryID, title, mota, price, imageURL);
+        Products product = new Products(currentProductID, shopID, categoryID, title, mota, price, imageURL,0);
         String currentDate = DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
         Query query = productsCollection.whereEqualTo("title", currentDate);
         query.get().addOnCompleteListener(task -> {

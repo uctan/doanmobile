@@ -17,6 +17,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryHolder> {
     private Context context;
     private List<Category> categoryList;
 
+
     private OnCategoryClickListener onCategoryClickListener;
 
     public CategoryAdapter (Context context, List<Category> categoryList)
@@ -49,6 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryHolder> {
         });
 
 
+
     }
 
     @Override
@@ -59,6 +61,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryHolder> {
     public interface OnCategoryClickListener {
         void onCategoryClick(Category category);
     }
+    public void setOnCategoryClickListener(OnCategoryClickListener listener) {
+        this.onCategoryClickListener = listener;
+    }
+
 }
 class CategoryHolder extends RecyclerView.ViewHolder {
     TextView  tentheloaiidnha;
@@ -69,5 +75,13 @@ class CategoryHolder extends RecyclerView.ViewHolder {
         super(itemView);
         tentheloaiidnha = itemView.findViewById(R.id.tentheloaiidnha);
         viewtheloai = itemView.findViewById(R.id.viewtheloai);
+    }
+    public void setOnCategoryClickListener(CategoryAdapter.OnCategoryClickListener listener) {
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onCategoryClick(new Category());
+            }
+        });
     }
 }
