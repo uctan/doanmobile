@@ -16,20 +16,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ShopChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_SENT = 1;
     private static final int VIEW_TYPE_RECEIVED = 2;
 
     private List<ChatMessage> messages;
     private FirebaseUser currentUser;
 
-    public ChatAdapter(List<ChatMessage> messages, FirebaseUser currentUser) {
+    public ShopChatAdapter(List<ChatMessage> messages, FirebaseUser currentUser) {
         this.messages = messages;
         this.currentUser = currentUser;
     }
-
-
-
 
     @NonNull
     @Override
@@ -54,10 +51,17 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-
     @Override
     public int getItemCount() {
         return messages.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        // Implement the logic to return the view type (Sent or Received) based on your data
+        // For example, you can check if the message is sent by the current user or received.
+        // Return VIEW_TYPE_SENT or VIEW_TYPE_RECEIVED accordingly.
+        return super.getItemViewType(position);
     }
 
     public static class SentMessageHolder extends RecyclerView.ViewHolder {
@@ -75,7 +79,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    // Inner static class for ReceivedMessageHolder
     public static class ReceivedMessageHolder extends RecyclerView.ViewHolder {
         private TextView receivedMessageText, receivedMessageTime;
 
@@ -97,4 +100,3 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return sdf.format(dateObj);
     }
 }
-

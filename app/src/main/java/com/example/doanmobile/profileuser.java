@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.doanmobile.chat.ChatHistoryActivity;
 import com.example.doanmobile.dangkynguoiban.dangkylenguoiban;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +26,7 @@ public class profileuser extends AppCompatActivity {
     TextView tendayduprofile,tengmailprofile;
     ImageView backprofile,dangxuatpf;
 
-    View dkyngbanpf;
+    View dkyngbanpf,nhantinvoishoppf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,13 @@ public class profileuser extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+nhantinvoishoppf=findViewById(R.id.nhantinvoishoppf);
+nhantinvoishoppf.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent=new Intent(profileuser.this, ChatHistoryActivity.class);
+        startActivity(intent);
+    }
+});
     }
 }

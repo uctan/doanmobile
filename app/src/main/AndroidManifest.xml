@@ -15,6 +15,21 @@
         android:theme="@style/Theme.Doanmobile"
         tools:targetApi="31">
         <activity
+            android:name=".chat.NguoidungvoiShopActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.ShopChat"
+            android:exported="false" />
+        <activity
+            android:name=".chat.ShopChatListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.ChatHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".dangsanpham.chitietsanpham"
             android:exported="false" />
         <activity

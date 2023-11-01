@@ -1,37 +1,50 @@
 package com.example.doanmobile.chat;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.doanmobile.R;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChatHistoryAdapter extends RecyclerView.Adapter<ChatHistoryAdapter.ChatHistoryViewHolder> {
 
-    private ArrayList<ChatHistoryModel> chatHistoryList;
+    private List<ChatMessage> chatHistoryList;
+    private OnItemClickListener onItemClickListener;
 
-    public ChatHistoryAdapter() {
-        chatHistoryList = new ArrayList<>();
+    public interface OnItemClickListener {
+        void onItemClick(ChatMessage chatMessage);
+
     }
 
-    public void addChatHistory(ChatHistoryModel model) {
-        chatHistoryList.add(model);
+    public ChatHistoryAdapter(List<ChatMessage> chatHistoryList) {
+        this.chatHistoryList = chatHistoryList;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
+    public void updateChatHistoryList(List<ChatMessage> newChatHistoryList) {
+        chatHistoryList = newChatHistoryList;
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public ChatHistoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChatHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_history, parent, false);
         return new ChatHistoryViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ChatHistoryViewHolder holder, int position) {
-        ChatHistoryModel model = chatHistoryList.get(position);
-        holder.shopNameTextView.setText(model.getShopName());
+    public void onBindViewHolder(@NonNull ChatHistoryViewHolder holder, int position) {
+        ChatMessage chatMessage = chatHistoryList.get(position);
+        holder.bind(chatMessage);
     }
 
     @Override
@@ -39,12 +52,24 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter<ChatHistoryAdapter.
         return chatHistoryList.size();
     }
 
-    public static class ChatHistoryViewHolder extends RecyclerView.ViewHolder {
-        TextView shopNameTextView;
-
-        public ChatHistoryViewHolder(View itemView) {
+    public class ChatHistoryViewHolder extends RecyclerView.ViewHolder {
+        private TextView textShopOrUserName;
+        private CardView nhantinnguoidungvashopnha;
+        public ChatHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            shopNameTextView = itemView.findViewById(R.id.shopNameTextView);
+            textShopOrUserName = itemView.findViewById(R.id.textShopOrUserName);
+            nhantinnguoidungvashopnha = itemView.findViewById(R.id.nhantinnguoidungvashopnha);
+            nhantinnguoidungvashopnha.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {
+                    onItemClickListener.onItemClick(chatHistoryList.get(position)); // Gửi tin nhắn được chọn đến ChatActivity
+                }
+            });
+        }
+
+        public void bind(ChatMessage chatMessage) {
+            textShopOrUserName.setText(chatMessage.getShopName());
         }
     }
+
 }

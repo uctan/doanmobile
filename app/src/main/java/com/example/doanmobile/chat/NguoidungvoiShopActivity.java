@@ -1,108 +1,95 @@
 package com.example.doanmobile.chat;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doanmobile.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ChatHistoryActivity extends AppCompatActivity {
-
-    private RecyclerView chatHistoryRecyclerView;
-    private ChatHistoryAdapter chatHistoryAdapter;
-    private List<ChatMessage> chatHistoryList;
+public class NguoidungvoiShopActivity extends AppCompatActivity {
+    private RecyclerView nguoidungvoiShopRecyclerView;
+    private NguoidungvoiShopAdapter nguoidungvoiShopAdapter;
+    private List<ChatMessage> NguoidungvoiShopList;
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
-
-private TextView textShopOrUserName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_history);
+        setContentView(R.layout.activity_nguoidungvoi_shop);
 
         db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
 
-        chatHistoryRecyclerView = findViewById(R.id.chatHistoryRecyclerView);
-        chatHistoryList = new ArrayList<>();
-        chatHistoryAdapter = new ChatHistoryAdapter(chatHistoryList);
-        chatHistoryRecyclerView.setAdapter(chatHistoryAdapter);
+        nguoidungvoiShopRecyclerView= findViewById(R.id.nguoidungvoiShopRecyclerView);
+        NguoidungvoiShopList = new ArrayList<>();
+        nguoidungvoiShopAdapter = new NguoidungvoiShopAdapter(NguoidungvoiShopList);
+        nguoidungvoiShopRecyclerView.setAdapter(nguoidungvoiShopAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        chatHistoryRecyclerView.setLayoutManager(layoutManager);
-        chatHistoryAdapter.notifyDataSetChanged();
-
-
+        nguoidungvoiShopRecyclerView.setLayoutManager(layoutManager);
+        nguoidungvoiShopAdapter.notifyDataSetChanged();
 
 
         fetchChatHistory();
 
-        chatHistoryAdapter.setOnItemClickListener(chatMessage -> {
-            Intent intent = new Intent(ChatHistoryActivity.this, ChatActivity.class);
-            intent.putExtra("shopName", chatMessage.getShopName());
-            intent.putExtra("shopID", chatMessage.getShopID());
-            intent.putExtra("userID", chatMessage.getUserID());
+        nguoidungvoiShopAdapter.setOnItemClickListener(chatMessage -> {
+            Intent intent = new Intent(NguoidungvoiShopActivity.this, ShopChat.class);
+            intent.putExtra("tenDayDu", chatMessage.getTenDayDu());
+            intent.putExtra("shopID", chatMessage.getShopID()); // Bổ sung ID của shop
+            intent.putExtra("userID", chatMessage.getUserID()); // Bổ sung ID của người dùng/khách hàng
             startActivity(intent);
         });
+
     }
-
-
-
-
-
     private void fetchChatHistory() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        DocumentReference userRef = db.collection("KhachHang").document(currentUserID);
+        DocumentReference userRef = db.collection("Shop").document(currentUserID);
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
-                Long khachHangIDLong = documentSnapshot.getLong("userID");
-                int khachHangID = (khachHangIDLong != null) ? khachHangIDLong.intValue() : -1;
+                Long ShopIDLong = documentSnapshot.getLong("shopId");
+                int ShopID = (ShopIDLong != null) ? ShopIDLong.intValue() : -1;
 
                 CollectionReference chatCollectionRef = db.collection("chat");
-                chatCollectionRef.whereEqualTo("userID", khachHangID).get()
+                chatCollectionRef.whereEqualTo("shopID", ShopID).get()
 
                         .addOnSuccessListener(queryDocumentSnapshots -> {
-                            Set<String> uniqueShopNames = new HashSet<>();
+                            Set<String> uniquetenDayDu = new HashSet<>();
                             for (DocumentSnapshot document : queryDocumentSnapshots) {
-                                String shopName = document.getString("shopName");
+                                String tenDayDu = document.getString("tenDayDu");
 
-                                if (shopName != null) {
-                                    uniqueShopNames.add(shopName);
+                                if (tenDayDu != null) {
+                                    uniquetenDayDu.add(tenDayDu);
                                 } else {
-                                    Log.d("ChatHistoryActivity", "Invalid Data: Shop Name not found!");
+                                    Log.d("ChatHistoryActivity", "Invalid Data: tenDayDu not found!");
                                 }
                             }
 
                             // Add unique shop names to the chatHistoryList
-                            for (String shopName : uniqueShopNames) {
+                            for (String tenDayDu : uniquetenDayDu) {
                                 ChatMessage chatMessage = new ChatMessage();
-                                chatMessage.setShopName(shopName);
-                                chatHistoryList.add(chatMessage);
+                                chatMessage.setTenDayDu(tenDayDu);
+                                NguoidungvoiShopList.add(chatMessage);
                             }
 
                             // Cập nhật giao diện người dùng
-                            chatHistoryAdapter.notifyDataSetChanged();
+                            nguoidungvoiShopAdapter.notifyDataSetChanged();
                         })
                         .addOnFailureListener(e -> {
                             Log.e("ChatHistoryActivity", "Error getting chat history: ", e);
@@ -115,6 +102,4 @@ private TextView textShopOrUserName;
         });
     }
 
-
 }
-

@@ -8,10 +8,10 @@
 
     <!-- Thanh hiển thị tên cửa hàng -->
     <TextView
-        android:id="@+id/shopNameTextView"
+        android:id="@+id/tenDayduTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tên cửa hàng"
+        android:text="Tên Người dùng"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -58,9 +58,9 @@
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_chat"
+        android:id="@+id/recycle_shopchat"
         android:layout_margin="10sp"
-        app:layout_constraintTop_toBottomOf="@id/shopNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/tenDayduTextView"
         app:layout_constraintBottom_toTopOf="@id/line1"
         android:layout_width="match_parent"
         android:layout_height="0sp"/>

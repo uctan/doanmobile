@@ -1,5 +1,9 @@
 package com.example.doanmobile.chat;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,29 +12,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doanmobile.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import com.example.doanmobile.dangsanpham.chitietsanpham;
-public class ChatActivity extends AppCompatActivity {
 
+public class ShopChat extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private ChatAdapter chatAdapter;
+    private ShopChatAdapter shopChatAdapter;
     private List<ChatMessage> chatMessageList;
     private EditText messageEditText;
     private ImageView sendMessageImageView;
@@ -38,13 +36,13 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private int userID;
     private int shopID;
-    private String shopName;
+    private String tenDayDu;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_shop_chat);
 
         db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -54,50 +52,48 @@ public class ChatActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            shopName = intent.getStringExtra("shopName");
+            tenDayDu = intent.getStringExtra("tenDayDu");
             shopID = intent.getIntExtra("shopId", 0);
-            Log.d("ChatActivity", "Shop ID: " + shopID);
+            Log.d("ChatActivity", "User ID: " + userID);
             userID = intent.getIntExtra("userID", 0);
-            if (shopName != null) {
-                TextView shopNameTextView = findViewById(R.id.shopNameTextView);
-                shopNameTextView.setText(shopName);
+            if (tenDayDu != null) {
+                TextView tenDayduTextView = findViewById(R.id.tenDayduTextView);
+                tenDayduTextView.setText(tenDayDu);
             }
         }
 
 
-        recyclerView = findViewById(R.id.recycle_chat);
+        recyclerView = findViewById(R.id.recycle_shopchat);
         messageEditText = findViewById(R.id.edtinputtext);
         sendMessageImageView = findViewById(R.id.imagechat);
 
         chatMessageList = new ArrayList<>();
-        chatAdapter = new ChatAdapter(chatMessageList, currentUser);
+        shopChatAdapter = new ShopChatAdapter(chatMessageList, currentUser);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(chatAdapter);
+        recyclerView.setAdapter(shopChatAdapter);
         listenForMessages();
         sendMessageImageView.setOnClickListener(v -> {
             // Gọi phương thức để gửi tin nhắn ở đây
-            sendMessageToShop();
+            sendMessageToUser();
         });
         loadChatHistory();
-
-        
     }
 
-    private void sendMessageToShop() {
+    private void sendMessageToUser() {
         String messageText = messageEditText.getText().toString().trim();
 
         String userIDD= currentUser.getUid();
         db = FirebaseFirestore.getInstance();
-        DocumentReference userRef = db.collection("KhachHang").document(userIDD);
+        DocumentReference userRef = db.collection("Shop").document(userIDD);
 
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
-                int userID = documentSnapshot.getLong("userID").intValue();
-                String tenDayDu = documentSnapshot.getString("tenDayDu");
+                int ShopID = documentSnapshot.getLong("shopId").intValue();
+                String ShopName = documentSnapshot.getString("shopName");
                 if (!TextUtils.isEmpty(messageText)) {
-                    if (shopID != 0) {
+                    if (userID != 0) {
                         ChatMessage chatMessage = new ChatMessage();
                         chatMessage.setUserID(userID);
                         chatMessage.setShopID(shopID);
@@ -105,19 +101,19 @@ public class ChatActivity extends AppCompatActivity {
                         chatMessage.setDateObj(new Date());
                         chatMessage.setDatetime(getCurrentTimestamp());
                         chatMessage.setTenDayDu(tenDayDu);
-                        chatMessage.setShopName(shopName);
+                        chatMessage.setShopName(ShopName);
 
                         db.collection("chat")
                                 .add(chatMessage)
                                 .addOnSuccessListener(documentReference -> {
                                     chatMessageList.add(chatMessage);
-                                    chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                                   shopChatAdapter.notifyItemInserted(chatMessageList.size() - 1);
                                     recyclerView.scrollToPosition(chatMessageList.size() - 1);
                                     messageEditText.setText("");
                                 })
                                 .addOnFailureListener(e -> {
                                     // Xử lý khi gửi tin nhắn thất bại
-                                    Toast.makeText(ChatActivity.this, "Gửi tin nhắn không thành công", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ShopChat.this, "Gửi tin nhắn không thành công", Toast.LENGTH_SHORT).show();
                                 });
 
 
@@ -141,7 +137,7 @@ public class ChatActivity extends AppCompatActivity {
     }
     private void listenForMessages() {
         db.collection("chat")
-                .whereEqualTo("shopID", shopID)
+                .whereEqualTo("userID", userID)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         Log.e("ChatActivity", "Listen failed", error);
@@ -152,7 +148,7 @@ public class ChatActivity extends AppCompatActivity {
                         if (dc.getType() == DocumentChange.Type.ADDED) {
                             ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
                             chatMessageList.add(message);
-                            chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                            shopChatAdapter.notifyItemInserted(chatMessageList.size() - 1);
                             recyclerView.scrollToPosition(chatMessageList.size() - 1);
                         }
                     }
@@ -165,7 +161,7 @@ public class ChatActivity extends AppCompatActivity {
                 .whereEqualTo("userID", userID)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
-                        Log.e("ChatActivity", "Listen failed", error);
+                        Log.e("ShopChat", "Listen failed", error);
                         return;
                     }
 
@@ -173,7 +169,7 @@ public class ChatActivity extends AppCompatActivity {
                         if (dc.getType() == DocumentChange.Type.ADDED) {
                             ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
                             chatMessageList.add(message);
-                            chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                           shopChatAdapter.notifyItemInserted(chatMessageList.size() - 1);
                             recyclerView.scrollToPosition(chatMessageList.size() - 1);
                         }
                     }
