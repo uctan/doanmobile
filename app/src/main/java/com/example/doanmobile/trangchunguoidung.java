@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doanmobile.dangsanpham.tranggiaodienbanhang;
+import com.example.doanmobile.giohang.GioHangActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +31,7 @@ import java.util.List;
 public class trangchunguoidung extends AppCompatActivity {
 
     TextView tennguoidungtrangchu;
-    ImageView profile, bansanphamtrangchu;
+    ImageView profile, bansanphamtrangchu, donhang;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -92,5 +93,19 @@ public class trangchunguoidung extends AppCompatActivity {
             }
         });
 
+        donhang = findViewById(R.id.donhang);
+        donhang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //k co tk
+                if (user == null) {
+                    Toast.makeText(trangchunguoidung.this, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangchunguoidung.this, dangnhap.class);
+                    startActivity(intent);
+                }
+                Intent intent = new Intent(trangchunguoidung.this, GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

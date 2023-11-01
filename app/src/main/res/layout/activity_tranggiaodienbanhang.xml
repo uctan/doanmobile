@@ -47,6 +47,7 @@
                         android:textStyle="bold"
                         />
                     <ImageView
+                        android:id="@+id/giaodiengiohang"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                         android:layout_marginStart="380dp"
@@ -127,6 +128,13 @@
                     android:layout_height="160dp"
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/home5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thể loại"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="393dp"
@@ -136,13 +144,6 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Thể loại"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="80dp"
@@ -230,7 +231,6 @@
 
             </RelativeLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dangbansanphamitem"
                 android:layout_marginStart="20dp"
@@ -238,9 +238,6 @@
                 android:layout_height="390dp"
                 android:layout_marginTop="880dp"
                 />
-
-
-
         </RelativeLayout>
     </ScrollView>
 

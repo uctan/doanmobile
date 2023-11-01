@@ -30,6 +30,9 @@
             android:name=".chat.ChatHistoryActivity"
             android:exported="false" />
         <activity
+            android:name=".giohang.GioHangActivity"
+            android:exported="false" />
+        <activity
             android:name=".dangsanpham.chitietsanpham"
             android:exported="false" />
         <activity
@@ -61,7 +64,7 @@
             android:exported="false" />
         <activity
             android:name=".trangchunguoidung"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -76,9 +79,7 @@
             android:exported="false" />
         <activity
             android:name=".dangnhap"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

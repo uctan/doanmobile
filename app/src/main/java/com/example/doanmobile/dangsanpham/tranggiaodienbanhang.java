@@ -15,6 +15,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 
 import com.example.doanmobile.R;
+import com.example.doanmobile.giohang.GioHangActivity;
 import com.example.doanmobile.trangchunguoidung;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class tranggiaodienbanhang extends AppCompatActivity {
 
-    ImageView backnguoiban;
+    ImageView backnguoiban, giaodiengiohang;
 
     RecyclerView theloaisanphamnha;
     List<Category> categoryList;
@@ -59,7 +60,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //lay sanphamra
+        //lay sanpham ra
         productsList = new ArrayList<>();
         productAdapter = new ProductAdapter(tranggiaodienbanhang.this,productsList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(tranggiaodienbanhang.this,2);
@@ -119,7 +120,15 @@ public class tranggiaodienbanhang extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-
+        //giohang
+        giaodiengiohang=findViewById(R.id.giaodiengiohang);
+        giaodiengiohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(tranggiaodienbanhang.this, GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
         //dang san pham len
     }
 }

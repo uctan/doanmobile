@@ -51,6 +51,7 @@
                         android:textStyle="bold"
                         />
                     <ImageView
+                        android:id="@+id/detailgiohang"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginStart="380dp"
@@ -288,6 +289,7 @@
                     android:layout_marginStart="25dp"
                     />
                 <View
+                    android:id="@+id/themgiohang"
                     android:layout_width="158dp"
                     android:layout_height="58dp"
                    android:background="@drawable/themvaogiohangdetail"
@@ -313,6 +315,7 @@
                     android:layout_marginStart="155dp"
                     />
                 <View
+                    android:id="@+id/muangaydetail"
                     android:layout_width="118dp"
                     android:layout_height="58dp"
                     android:background="@drawable/muangaydetail"

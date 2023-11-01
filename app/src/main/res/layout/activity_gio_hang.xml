@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".giohang.GioHangActivity">
+
+    <ImageView
+        android:id="@+id/backgiohang1"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="343dp"
+
+        android:background="@drawable/ic_keyboard_arrow_left_48px" />
+
+    <TextView
+        android:layout_width="93dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="155dp"
+        android:text="Giỏ hàng"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="336dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="45dp"
+
+        android:background="@drawable/ic_chat_cart" />
+
+    <!-- res/layout/gio_hang.xml -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-1dp">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="34dp"
+                android:background="@drawable/vocher"/>
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="69dp"
+                android:background="@drawable/arrow_cart" />
+
+
+            <TextView
+                android:id="@+id/totalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="172dp"
+                android:layout_marginBottom="16dp"
+                android:text="0.0"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="128dp"
+                android:layout_height="57dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/ic_muahang_cart" />
+        </RelativeLayout>
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

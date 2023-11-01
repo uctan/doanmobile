@@ -54,6 +54,8 @@ public class ProductAdapter extends RecyclerView.Adapter<sanphamHolder> {
                 int shopId = data.getShopID();
                 intent.putExtra("shopId", shopId);
                 intent.putExtra("Giaca", giaCa);
+                int productID = data.getProductID();
+                intent.putExtra("productID",productID);
                 context.startActivity(intent);
             }
         });
