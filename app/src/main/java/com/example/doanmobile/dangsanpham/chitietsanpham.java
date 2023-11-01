@@ -12,9 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.doanmobile.R;
+import com.example.doanmobile.chat.ChatActivity;
 import com.example.doanmobile.dangkynguoiban.Shop;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,7 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class chitietsanpham extends AppCompatActivity {
     TextView detailtensp,detailgia,detailmotasp,detailsoluong,tinhtiengiohangdetail,detailtencuahang;
     View detailtru,detailcong;
-    ImageView detailanh,backnguoibanchitiet;
+    ImageView detailanh,backnguoibanchitiet,nhantinvoishop;
     //Thêm hoặc giảm số lượng sản phẩm
     double giacade ;
     int soLuong = 1;
@@ -50,7 +52,7 @@ public class chitietsanpham extends AppCompatActivity {
         detailanh = findViewById(R.id.detailanh);
         tinhtiengiohangdetail = findViewById(R.id.tinhtiengiohangdetail);
         detailtencuahang = findViewById(R.id.detailtencuahang);
-
+nhantinvoishop=findViewById(R.id.nhantinvoishop);
         db = FirebaseFirestore.getInstance();
 
         //quavetrangnguoiban
@@ -182,7 +184,21 @@ public class chitietsanpham extends AppCompatActivity {
             }
         });
 
+        // Trong chitietsanpham.java
+        nhantinvoishop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lấy tên cửa hàng từ TextView
+                String shopName = detailtencuahang.getText().toString();
+                int shopId = bundle.getInt("shopId", 0);
+                Intent intent = new Intent(chitietsanpham.this, ChatActivity.class);
+                intent.putExtra("shopName", shopName);
+                intent.putExtra("shopId",shopId);
+                startActivity(intent);
+
+            }
+        });
 
     }
-
 }
+
