@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.doanmobile.R;
-import com.example.doanmobile.chat.ChatActivity;
 import com.example.doanmobile.dangkynguoiban.Shop;
+import com.example.doanmobile.giohang.GioHangActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,8 +31,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class chitietsanpham extends AppCompatActivity {
     TextView detailtensp,detailgia,detailmotasp,detailsoluong,tinhtiengiohangdetail,detailtencuahang;
-    View detailtru,detailcong;
-    ImageView detailanh,backnguoibanchitiet,nhantinvoishop;
+    View detailtru,detailcong,themgiohang;
+    ImageView detailanh,backnguoibanchitiet,detailgiohang;
     //Thêm hoặc giảm số lượng sản phẩm
     double giacade ;
     int soLuong = 1;
@@ -52,7 +52,8 @@ public class chitietsanpham extends AppCompatActivity {
         detailanh = findViewById(R.id.detailanh);
         tinhtiengiohangdetail = findViewById(R.id.tinhtiengiohangdetail);
         detailtencuahang = findViewById(R.id.detailtencuahang);
-nhantinvoishop=findViewById(R.id.nhantinvoishop);
+        detailgiohang = findViewById(R.id.detailgiohang);
+        themgiohang = findViewById(R.id.themgiohang);
         db = FirebaseFirestore.getInstance();
 
         //quavetrangnguoiban
@@ -184,21 +185,33 @@ nhantinvoishop=findViewById(R.id.nhantinvoishop);
             }
         });
 
-        // Trong chitietsanpham.java
-        nhantinvoishop.setOnClickListener(new View.OnClickListener() {
+        //nut gio hang
+        detailgiohang=findViewById(R.id.detailgiohang);
+        detailgiohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Lấy tên cửa hàng từ TextView
-                String shopName = detailtencuahang.getText().toString();
-                int shopId = bundle.getInt("shopId", 0);
-                Intent intent = new Intent(chitietsanpham.this, ChatActivity.class);
-                intent.putExtra("shopName", shopName);
-                intent.putExtra("shopId",shopId);
+                Intent intent = new Intent(chitietsanpham.this, GioHangActivity.class);
                 startActivity(intent);
-
             }
         });
+        //button themgiohang
+        themgiohang=findViewById(R.id.themgiohang);
+        themgiohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+
+                CartItem tontai = CartManager.getInstance().getCarrtItemByProductID(bundle.getInt("productID"));
+                if (tontai != null){
+                    tontai.setQuantity(tontai.getQuantity() + soLuong);
+                }
+                else {
+                    CartItem cartItem = new CartItem(bundle.getInt("productID"), bundle.getString("Title"), giacade, bundle.getString("Image"),soLuong);
+                    CartManager.getInstance().addToCart(cartItem);
+                }
+                Toast.makeText(chitietsanpham.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-}
 
+}
