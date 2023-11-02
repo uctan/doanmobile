@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="310dp"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -10,12 +11,12 @@
         android:padding="10sp"
         android:text="Nội dung chat"
         android:textColor="@color/black"
-        android:background="@drawable/background_received_mess"
+        android:background="@color/b_n_ch_a___ng_k__t_i_kho_n____ng_k__color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.7"
         android:layout_marginLeft="15sp"
-        android:layout_width="0sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
         app:layout_constraintTop_toBottomOf="@id/txt_mess_received"

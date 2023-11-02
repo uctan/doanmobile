@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,12 +40,16 @@ public class ChatActivity extends AppCompatActivity {
     private int userID;
     private int shopID;
     private String shopName;
+    ImageView quaylaitinnhanchitiet;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        quaylaitinnhanchitiet = findViewById(R.id.quaylaitinnhanchitietnha);
+
 
         db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -82,7 +87,16 @@ public class ChatActivity extends AppCompatActivity {
         });
         loadChatHistory();
 
-        
+        quaylaitinnhanchitiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatActivity.this, chitietsanpham.class);
+                intent.putExtra("shopName", shopName);
+                intent.putExtra("shopId", shopID);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
+        });
     }
 
     private void sendMessageToShop() {
@@ -140,21 +154,35 @@ public class ChatActivity extends AppCompatActivity {
         return sdf.format(new Date());
     }
     private void listenForMessages() {
-        db.collection("chat")
-                .whereEqualTo("shopID", shopID)
-                .addSnapshotListener((value, error) -> {
+        String userIDD = currentUser.getUid();
+        db.collection("KhachHang").document(userIDD)
+                .addSnapshotListener((documentSnapshot, error) -> {
                     if (error != null) {
                         Log.e("ChatActivity", "Listen failed", error);
                         return;
                     }
 
-                    for (DocumentChange dc : value.getDocumentChanges()) {
-                        if (dc.getType() == DocumentChange.Type.ADDED) {
-                            ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
-                            chatMessageList.add(message);
-                            chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
-                            recyclerView.scrollToPosition(chatMessageList.size() - 1);
-                        }
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        int userID = documentSnapshot.getLong("userID").intValue();
+
+                        db.collection("chat")
+                                .whereEqualTo("shopID", shopID)
+                                .whereEqualTo("userID", userID)
+                                .addSnapshotListener((value, chatError) -> {
+                                    if (chatError != null) {
+                                        Log.e("ChatActivity", "Listen failed", chatError);
+                                        return;
+                                    }
+
+                                    for (DocumentChange dc : value.getDocumentChanges()) {
+                                        if (dc.getType() == DocumentChange.Type.ADDED) {
+                                            ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
+                                            chatMessageList.add(message);
+                                            chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                                            recyclerView.scrollToPosition(chatMessageList.size() - 1);
+                                        }
+                                    }
+                                });
                     }
                 });
     }

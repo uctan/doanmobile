@@ -3,13 +3,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="#F5F5F5">
 
-    <!-- RecyclerView để hiển thị danh sách người dùng đã chat với bạn và thông tin cửa hàng -->
 
+    <ImageView
+        android:id="@+id/quaylaitinnhanthongtincanhannguoidung"
+        android:layout_width="13dp"
+        android:layout_height="21dp"
+        android:background="@drawable/back"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="25dp"
+        />
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="120dp"
+        android:text="Tin nhắn với shop"
+        android:gravity="left|center"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatHistoryRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        />
 
 </RelativeLayout>

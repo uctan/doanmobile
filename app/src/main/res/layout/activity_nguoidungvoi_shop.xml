@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.NguoidungvoiShopActivity">
+    tools:context=".chat.NguoidungvoiShopActivity"
+    android:background="#F5F5F5"
+    >
 
+    <ImageView
+        android:id="@+id/quaylaitinnhanthongtincanhannguoiban"
+        android:layout_width="13dp"
+        android:layout_height="21dp"
+        android:background="@drawable/back"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="25dp"
+        />
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="110dp"
+        android:text="Tin nhắn với người dùng"
+        android:gravity="left|center"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nguoidungvoiShopRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        />
+</RelativeLayout>

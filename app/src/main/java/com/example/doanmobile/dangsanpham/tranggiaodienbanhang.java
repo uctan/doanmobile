@@ -19,6 +19,7 @@ import android.widget.ImageView;
 
 
 import com.example.doanmobile.R;
+import com.example.doanmobile.giohang.GioHangActivity;
 import com.example.doanmobile.trangchunguoidung;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,7 +41,7 @@ import java.util.List;
 
 public class tranggiaodienbanhang extends AppCompatActivity {
 
-    ImageView backnguoiban;
+    ImageView backnguoiban,giaodiengiohang;
 
     RecyclerView theloaisanphamnha;
     List<Category> categoryList;
@@ -71,6 +72,15 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         cbcaothap = findViewById(R.id.cbcaothap);
         cbsoluotyeuthich = findViewById(R.id.cbsoluotyeuthich);
 
+        giaodiengiohang = findViewById(R.id.giaodiengiohang);
+        giaodiengiohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(tranggiaodienbanhang.this, GioHangActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
 
         //chuyenvetrangchu

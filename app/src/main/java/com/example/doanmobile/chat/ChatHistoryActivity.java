@@ -3,6 +3,8 @@ package com.example.doanmobile.chat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doanmobile.R;
+import com.example.doanmobile.profileuser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,12 +35,23 @@ public class ChatHistoryActivity extends AppCompatActivity {
     private List<ChatMessage> chatHistoryList;
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
+    ImageView quaylaitinnhanthongtincanhannguoidung;
+
 
 private TextView textShopOrUserName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_history);
+
+        quaylaitinnhanthongtincanhannguoidung = findViewById(R.id.quaylaitinnhanthongtincanhannguoidung);
+        quaylaitinnhanthongtincanhannguoidung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatHistoryActivity.this, profileuser.class);
+                startActivity(intent);
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();

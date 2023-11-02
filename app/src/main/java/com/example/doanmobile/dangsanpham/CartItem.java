@@ -33,6 +33,7 @@ public class CartItem {
     }
 
     public double getPrice() {
+
         return price* this.quantity;
     }
 

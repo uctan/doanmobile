@@ -32,11 +32,11 @@ public class ShopChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (viewType == VIEW_TYPE_SENT) {
+        if (viewType == VIEW_TYPE_RECEIVED) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_send_mess, parent, false);
             return new SentMessageHolder(view);
         } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_received, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_send_mess, parent, false);
             return new ReceivedMessageHolder(view);
         }
     }
@@ -44,7 +44,7 @@ public class ShopChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ChatMessage message = messages.get(position);
-        if (holder.getItemViewType() == VIEW_TYPE_SENT) {
+        if (holder.getItemViewType() == VIEW_TYPE_RECEIVED) {
             ((SentMessageHolder) holder).bind(message);
         } else {
             ((ReceivedMessageHolder) holder).bind(message);
@@ -80,17 +80,17 @@ public class ShopChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public static class ReceivedMessageHolder extends RecyclerView.ViewHolder {
-        private TextView receivedMessageText, receivedMessageTime;
+        private TextView txt_messsend, txttimesend;
 
         public ReceivedMessageHolder(@NonNull View itemView) {
             super(itemView);
-            receivedMessageText = itemView.findViewById(R.id.txt_mess_received);
-            receivedMessageTime = itemView.findViewById(R.id.txt_time_received); // Ánh xạ TextView thời gian
+            txt_messsend = itemView.findViewById(R.id.txt_messsend);
+            txttimesend = itemView.findViewById(R.id.txttimesend); // Ánh xạ TextView thời gian
         }
 
         public void bind(ChatMessage message) {
-            receivedMessageText.setText(message.getMess());
-            receivedMessageTime.setText(formatDate(message.getDateObj())); // Hiển thị thời gian
+            txt_messsend.setText(message.getMess());
+            txttimesend.setText(formatDate(message.getDateObj())); // Hiển thị thời gian
         }
     }
 

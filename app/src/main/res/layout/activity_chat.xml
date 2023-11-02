@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".chat.ChatActivity">
 
+    <ImageView
+        android:id="@+id/quaylaitinnhanchitietnha"
+        android:layout_width="13dp"
+        android:layout_height="21dp"
+        android:background="@drawable/back"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+    <ImageView
+        android:id="@+id/hinhanhcuahangnhantin"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/shopNameTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/shop"
+
+        android:layout_marginTop="10dp"
+        tools:ignore="MissingConstraints" />
     <!-- Thanh hiển thị tên cửa hàng -->
     <TextView
         android:id="@+id/shopNameTextView"
@@ -17,6 +38,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="16dp" />
 
     <!-- LinearLayout chứa EditText và ImageView -->
@@ -59,7 +81,8 @@
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_chat"
-        android:layout_margin="10sp"
+        android:layout_margin="25sp"
+        android:layout_marginTop="30sp"
         app:layout_constraintTop_toBottomOf="@id/shopNameTextView"
         app:layout_constraintBottom_toTopOf="@id/line1"
         android:layout_width="match_parent"

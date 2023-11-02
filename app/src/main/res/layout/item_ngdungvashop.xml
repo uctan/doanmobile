@@ -4,14 +4,29 @@
     android:id="@+id/nguoibanchuyensangtinnhan"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="90dp">
+    android:layout_height="70dp"
+    android:clickable="true"
+    app:cardCornerRadius="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:src="@drawable/edit_1"
+        android:contentDescription="back"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:clickable="true"
+        android:focusable="true"
 
+        />
     <TextView
         android:id="@+id/textUserName"
         android:text="tên User"
         android:textSize="26dp"
         android:layout_width="410dp"
-        android:layout_height="90dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="60dp"
         android:clickable="true"/>
 
 

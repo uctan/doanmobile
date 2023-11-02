@@ -2,16 +2,27 @@
 <androidx.cardview.widget.CardView
 
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nhantinnguoidungvashopnha"
     android:layout_width="match_parent"
-    android:layout_height="40dp">
-
+    android:layout_height="70dp"
+    android:clickable="true"
+    app:cardCornerRadius="8dp">
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/shop"
+        />
     <TextView
         android:id="@+id/textShopOrUserName"
         android:text="tên Shop"
         android:textSize="26dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"/>
 
 

@@ -167,6 +167,7 @@ public class chitietsanpham extends AppCompatActivity {
                 if (bundle != null) {
                     Object giacaObject = bundle.get("Giaca");
 
+
                     if (giacaObject instanceof String) {
                         String giacaString = (String) giacaObject;
                         double giaca = Double.parseDouble(giacaString.trim());

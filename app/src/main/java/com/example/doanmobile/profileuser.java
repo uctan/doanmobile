@@ -2,6 +2,7 @@ package com.example.doanmobile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,8 +27,9 @@ public class profileuser extends AppCompatActivity {
     TextView tendayduprofile,tengmailprofile;
     ImageView backprofile,dangxuatpf;
 
-    View dkyngbanpf,nhantinvoishoppf;
+    View dkyngbanpf,nhantinvoishoppf,thaydoithongtinuser;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,15 @@ public class profileuser extends AppCompatActivity {
         //Cập nhật tên người dùng gmail tenday du len user
         tendayduprofile = findViewById(R.id.tendayduprofile);
         tengmailprofile = findViewById(R.id.tengmailprofile);
+        thaydoithongtinuser = findViewById(R.id.thaydoithongtinuser);
+        thaydoithongtinuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(profileuser.this, Profile.class);
+
+                startActivity(intent);
+            }
+        });
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 

@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.doanmobile.R;
+import com.example.doanmobile.dangkynguoiban.manhinhnguoiban;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -27,10 +30,19 @@ public class NguoidungvoiShopActivity extends AppCompatActivity {
     private List<ChatMessage> NguoidungvoiShopList;
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
+    ImageView quaylaitinnhanthongtincanhannguoiban;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nguoidungvoi_shop);
+        quaylaitinnhanthongtincanhannguoiban = findViewById(R.id.quaylaitinnhanthongtincanhannguoiban);
+        quaylaitinnhanthongtincanhannguoiban.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NguoidungvoiShopActivity.this, manhinhnguoiban.class);
+                startActivity(intent);
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();

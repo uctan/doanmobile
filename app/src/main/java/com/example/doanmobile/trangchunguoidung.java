@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doanmobile.dangsanpham.tranggiaodienbanhang;
+import com.example.doanmobile.yeuthichsanpham.yeuthichsanpham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +31,7 @@ import java.util.List;
 public class trangchunguoidung extends AppCompatActivity {
 
     TextView tennguoidungtrangchu;
-    ImageView profile,bansanphamtrangchu;
+    ImageView profile,bansanphamtrangchu,yeuthichtrangchu;
     //congkhanh
 //thanhsy
     //thong
@@ -40,6 +41,14 @@ public class trangchunguoidung extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trangchunguoidung);
+        yeuthichtrangchu = findViewById(R.id.yeuthichtrangchu);
+        yeuthichtrangchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(trangchunguoidung.this, yeuthichsanpham.class);
+                startActivity(intent);
+            }
+        });
         //chuyensangtrangbanhang
         bansanphamtrangchu = findViewById(R.id.bansanphamtrangchu);
         bansanphamtrangchu.setOnClickListener(new View.OnClickListener() {

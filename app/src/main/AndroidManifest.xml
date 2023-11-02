@@ -78,6 +78,12 @@
             android:name=".dangky"
             android:exported="false" />
         <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeProfile"
+            android:exported="false" />
+        <activity
             android:name=".quenmatkhau"
             android:exported="false" />
         <activity
