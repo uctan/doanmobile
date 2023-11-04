@@ -64,7 +64,16 @@
                 android:layout_marginBottom="69dp"
                 android:background="@drawable/arrow_cart" />
 
+            <TextView
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+
+                android:layout_marginBottom="16dp"
+                android:text="Tổng cộng"
+                android:textSize="18dp" />
             <TextView
                 android:id="@+id/totalTextView"
                 android:layout_width="wrap_content"
@@ -77,6 +86,7 @@
                 android:textSize="18dp" />
 
             <ImageView
+                android:id="@+id/thanhtoangiohang"
                 android:layout_width="128dp"
                 android:layout_height="57dp"
                 android:layout_alignParentEnd="true"

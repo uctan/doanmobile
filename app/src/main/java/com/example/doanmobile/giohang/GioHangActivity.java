@@ -31,13 +31,15 @@ public class GioHangActivity extends AppCompatActivity {
     private TextView totalTextView;
     private CartAdapter cartAdapter;
     private List<CartItem> cartItems;
-    ImageView cong,tru,back;
+    ImageView cong,tru,back,thanhtoangiohang;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gio_hang);
         listView = findViewById(R.id.listView);
+        thanhtoangiohang = findViewById(R.id.thanhtoangiohang);
         totalTextView = findViewById(R.id.totalTextView);
         cartItems = CartManager.getInstance().getCartItems();
         cartAdapter = new CartAdapter(this, cartItems);
@@ -59,9 +61,16 @@ public class GioHangActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //chuyenquatrangthanhtoan
+        thanhtoangiohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
     private void updateTotalPrice() {
         double total = CartManager.getInstance().getTotalPrice();
-        totalTextView.setText("Tổng cộng: " + total + " VNĐ");
+        totalTextView.setText(String.valueOf(total));
     }
 }
