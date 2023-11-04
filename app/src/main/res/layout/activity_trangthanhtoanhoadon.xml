@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".hoadon.trangthanhtoanhoadon">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/quaylaidondathang"
+                android:layout_width="13dp"
+                android:layout_height="21dp"
+                android:background="@drawable/back"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="25dp"
+                />
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="Thanh Toán"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="15dp"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="90dp"
+                >
+                <TextView
+                    android:layout_width="260dp"
+                    android:layout_height="40dp"
+                    android:text="Thông tin người đặt hàng"
+                    android:textStyle="bold"
+                    android:textSize="19sp"
+                    android:layout_marginStart="25dp"
+                    />
+
+                    <ImageView
+                        android:layout_width="404dp"
+                        android:layout_height="128dp"
+                        android:background="@drawable/thongtinhoadon"
+                        android:layout_marginTop="30dp"
+
+                        android:layout_marginStart="5dp"
+                        />
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:text="Nguyễn Trần Duy Tân"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="55dp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:text="0456456456"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginStart="55dp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:text="Ngày Đặt hàng:"
+                    android:layout_marginTop="110dp"
+                    android:layout_marginStart="55dp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:text="22/03/2003"
+                    android:layout_marginTop="110dp"
+                    android:layout_marginStart="155dp"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="250dp"
+                >
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="40dp"
+                    android:text="Địa chỉ giao hàng"
+                    android:textStyle="bold"
+                    android:textSize="19sp"
+                    android:layout_marginStart="25dp"
+                    />
+                <ImageView
+                    android:layout_width="404dp"
+                    android:layout_height="58dp"
+                    android:background="@drawable/thongtinhoadon"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="5dp"
+                    />
+                <EditText
+                    android:layout_width="360dp"
+                    android:layout_height="40dp"
+                    android:hint="Nhap Dia chi nhan hang"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="25dp"
+                    android:background="@null"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="350dp"
+                >
+                <TextView
+                    android:layout_width="260dp"
+                    android:layout_height="40dp"
+                    android:text="Phương thức thanh toán"
+                    android:textStyle="bold"
+                    android:textSize="19sp"
+                    android:layout_marginStart="25dp"
+                    />
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="30dp"
+                    android:drawableLeft="@drawable/tien"
+                    android:text="Thanh Toán tiền mặt"
+                    android:drawablePadding="10dp"
+                    android:paddingStart="20dp"
+                    android:textStyle="bold"
+                    android:textSize="19sp"
+                    />
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="110dp"
+                    android:layout_marginStart="30dp"
+                    android:drawableLeft="@drawable/momo"
+                    android:text="Thanh Toán Momo"
+                    android:drawablePadding="10dp"
+                    android:textStyle="bold"
+                    android:paddingStart="20dp"
+                    android:textSize="19sp"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="530dp"
+                >
+                <ListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="750dp"
+                android:background="@drawable/thongtinhoadon"
+                >
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="Số lượng:"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="2"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="330dp"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="Tổng tiền:"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginStart="30dp"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="130000"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginStart="130dp"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    />
+                <ImageView
+                    android:layout_width="158dp"
+                    android:layout_height="57dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="18dp"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/ic_muahang_cart" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
