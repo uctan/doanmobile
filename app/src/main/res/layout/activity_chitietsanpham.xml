@@ -264,13 +264,14 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/xuathiendanhgiatungsanpham"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginTop="690dp"
-                android:background="@color/white"
+                android:background="#F7F7F9"
                 >
-            </RelativeLayout>
+            </androidx.recyclerview.widget.RecyclerView>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"

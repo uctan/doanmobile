@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.doanmobile.chat.ChatHistoryActivity;
 import com.example.doanmobile.dangkynguoiban.dangkylenguoiban;
+import com.example.doanmobile.danhgiasanpham.trangxemdanhgianguoidung;
+import com.example.doanmobile.hoadon.xemhoadonuser;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,13 +29,22 @@ public class profileuser extends AppCompatActivity {
     TextView tendayduprofile,tengmailprofile;
     ImageView backprofile,dangxuatpf;
 
-    View dkyngbanpf,nhantinvoishoppf,thaydoithongtinuser;
+    View dkyngbanpf,nhantinvoishoppf,thaydoithongtinuser,xemdanhgianguoidungpf,xemhoadonpf;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profileuser);
+        xemdanhgianguoidungpf = findViewById(R.id.xemdanhgianguoidungpf);
+        xemhoadonpf = findViewById(R.id.xemhoadonpf);
+        xemhoadonpf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(profileuser.this, xemhoadonuser.class);
+                startActivity(intent);
+            }
+        });
 
         //Cập nhật tên người dùng gmail tenday du len user
         tendayduprofile = findViewById(R.id.tendayduprofile);
@@ -44,6 +55,13 @@ public class profileuser extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(profileuser.this, Profile.class);
 
+                startActivity(intent);
+            }
+        });
+        xemdanhgianguoidungpf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(profileuser.this, trangxemdanhgianguoidung.class);
                 startActivity(intent);
             }
         });

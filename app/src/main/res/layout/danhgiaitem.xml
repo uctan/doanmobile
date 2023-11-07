@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/danhgiansanphamcard"
+    app:cardCornerRadius="8dp">
+    <ImageView
+        android:id="@+id/anhdanhgiasanpham"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/anhdemo"
+        />
+    <TextView
+        android:id="@+id/tennguoidanhgia"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:text="Nguyễn Trần Duy Tân"
+        android:textStyle="bold"
+
+        />
+    <RatingBar
+        android:id="@+id/ratingBaritem"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="45dp"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:progressTint="#F2C94C"
+
+        />
+    <TextView
+        android:id="@+id/binhluandanhgia"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="85dp"
+        android:text="đánh giá sản phẩm"
+        android:textStyle="bold"
+
+        />
+
+
+</androidx.cardview.widget.CardView>

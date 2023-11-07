@@ -20,6 +20,7 @@ import com.example.doanmobile.dangsanpham.ProductAdapter;
 import com.example.doanmobile.dangsanpham.Products;
 import com.example.doanmobile.dangsanpham.chitietsanpham;
 import com.example.doanmobile.dangsanpham.tranggiaodienbanhang;
+import com.example.doanmobile.hoadon.trangthanhtoanhoadon;
 import com.example.doanmobile.trangchunguoidung;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -65,7 +66,9 @@ public class GioHangActivity extends AppCompatActivity {
         thanhtoangiohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(GioHangActivity.this, trangthanhtoanhoadon.class);
+                intent.putParcelableArrayListExtra("cartItems", new ArrayList<>(cartItems));
+                startActivity(intent);
             }
         });
     }

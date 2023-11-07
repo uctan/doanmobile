@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ordercardnhe"
+    app:cardCornerRadius="8dp">
+    <ImageView
+
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/edit_1"
+        />
+    <TextView
+        android:id="@+id/tennguoimuaorder"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:text="Nguyễn Trần Duy Tân"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/ngaynguoimuaorder"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="50dp"
+        android:text="Ngày đặt hàng"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/hinhthucnguoimuaorder"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="80dp"
+        android:text="Hình thức thanh toán"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/diachinguoimuaorder"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="110dp"
+        android:text="Địa chỉ"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/tongtiennguoimuaorder"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="140dp"
+        android:text="Tongtien"
+        android:textStyle="bold"
+        />
+</androidx.cardview.widget.CardView>

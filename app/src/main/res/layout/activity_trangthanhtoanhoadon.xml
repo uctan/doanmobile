@@ -55,6 +55,7 @@
                         android:layout_marginStart="5dp"
                         />
                 <TextView
+                    android:id="@+id/tenhoadon"
                     android:layout_width="150dp"
                     android:layout_height="20dp"
                     android:text="Nguyễn Trần Duy Tân"
@@ -63,6 +64,7 @@
                     android:textStyle="bold"
                     />
                 <TextView
+                    android:id="@+id/sodienthoaihoadon"
                     android:layout_width="150dp"
                     android:layout_height="20dp"
                     android:text="0456456456"
@@ -79,6 +81,7 @@
                     android:textStyle="bold"
                     />
                 <TextView
+                    android:id="@+id/ngaydathanghoadon"
                     android:layout_width="150dp"
                     android:layout_height="20dp"
                     android:text="22/03/2003"
@@ -109,6 +112,7 @@
                     android:layout_marginStart="5dp"
                     />
                 <EditText
+                    android:id="@+id/diachihoadon"
                     android:layout_width="360dp"
                     android:layout_height="40dp"
                     android:hint="Nhap Dia chi nhan hang"
@@ -133,6 +137,7 @@
                     android:layout_marginStart="25dp"
                     />
                 <CheckBox
+                    android:id="@+id/thanhtoantienmathoadon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
@@ -145,6 +150,7 @@
                     android:textSize="19sp"
                     />
                 <CheckBox
+                    android:id="@+id/thanhtoanhoadonmomo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="110dp"
@@ -157,22 +163,21 @@
                     android:textSize="19sp"
                     />
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="530dp"
-                >
-                <ListView
-                    android:id="@+id/listView"
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewThanhtoan"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="530dp"
+                android:layout_marginStart="10dp"
                     />
 
-            </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginTop="750dp"
+                android:layout_marginTop="850dp"
                 android:background="@drawable/thongtinhoadon"
                 >
                 <TextView
@@ -185,6 +190,7 @@
                     android:textSize="20dp"
                     />
                 <TextView
+                    android:id="@+id/soluongsanphamhoadon"
                     android:layout_width="120dp"
                     android:layout_height="30dp"
                     android:text="2"
@@ -203,6 +209,7 @@
                     android:textSize="20dp"
                     />
                 <TextView
+                    android:id="@+id/tongtinehoadon"
                     android:layout_width="120dp"
                     android:layout_height="30dp"
                     android:text="130000"
@@ -212,6 +219,7 @@
                     android:textSize="20dp"
                     />
                 <ImageView
+                    android:id="@+id/muahangdonhang"
                     android:layout_width="158dp"
                     android:layout_height="57dp"
                     android:layout_alignParentEnd="true"

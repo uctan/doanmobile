@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".hoadon.thanhtoanthanhcong"
+    android:background="#EFEFEF"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/white"
+            >
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="110dp"
+                android:layout_marginTop="80dp"
+                android:stepSize="0.5"
+                android:numStars="5"
+                android:rating="0"
+                android:isIndicator="false"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:progressTint="#F2C94C"
+                />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="571dp"
+            android:layout_marginTop="210dp"
+            android:background="@color/white"
+            >
+
+            <View
+                android:layout_width="400dp"
+                android:layout_height="380dp"
+                android:background="@drawable/tinnhandanhgia"
+                android:layout_marginTop="35dp"
+                android:layout_marginStart="20dp"
+                />
+            <TextView
+                android:layout_width="293dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginStart="70dp"
+                android:textStyle="bold"
+                android:text="Để lại đánh giá tốt cho cho chúng tôi  nha!"
+                android:textSize="20sp"
+                android:gravity="center"
+                />
+            <EditText
+                android:id="@+id/delaidanhgia"
+                android:layout_width="400dp"
+                android:layout_height="290dp"
+                android:background="@null"
+                android:layout_marginTop="125dp"
+                android:layout_marginStart="20dp"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:hint="Để lại đánh giá ở đây nhé"
+                />
+            <View
+                android:id="@+id/vetrangchudanhgia"
+                android:layout_width="175dp"
+                android:layout_height="50dp"
+                android:background="@drawable/vetrangchunha"
+                android:layout_marginTop="460dp"
+                android:layout_marginStart="30dp"
+                />
+            <View
+                android:id="@+id/luudanhgianha"
+                android:layout_width="175dp"
+                android:layout_height="50dp"
+                android:background="@drawable/luudanhgianha"
+                android:layout_marginTop="460dp"
+                android:layout_marginStart="230dp"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+        
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

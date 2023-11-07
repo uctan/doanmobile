@@ -29,6 +29,9 @@ public class CartAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        if (cartItems == null) {
+            return 0;
+        }
         return cartItems.size();
     }
 

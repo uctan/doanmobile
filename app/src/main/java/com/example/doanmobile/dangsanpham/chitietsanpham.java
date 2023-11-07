@@ -4,6 +4,9 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -18,6 +21,8 @@ import com.bumptech.glide.Glide;
 import com.example.doanmobile.R;
 import com.example.doanmobile.chat.ChatActivity;
 import com.example.doanmobile.dangkynguoiban.Shop;
+import com.example.doanmobile.danhgiasanpham.ReViewAdapter;
+import com.example.doanmobile.danhgiasanpham.Review;
 import com.example.doanmobile.giohang.GioHangActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,7 +33,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class chitietsanpham extends AppCompatActivity {
     TextView detailtensp,detailgia,detailmotasp,detailsoluong,tinhtiengiohangdetail,detailtencuahang;
@@ -39,6 +48,10 @@ public class chitietsanpham extends AppCompatActivity {
     int soLuong = 1;
     FirebaseFirestore db;
 
+    //xuathien danh gia san pham
+    RecyclerView xuathiendanhgiatungsanpham;
+    ReViewAdapter reViewAdapter;
+    List<Review> reviewList;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +68,10 @@ public class chitietsanpham extends AppCompatActivity {
         detailtencuahang = findViewById(R.id.detailtencuahang);
         detailgiohang = findViewById(R.id.detailgiohang);
         themgiohang = findViewById(R.id.themgiohang);
+        xuathiendanhgiatungsanpham = findViewById(R.id.xuathiendanhgiatungsanpham);
         db = FirebaseFirestore.getInstance();
 
         nhantinvoishop = findViewById(R.id.nhantinvoishop);
-        //quavetrangnguoiban
-        backnguoibanchitiet = findViewById(R.id.backnguoibanchitiet);
-        backnguoibanchitiet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chitietsanpham.this,tranggiaodienbanhang.class);
-                startActivity(intent);
-            }
-        });
-
         //hieện chi tiết sản phẩm
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -76,15 +80,15 @@ public class chitietsanpham extends AppCompatActivity {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 DocumentReference shopRef = db.collection("Shop").document(String.valueOf(shopId));
 
-               shopRef.get().addOnCompleteListener(task -> {
-                   if (task.isSuccessful()) {
-                       DocumentSnapshot document = task.getResult();
-                       if (document.exists()) {
-                           String shopName = document.getString("shopName");
-                           detailtencuahang.setText(shopName);
-                       }
-                   }
-               });
+                shopRef.get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            String shopName = document.getString("shopName");
+                            detailtencuahang.setText(shopName);
+                        }
+                    }
+                });
 
 
                 detailtensp.setText(bundle.getString("Title"));
@@ -111,6 +115,40 @@ public class chitietsanpham extends AppCompatActivity {
                 Log.e(TAG, "Error: " + e.getMessage());
             }
         }
+        //xuat hien phan danh gia
+        reviewList = new ArrayList<>();
+        reViewAdapter = new ReViewAdapter(chitietsanpham.this,reviewList);
+
+        xuathiendanhgiatungsanpham.setLayoutManager(new LinearLayoutManager(this));
+        xuathiendanhgiatungsanpham.addItemDecoration(new ItemSpacingDecoration(16));
+        xuathiendanhgiatungsanpham.setAdapter(reViewAdapter);
+        FirebaseFirestore db1 = FirebaseFirestore.getInstance();
+        CollectionReference reviewCollectionRef = db1.collection("Reviews");
+        Query reviewQuery = reviewCollectionRef.whereEqualTo("productID", bundle.getInt("productID"));
+
+        reviewQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Review review = document.toObject(Review.class);
+                    reviewList.add(review);
+                }
+                // Thông báo cho adapter biết dữ liệu đã thay đổi
+                reViewAdapter.notifyDataSetChanged();
+            } else {
+                // Xử lý trường hợp không thành công
+            }
+        });
+        //quavetrangnguoiban
+        backnguoibanchitiet = findViewById(R.id.backnguoibanchitiet);
+        backnguoibanchitiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(chitietsanpham.this,tranggiaodienbanhang.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         //nhantin voi shop
         nhantinvoishop.setOnClickListener(new View.OnClickListener() {

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".hoadon.xemhoadonuser">
+    <RelativeLayout android:id="@+id/yeuthich"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <RelativeLayout android:id="@+id/page_giohang_ek1"
+            android:layout_marginTop="50dp"
+            android:layout_width="450dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            >
+            <TextView
+                android:layout_width="256dp"
+                android:layout_height="44dp"
+                android:text="Hóa đơn"
+                android:textStyle="bold"
+                android:textSize="32sp"
+                android:layout_marginTop="2dp"
+                android:textColor="#FF9431"
+                />
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="320dp"
+                android:background="@drawable/close"
+                android:id="@+id/closeorderuser"
+                />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginStart="20dp"
+            android:text="Hóa đơn đặt mua"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewOrderuser"
+            android:layout_width="450dp"
+            android:layout_height="550dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginStart="10dp"
+
+            />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

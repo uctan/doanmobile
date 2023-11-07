@@ -1,11 +1,15 @@
 package com.example.doanmobile.dangsanpham;
 
-public class CartItem {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CartItem implements Parcelable {
     private int productID;
     private String title;
     private double price;
     private String imageURL;
     private int quantity;
+
 
     public CartItem(int productID, String title, double price, String imageURL, int quantity) {
         this.productID = productID;
@@ -15,6 +19,39 @@ public class CartItem {
         this.quantity=quantity;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(productID);
+        dest.writeString(title);
+        dest.writeDouble(price);
+        dest.writeString(imageURL);
+        dest.writeInt(quantity);
+    }
+
+    protected CartItem(Parcel in) {
+        productID = in.readInt();
+        title = in.readString();
+        price = in.readDouble();
+        imageURL = in.readString();
+        quantity = in.readInt();
+    }
+
+    public static final Parcelable.Creator<CartItem> CREATOR = new Parcelable.Creator<CartItem>() {
+        @Override
+        public CartItem createFromParcel(Parcel in) {
+            return new CartItem(in);
+        }
+
+        @Override
+        public CartItem[] newArray(int size) {
+            return new CartItem[size];
+        }
+    };
 
     public int getProductID() {
         return productID;
