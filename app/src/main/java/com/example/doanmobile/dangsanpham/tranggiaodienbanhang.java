@@ -16,9 +16,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.example.doanmobile.R;
+import com.example.doanmobile.dangnhap;
 import com.example.doanmobile.giohang.GioHangActivity;
 import com.example.doanmobile.trangchunguoidung;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,7 +35,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import androidx.appcompat.widget.SearchView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -41,7 +45,7 @@ import java.util.List;
 
 public class tranggiaodienbanhang extends AppCompatActivity {
 
-    ImageView backnguoiban,giaodiengiohang;
+    ImageView backnguoiban, giaodiengiohang;
 
     RecyclerView theloaisanphamnha;
     List<Category> categoryList;
@@ -58,7 +62,8 @@ public class tranggiaodienbanhang extends AppCompatActivity {
     SearchView searchView;
     private List<Integer> favoriteProducts = new ArrayList<>();
 
-    CheckBox cbthapcao,cbcaothap,cbsoluotyeuthich;
+    CheckBox cbthapcao, cbcaothap, cbsoluotyeuthich;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +77,24 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         cbcaothap = findViewById(R.id.cbcaothap);
         cbsoluotyeuthich = findViewById(R.id.cbsoluotyeuthich);
 
+        //lấy user
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+
+        FirebaseUser user = fAuth.getCurrentUser();
+
         giaodiengiohang = findViewById(R.id.giaodiengiohang);
         giaodiengiohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(tranggiaodienbanhang.this, GioHangActivity.class);
-                startActivity(intent);
 
+                if (user == null) {
+                    Toast.makeText(tranggiaodienbanhang.this, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(tranggiaodienbanhang.this, dangnhap.class);
+                    startActivity(intent);
+                } else {
+                Intent intent = new Intent(tranggiaodienbanhang.this, GioHangActivity.class);
+                startActivity(intent);}
             }
         });
 
@@ -94,9 +110,9 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         });
         //lay sanphamra
         productsList = new ArrayList<>();
-        productAdapter = new ProductAdapter(tranggiaodienbanhang.this,productsList);
+        productAdapter = new ProductAdapter(tranggiaodienbanhang.this, productsList);
         productAdapter.updateProductFavoriteStatus(favoriteProducts);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(tranggiaodienbanhang.this,2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(tranggiaodienbanhang.this, 2);
         dangbansanphamitem.setLayoutManager(gridLayoutManager);
         dangbansanphamitem.setAdapter(productAdapter);
         productCollection = FirebaseFirestore.getInstance().collection("Products");
@@ -114,8 +130,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
                     return;
                 }
                 productsList.clear();
-                for (DocumentSnapshot documentSnapshot : value)
-                {
+                for (DocumentSnapshot documentSnapshot : value) {
                     Products products = documentSnapshot.toObject(Products.class);
                     productsList.add(products);
                 }
@@ -127,7 +142,6 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         //the loaisanpham
         categoryCollection = db.collection("Category");
         theloaisanphamnha.setAdapter(adapter);
-
 
 
         categoryList = new ArrayList<>();
@@ -212,6 +226,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
             }
         });
     }
+
     //tim kiem theo san pham yeu thich
     private void sortByLikeCount() {
         // Sắp xếp danh sách sản phẩm theo số lượt yêu thích (likeCount)
@@ -225,6 +240,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         // Cập nhật RecyclerView
         productAdapter.notifyDataSetChanged();
     }
+
     //tim kiem san pham theo the loan
     private void loadProductsByCategory(int categoryID) {
         productCollection.whereEqualTo("categoryID", categoryID)
@@ -244,6 +260,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
                     }
                 });
     }
+
     //tim kiem theo ten
     public void searchList(String text) {
         ArrayList<Products> searchList = new ArrayList<>();
@@ -254,6 +271,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         }
         productAdapter.searchDataList(searchList);
     }
+
     //Tim kiem san pham tu thap den cao
     private void sortByPriceLowToHigh() {
         // Sắp xếp danh sách sản phẩm từ thấp đến cao
@@ -267,6 +285,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         // Cập nhật RecyclerView
         productAdapter.notifyDataSetChanged();
     }
+
     //Tim kiem san pham tu cao den thap
     private void sortByPriceHighToLow() {
         // Sắp xếp danh sách sản phẩm từ cao đến thấp
@@ -280,48 +299,53 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         // Cập nhật RecyclerView
         productAdapter.notifyDataSetChanged();
     }
+
     private void loadFavoriteProducts() {
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fAuth.getCurrentUser();
         FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        String userId = user.getUid();
-        DocumentReference userRef = fStore.collection("KhachHang").document(userId);
-        userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    int userID = documentSnapshot.getLong("userID").intValue();
+        if (user != null) {
+            String userId = user.getUid();
+            DocumentReference userRef = fStore.collection("KhachHang").document(userId);
+            userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        int userID = documentSnapshot.getLong("userID").intValue();
 
-                    // Tiếp tục xử lý với userID tại đây...
+                        // Tiếp tục xử lý với userID tại đây...
 
-                    // Lấy reference đến collection "favorites" và thực hiện truy vấn
-                    fStore.collection("favorites")
-                            .whereEqualTo("userID", userID)
-                            .get()
-                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    favoriteProducts.clear();
-                                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                        // Lấy productID từ document
-                                        int productID = document.getLong("productID").intValue();
-                                        favoriteProducts.add(productID);
+                        // Lấy reference đến collection "favorites" và thực hiện truy vấn
+                        fStore.collection("favorites")
+                                .whereEqualTo("userID", userID)
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        favoriteProducts.clear();
+                                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                            // Lấy productID từ document
+                                            int productID = document.getLong("productID").intValue();
+                                            favoriteProducts.add(productID);
+                                        }
+
+                                        // Cập nhật vào adapter
+                                        if (productAdapter != null) {
+                                            productAdapter.updateProductFavoriteStatus(favoriteProducts);
+                                        }
                                     }
-
-                                    // Cập nhật vào adapter
-                                    if (productAdapter != null) {
-                                        productAdapter.updateProductFavoriteStatus(favoriteProducts);
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Xảy ra lỗi khi truy vấn Firestore
                                     }
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Xảy ra lỗi khi truy vấn Firestore
-                                }
-                            });
+                                });
+                    }
                 }
-            }
-        });
+            });
+        } else {
+
+        }
     }
 }

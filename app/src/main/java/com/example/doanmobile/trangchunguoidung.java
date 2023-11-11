@@ -32,7 +32,7 @@ import java.util.List;
 public class trangchunguoidung extends AppCompatActivity {
 
     TextView tennguoidungtrangchu;
-    ImageView profile,bansanphamtrangchu,yeuthichtrangchu,donhang;
+    ImageView profile, bansanphamtrangchu, yeuthichtrangchu, donhang;
     //congkhanh
 //thanhsy
     //thong
@@ -44,18 +44,55 @@ public class trangchunguoidung extends AppCompatActivity {
         setContentView(R.layout.activity_trangchunguoidung);
         yeuthichtrangchu = findViewById(R.id.yeuthichtrangchu);
         donhang = findViewById(R.id.donhang);
+
+        // lấy tên khách hàng vào trang chủ để hiện tên
+        tennguoidungtrangchu = findViewById(R.id.tennguoidungtrangchu);
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+
+        FirebaseUser user = fAuth.getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            DocumentReference userRef = fStore.collection("KhachHang").document(userId);
+            userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    String fullName = documentSnapshot.getString("tenDayDu");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tennguoidungtrangchu.setText(fullName);
+                        }
+                    });
+                }
+            });
+        } else {
+            tennguoidungtrangchu.setText("Khách vãng lai");
+        }
         donhang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(trangchunguoidung.this, xemhoadonuser.class);
-                startActivity(intent);
+                if (user == null) {
+                    Toast.makeText(trangchunguoidung.this, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangchunguoidung.this, dangnhap.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(trangchunguoidung.this, xemhoadonuser.class);
+                    startActivity(intent);
+                }
             }
         });
         yeuthichtrangchu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(trangchunguoidung.this, yeuthichsanpham.class);
-                startActivity(intent);
+                if (user == null) {
+                    Toast.makeText(trangchunguoidung.this, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangchunguoidung.this, dangnhap.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(trangchunguoidung.this, yeuthichsanpham.class);
+                    startActivity(intent);
+                }
             }
         });
         //chuyensangtrangbanhang
@@ -67,36 +104,19 @@ public class trangchunguoidung extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        // lấy tên khách hàng vào trang chủ để hiện tên
-        tennguoidungtrangchu = findViewById(R.id.tennguoidungtrangchu);
-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-
-        FirebaseUser user = fAuth.getCurrentUser();
-        String userId = user.getUid();
-        DocumentReference userRef = fStore.collection("KhachHang").document(userId);
-        userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String fullName = documentSnapshot.getString("tenDayDu");
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        tennguoidungtrangchu.setText(fullName);
-                    }
-                });
-            }
-        });
-
         //chuyen sang trang profile
         profile = findViewById(R.id.profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(trangchunguoidung.this, profileuser.class);
-                startActivity(intent);
+                if (user == null) {
+                    Toast.makeText(trangchunguoidung.this, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangchunguoidung.this, dangnhap.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(trangchunguoidung.this, profileuser.class);
+                    startActivity(intent);
+                }
             }
         });
 

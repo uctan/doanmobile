@@ -1,30 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".coicuahangshopdetail.cuahangshopdetail">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F5F5F5">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView android:id="@+id/backquenmatkhau"
-                android:src="@drawable/back"
-                android:contentDescription="back"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="20dp"
-                android:layout_width="12dp"
-                android:layout_height="19dp"
-              />
+            <RelativeLayout
+                android:id="@+id/hienthicuahang"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/background_start"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/backcuahang"
+                    android:layout_width="12dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="20dp"
+                    android:contentDescription="back"
+                    android:src="@drawable/back_white" />
+
+                <ImageView
+                    android:id="@+id/anhcuahangshopdetail"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="70dp"
+                    android:src="@drawable/shop" />
+
+                <TextView
+                    android:id="@+id/tencuahangsd"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="78dp"
+                    android:layout_marginEnd="113dp"
+                    android:gravity="center"
+                    android:text="Tên Cửa hàng"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="88dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/theodoishop_white" />
+
+                <ImageView
+                    android:id="@+id/nhantincuahangsd"
+                    android:layout_width="88dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="307dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/nhantinvoishop_white" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/diachimota"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_below="@+id/hienthicuahang"
+                android:layout_marginTop="5dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="312dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="15dp"
+                    android:text="Mô tả: "
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/motacuahangsd"
+                    android:layout_width="270dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="33dp"
+                    android:gravity="center"
+                    android:text="textmt"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="310dp"
+                    android:layout_marginBottom="23dp"
+                    android:paddingLeft="10dp"
+                    android:text="Địa chỉ: "
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/diachicuhangsd"
+                    android:layout_width="270dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="33dp"
+                    android:layout_marginBottom="22dp"
+                    android:gravity="center"
+                    android:text="text"
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sanphamtheoshop"
+                android:layout_width="match_parent"
+                android:layout_height="800dp"
+                android:layout_below="@+id/diachimota"
+                android:layout_marginTop="15dp"
+                android:padding="20dp"
+                android:background="@color/white" />
         </RelativeLayout>
-
-
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

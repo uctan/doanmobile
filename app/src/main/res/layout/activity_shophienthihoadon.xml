@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".hoadonnguoiban.shophienthi">
+    <RelativeLayout android:id="@+id/yeuthich"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <RelativeLayout android:id="@+id/page_giohang_ek1"
+            android:layout_marginTop="50dp"
+            android:layout_width="450dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            >
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="44dp"
+                android:text="Hóa đơn của shop"
+                android:textStyle="bold"
+                android:textSize="32sp"
+                android:layout_marginTop="2dp"
+                android:textColor="#FF9431"
+                />
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="320dp"
+                android:background="@drawable/close"
+                android:id="@+id/backdonhangshop"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/khachang"
+            android:layout_width="371dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="130dp"
+            android:gravity="center_vertical"
+            android:text="Khách hàng"
+            android:textSize="22sp"
+            android:textStyle="bold"
+
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewOrdershopKH"
+            android:layout_width="450dp"
+            android:layout_height="550dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginStart="10dp"
+            />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

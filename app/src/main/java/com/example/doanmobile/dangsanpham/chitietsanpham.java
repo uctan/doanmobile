@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.doanmobile.R;
 import com.example.doanmobile.chat.ChatActivity;
+import com.example.doanmobile.coicuahangshopdetail.cuahangshopdetail;
 import com.example.doanmobile.dangkynguoiban.Shop;
 import com.example.doanmobile.danhgiasanpham.ReViewAdapter;
 import com.example.doanmobile.danhgiasanpham.Review;
@@ -28,6 +29,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -72,7 +75,7 @@ public class chitietsanpham extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         nhantinvoishop = findViewById(R.id.nhantinvoishop);
-        //hieện chi tiết sản phẩm
+        //hiện chi tiết sản phẩm
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             try {
@@ -89,7 +92,17 @@ public class chitietsanpham extends AppCompatActivity {
                         }
                     }
                 });
+                detailtencuahang.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int shopId = bundle.getInt("shopId", 0);
 
+                        // Tạo Intent để mở hoạt động hiển thị sản phẩm của cửa hàng
+                        Intent intent = new Intent(chitietsanpham.this, cuahangshopdetail.class);
+                        intent.putExtra("shopId", shopId);
+                        startActivity(intent);
+                    }
+                });
 
                 detailtensp.setText(bundle.getString("Title"));
                 detailmotasp.setText(bundle.getString("mota"));
@@ -154,6 +167,7 @@ public class chitietsanpham extends AppCompatActivity {
         nhantinvoishop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // Lấy tên cửa hàng từ TextView
                 String shopName = detailtencuahang.getText().toString();
                 int shopId = bundle.getInt("shopId", 0);
@@ -254,6 +268,8 @@ public class chitietsanpham extends AppCompatActivity {
         themgiohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAuth fAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = fAuth.getCurrentUser();
 
 
                 CartItem tontai = CartManager.getInstance().getCarrtItemByProductID(bundle.getInt("productID"));

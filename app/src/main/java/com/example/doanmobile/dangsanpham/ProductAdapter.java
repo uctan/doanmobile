@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.doanmobile.R;
+import com.example.doanmobile.dangnhap;
 import com.example.doanmobile.yeuthichsanpham.Favorites;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -86,30 +88,34 @@ public class ProductAdapter extends RecyclerView.Adapter<sanphamHolder> {
             public void onClick(View view) {
                 FirebaseAuth fAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = fAuth.getCurrentUser();
-                FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-                String userId = user.getUid();
-                DocumentReference userRef = fStore.collection("KhachHang").document(userId);
-                userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        int productID = data.getProductID();
-                        int userID = documentSnapshot.getLong("userID").intValue();
+                if(user != null){
+                    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+                    String userId = user.getUid();
+                    DocumentReference userRef = fStore.collection("KhachHang").document(userId);
+                    userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            int productID = data.getProductID();
+                            int userID = documentSnapshot.getLong("userID").intValue();
 
-                        if (isFavorite[0]) {
-                            removeFromFavorites(userID, productID);
-                        } else {
-                            addToFavorites(userID, productID);
+                            if (isFavorite[0]) {
+                                removeFromFavorites(userID, productID);
+                            } else {
+                                addToFavorites(userID, productID);
+                            }
+
+                            // Cập nhật hình ảnh của nút
+                            isFavorite[0] = !isFavorite[0]; // Đảo ngược trạng thái yêu thích
+                            holder.traitimbth.setImageResource(isFavorite[0] ? R.drawable.traitimdo : R.drawable.traitimbth);
+
                         }
-
-                        // Cập nhật hình ảnh của nút
-                        isFavorite[0] = !isFavorite[0]; // Đảo ngược trạng thái yêu thích
-                        holder.traitimbth.setImageResource(isFavorite[0] ? R.drawable.traitimdo : R.drawable.traitimbth);
-
-
-
-
-                    }
-                });
+                    });
+                }
+                else{
+                    Toast.makeText(context, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, dangnhap.class);
+                    context.startActivity(intent);
+                }
             }
 
 
@@ -118,17 +124,26 @@ public class ProductAdapter extends RecyclerView.Adapter<sanphamHolder> {
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, chitietsanpham.class);
-                intent.putExtra("Image", data.getImageURL());
-                intent.putExtra("Title", data.getTitle());
-                intent.putExtra("mota", data.getDescription());
-                double giaCa = data.getPrice();
-                int shopId = data.getShopID();
-                intent.putExtra("shopId", shopId);
-                intent.putExtra("Giaca", giaCa);
-                int productID = data.getProductID();
-                intent.putExtra("productID",productID);
-                context.startActivity(intent);
+                FirebaseAuth fAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = fAuth.getCurrentUser();
+                FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+                if (user != null) {
+                    Intent intent = new Intent(context, chitietsanpham.class);
+                    intent.putExtra("Image", data.getImageURL());
+                    intent.putExtra("Title", data.getTitle());
+                    intent.putExtra("mota", data.getDescription());
+                    double giaCa = data.getPrice();
+                    int shopId = data.getShopID();
+                    intent.putExtra("shopId", shopId);
+                    intent.putExtra("Giaca", giaCa);
+                    int productID = data.getProductID();
+                    intent.putExtra("productID",productID);
+                    context.startActivity(intent);}
+                else{
+                    Toast.makeText(context, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, dangnhap.class);
+                    context.startActivity(intent);
+                }
             }
         });
 
