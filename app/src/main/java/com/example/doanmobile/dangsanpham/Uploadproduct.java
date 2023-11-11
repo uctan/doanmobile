@@ -185,13 +185,9 @@ public class Uploadproduct extends AppCompatActivity {
                         if (!querySnapshot.isEmpty()) {
                             Category category = querySnapshot.getDocuments().get(0).toObject(Category.class);
                             int categoryId = category.getCategoryID();
-
-
                         }
                     }
                 });
-
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String documentId = user.getUid(); // Đây là ID của tài khoản người dùng

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.doanmobile.DanhGiaSPcuaShop.XemDanhGiaCuaShop;
 import com.example.doanmobile.R;
 import com.example.doanmobile.chat.NguoidungvoiShopActivity;
 import com.example.doanmobile.dangnhap;
@@ -26,7 +27,7 @@ public class manhinhnguoiban extends AppCompatActivity {
     View quanlysanphamcuahang;
     View nhantinvoikhachhang;
     View quanlyhoadoncuahang;
-    View dangxuatnguoiban;
+    View dangxuatnguoiban,Xemdanhgia;
 
 
     @Override
@@ -37,6 +38,14 @@ public class manhinhnguoiban extends AppCompatActivity {
         quanlysanphamcuahang = findViewById(R.id.quanlysanphamcuahang);
         nhantinvoikhachhang = findViewById(R.id.nhantinvoikhachhang);
         quanlyhoadoncuahang = findViewById(R.id.quanlyhoadoncuahang);
+        Xemdanhgia = findViewById(R.id.Xemdanhgia);
+        Xemdanhgia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(manhinhnguoiban.this, XemDanhGiaCuaShop.class);
+                startActivity(intent);
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
 

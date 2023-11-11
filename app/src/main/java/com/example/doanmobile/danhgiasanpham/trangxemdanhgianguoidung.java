@@ -39,7 +39,7 @@ public class trangxemdanhgianguoidung extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trangxemdanhgianguoidung);
-        closereviewnguoidung = findViewById(R.id.closereviewnguoidung);
+        closereviewnguoidung = findViewById(R.id.closereviewshop);
         recyclerViewReviewnguoidung = findViewById(R.id.recyclerViewReviewnguoidung);
         closereviewnguoidung.setOnClickListener(new View.OnClickListener() {
             @Override

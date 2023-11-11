@@ -175,10 +175,12 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <View
+                            android:id="@+id/Xemdanhgia"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/profile"/>
+                            android:background="@drawable/profile" />
                         <ImageView
                             android:layout_width="22dp"
                             android:layout_height="22dp"

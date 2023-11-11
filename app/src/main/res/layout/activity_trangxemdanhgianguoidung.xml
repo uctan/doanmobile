@@ -28,7 +28,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="320dp"
                 android:background="@drawable/close"
-                android:id="@+id/closereviewnguoidung"
+                android:id="@+id/closereviewshop"
                 />
         </RelativeLayout>
         <TextView
