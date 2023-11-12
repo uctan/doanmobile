@@ -55,43 +55,50 @@ public class XemDanhGiaCuaShop extends AppCompatActivity {
             }
         });
         reviewList = new ArrayList<>();
-        reViewAdapter = new ReViewAdapter(this,reviewList);
+        reViewAdapter = new ReViewAdapter(this, reviewList);
         RVReviewShop.setLayoutManager(new LinearLayoutManager(this));
         RVReviewShop.addItemDecoration(new ItemSpacingDecoration(16));
         RVReviewShop.setAdapter(reViewAdapter);
         loadReviewShop();
     }
-    private void loadReviewShop(){
-        FirebaseFirestore fStore=FirebaseFirestore.getInstance();
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-        FirebaseUser user=auth.getCurrentUser();
+
+    private void loadReviewShop() {
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
         String userId = user.getUid();
 
-        DocumentReference userRef=fStore.collection("Shop").document(userId);
+        DocumentReference userRef = fStore.collection("Shop").document(userId);
         userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                long shopID=documentSnapshot.getLong("shopId");
-                fStore.collection("Products")
-                        .whereEqualTo("shopID",shopID)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                                if (task.isSuccessful()) {
-                                    reviewList.clear();
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        int productId = document.getLong("productID").intValue();
-                                        loadReviewsForProduct(productId);
+                if (documentSnapshot.exists()) {
+                    long shopID = documentSnapshot.getLong("shopId");
+                    fStore.collection("Products")
+                            .whereEqualTo("shopID", shopID)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        reviewList.clear();
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            int productId = document.getLong("productID").intValue();
+                                            loadReviewsForProduct(productId);
+                                        }
+                                        reViewAdapter.notifyDataSetChanged();
+                                    } else {
+                                        // Xử lý trường hợp không thành công khi lấy danh sách sản phẩm
                                     }
-                                    reViewAdapter.notifyDataSetChanged();
                                 }
-                            }
-                        });
+                            });
+                } else {
+                    // Xử lý trường hợp không tồn tại dữ liệu cho người bán này
+                }
             }
         });
     }
+
     private void loadReviewsForProduct(int productId) {
         FirebaseFirestore fstore = FirebaseFirestore.getInstance();
         fstore.collection("Reviews")
@@ -110,5 +117,4 @@ public class XemDanhGiaCuaShop extends AppCompatActivity {
                     }
                 });
     }
-
 }

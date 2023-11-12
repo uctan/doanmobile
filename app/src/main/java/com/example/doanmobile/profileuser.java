@@ -13,6 +13,7 @@ import com.example.doanmobile.chat.ChatHistoryActivity;
 import com.example.doanmobile.dangkynguoiban.dangkylenguoiban;
 import com.example.doanmobile.danhgiasanpham.trangxemdanhgianguoidung;
 import com.example.doanmobile.hoadon.xemhoadonuser;
+import com.example.doanmobile.yeuthichsanpham.yeuthichsanpham;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +30,7 @@ public class profileuser extends AppCompatActivity {
     TextView tendayduprofile,tengmailprofile;
     ImageView backprofile,dangxuatpf;
 
-    View dkyngbanpf,nhantinvoishoppf,thaydoithongtinuser,xemdanhgianguoidungpf,xemhoadonpf;
+    View dkyngbanpf,nhantinvoishoppf,thaydoithongtinuser,xemdanhgianguoidungpf,xemhoadonpf,xemyeuthichsanphampf;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,6 +39,14 @@ public class profileuser extends AppCompatActivity {
         setContentView(R.layout.activity_profileuser);
         xemdanhgianguoidungpf = findViewById(R.id.xemdanhgianguoidungpf);
         xemhoadonpf = findViewById(R.id.xemhoadonpf);
+        xemyeuthichsanphampf = findViewById(R.id.xemyeuthichsanphampf);
+        xemyeuthichsanphampf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(profileuser.this, yeuthichsanpham.class);
+                startActivity(intent);
+            }
+        });
         xemhoadonpf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

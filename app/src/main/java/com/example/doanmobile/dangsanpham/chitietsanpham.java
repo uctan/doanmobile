@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.doanmobile.R;
 import com.example.doanmobile.chat.ChatActivity;
+import com.example.doanmobile.coicuahangshopdetail.cuahangshopdetail;
 import com.example.doanmobile.dangkynguoiban.Shop;
 import com.example.doanmobile.danhgiasanpham.ReViewAdapter;
 import com.example.doanmobile.danhgiasanpham.Review;
@@ -237,6 +238,14 @@ public class chitietsanpham extends AppCompatActivity {
                 }
             } else {
                 Log.d(TAG, "Failed with: ", task.getException());
+            }
+        });
+        detailtencuahang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(chitietsanpham.this, cuahangshopdetail.class);
+                intent.putExtra("shopId", shopId);
+                startActivity(intent);
             }
         });
 

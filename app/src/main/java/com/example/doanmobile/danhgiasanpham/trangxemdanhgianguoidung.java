@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 
 import com.example.doanmobile.R;
 import com.example.doanmobile.dangsanpham.ItemSpacingDecoration;
+import com.example.doanmobile.profileuser;
 import com.example.doanmobile.trangchunguoidung;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,7 +45,7 @@ public class trangxemdanhgianguoidung extends AppCompatActivity {
         closereviewnguoidung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(trangxemdanhgianguoidung.this, trangchunguoidung.class);
+                Intent intent = new Intent(trangxemdanhgianguoidung.this, profileuser.class);
                 startActivity(intent);
             }
         });

@@ -87,7 +87,7 @@
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginStart="140dp"
-            android:background="@drawable/traitimbth"
+            android:background="@drawable/traitimdo"
             />
 
     </RelativeLayout>

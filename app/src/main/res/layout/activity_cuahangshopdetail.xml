@@ -27,8 +27,8 @@
                     android:id="@+id/backcuahang"
                     android:layout_width="12dp"
                     android:layout_height="19dp"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
                     android:contentDescription="back"
                     android:src="@drawable/back_white" />
 
@@ -70,7 +70,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="307dp"
+                    android:layout_marginStart="330dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/nhantinvoishop_white" />
@@ -112,7 +112,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginEnd="310dp"
                     android:layout_marginBottom="23dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="3dp"
                     android:text="Địa chỉ: "
                     android:textSize="20dp"
                     android:textStyle="bold" />

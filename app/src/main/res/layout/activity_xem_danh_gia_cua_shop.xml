@@ -6,41 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".DanhGiaSPcuaShop.XemDanhGiaCuaShop">
 
-    <RelativeLayout
-        android:id="@+id/page_giohang_ek1"
-        android:layout_width="450dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-20dp">
-
-        <ImageButton
-            android:id="@+id/closereviewshop"
-            android:layout_width="50dp"
+    <RelativeLayout android:id="@+id/yeuthich"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <RelativeLayout android:id="@+id/page_giohang_ek1"
+            android:layout_marginTop="50dp"
+            android:layout_width="450dp"
             android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="28dp"
-            android:background="@drawable/close" />
-
+            android:layout_marginStart="20dp"
+            >
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="44dp"
+                android:text="Đánh giá sản phẩm"
+                android:textStyle="bold"
+                android:textSize="32sp"
+                android:layout_marginTop="2dp"
+                android:textColor="#FF9431"
+                />
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="320dp"
+                android:background="@drawable/close"
+                android:id="@+id/closereviewshop"
+                />
+        </RelativeLayout>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="87dp"
-            android:text="Đánh giá của khách hàng"
-            android:textColor="#FF9431"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginStart="20dp"
+            android:text="Sản phẩm đánh giá người dùng"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RVreviewshop"
+            android:layout_width="450dp"
+            android:layout_height="550dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginStart="20dp"
+
+            />
 
     </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RVreviewshop"
-        android:layout_width="421dp"
-        android:layout_height="622dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="10dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
