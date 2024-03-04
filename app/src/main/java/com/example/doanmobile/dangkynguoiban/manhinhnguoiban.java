@@ -2,8 +2,10 @@ package com.example.doanmobile.dangkynguoiban;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,8 +30,11 @@ public class manhinhnguoiban extends AppCompatActivity {
     View nhantinvoikhachhang;
     View quanlyhoadoncuahang;
     View dangxuatnguoiban,Xemdanhgia;
+    View livestream;
+    View dangkynguoibanvip;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,9 @@ public class manhinhnguoiban extends AppCompatActivity {
         nhantinvoikhachhang = findViewById(R.id.nhantinvoikhachhang);
         quanlyhoadoncuahang = findViewById(R.id.quanlyhoadoncuahang);
         Xemdanhgia = findViewById(R.id.Xemdanhgia);
+        livestream = findViewById(R.id.livestream);
+        dangkynguoibanvip = findViewById(R.id.dangkynguoibanvip);
+
         Xemdanhgia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +56,34 @@ public class manhinhnguoiban extends AppCompatActivity {
         });
 
         db = FirebaseFirestore.getInstance();
+        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (user1 != null) {
+            String userId = user1.getUid();
+            DocumentReference userRef = db.collection("KhachHang").document(userId);
+            userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        boolean isNguoiBan = documentSnapshot.getBoolean("nguoiBan");
+
+                        // Nếu là người bán, hiển thị View dangkynguoibanvip và ẩn View livestream
+                        if (isNguoiBan) {
+                            dangkynguoibanvip.setVisibility(View.VISIBLE);
+                            livestream.setVisibility(View.GONE);
+                        } else {
+                            livestream.setVisibility(View.VISIBLE);
+                            dangkynguoibanvip.setVisibility(View.GONE);
+                        }
+
+                        // Chuyển giá trị isNguoiBan thành chuỗi và in vào log
+                        Log.d("nguoiban", String.valueOf(isNguoiBan));
+                    }
+                }
+            });
+
+
+
+        }
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {

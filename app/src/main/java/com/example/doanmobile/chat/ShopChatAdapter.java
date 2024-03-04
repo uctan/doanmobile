@@ -32,7 +32,7 @@ public class ShopChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (viewType == VIEW_TYPE_RECEIVED) {
+        if (viewType == VIEW_TYPE_SENT) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_send_mess, parent, false);
             return new SentMessageHolder(view);
         } else {
@@ -44,7 +44,7 @@ public class ShopChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ChatMessage message = messages.get(position);
-        if (holder.getItemViewType() == VIEW_TYPE_RECEIVED) {
+        if (holder.getItemViewType() == VIEW_TYPE_SENT) {
             ((SentMessageHolder) holder).bind(message);
         } else {
             ((ReceivedMessageHolder) holder).bind(message);

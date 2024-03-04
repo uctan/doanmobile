@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doanmobile.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -36,7 +37,6 @@ public class ChatActivity extends AppCompatActivity {
     private EditText messageEditText;
     private ImageView sendMessageImageView;
     private FirebaseFirestore db;
-    private FirebaseUser currentUser;
     private int userID;
     private int shopID;
     private String shopName;
@@ -52,8 +52,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         db = FirebaseFirestore.getInstance();
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        currentUser = auth.getCurrentUser();
+
 
 
 
@@ -75,7 +74,7 @@ public class ChatActivity extends AppCompatActivity {
         sendMessageImageView = findViewById(R.id.imagechat);
 
         chatMessageList = new ArrayList<>();
-        chatAdapter = new ChatAdapter(chatMessageList, currentUser);
+        chatAdapter = new ChatAdapter(chatMessageList,userID);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -101,50 +100,60 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessageToShop() {
         String messageText = messageEditText.getText().toString().trim();
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
-        String userIDD= currentUser.getUid();
-        db = FirebaseFirestore.getInstance();
-        DocumentReference userRef = db.collection("KhachHang").document(userIDD);
+        FirebaseUser user = fAuth.getCurrentUser();
+        if (user != null) {
+            DocumentReference userRef = fStore.collection("KhachHang").document(user.getUid());
+            userRef.get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    int userId = documentSnapshot.getLong("userID").intValue();
 
-        userRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                int userID = documentSnapshot.getLong("userID").intValue();
-                String tenDayDu = documentSnapshot.getString("tenDayDu");
-                if (!TextUtils.isEmpty(messageText)) {
-                    if (shopID != 0) {
-                        ChatMessage chatMessage = new ChatMessage();
-                        chatMessage.setUserID(userID);
-                        chatMessage.setShopID(shopID);
-                        chatMessage.setMess(messageText);
-                        chatMessage.setDateObj(new Date());
-                        chatMessage.setDatetime(getCurrentTimestamp());
-                        chatMessage.setTenDayDu(tenDayDu);
-                        chatMessage.setShopName(shopName);
+                    db = FirebaseFirestore.getInstance();
+                    DocumentReference userRefFirestore = db.collection("KhachHang").document(user.getUid());
+                    userRefFirestore.get().addOnSuccessListener(documentSnapshotFirestore -> {
+                        if (documentSnapshotFirestore.exists()) {
+                            String tenDayDu = documentSnapshotFirestore.getString("tenDayDu");
 
-                        db.collection("chat")
-                                .add(chatMessage)
-                                .addOnSuccessListener(documentReference -> {
-                                    chatMessageList.add(chatMessage);
-                                    chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
-                                    recyclerView.scrollToPosition(chatMessageList.size() - 1);
-                                    messageEditText.setText("");
-                                })
-                                .addOnFailureListener(e -> {
-                                    // Xử lý khi gửi tin nhắn thất bại
-                                    Toast.makeText(ChatActivity.this, "Gửi tin nhắn không thành công", Toast.LENGTH_SHORT).show();
-                                });
+                            if (!TextUtils.isEmpty(messageText)) {
+                                if (shopID != 0) {
+                                    ChatMessage chatMessage = new ChatMessage();
+                                    // Thiết lập userID cho tin nhắn
 
+                                    chatMessage.setShopID(shopID);
+                                    chatMessage.setMess(messageText);
+                                    chatMessage.setDateObj(new Date());
+                                    chatMessage.setDatetime(getCurrentTimestamp());
+                                    chatMessage.setTenDayDu(tenDayDu);
+                                    chatMessage.setShopName(shopName);
 
-                        // Xóa nội dung trong EditText sau khi gửi tin nhắn
-                    } else {
-                        Toast.makeText(this, "Vui lòng chọn cửa hàng", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(this, "Vui lòng nhập nội dung tin nhắn", Toast.LENGTH_SHORT).show();
+                                    db.collection("chat")
+                                            .add(chatMessage)
+                                            .addOnSuccessListener(documentReference -> {
+                                                chatMessageList.add(chatMessage);
+                                                chatMessage.setUserID(userId);
+                                                chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                                                recyclerView.scrollToPosition(chatMessageList.size() - 1);
+                                                messageEditText.setText("");
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                // Xử lý khi gửi tin nhắn thất bại
+                                                Toast.makeText(ChatActivity.this, "Gửi tin nhắn không thành công", Toast.LENGTH_SHORT).show();
+                                            });
+                                } else {
+                                    Toast.makeText(this, "Vui lòng chọn cửa hàng", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(this, "Vui lòng nhập nội dung tin nhắn", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
-            }
-        });
-
+            });
+        } else {
+            // Xử lý trường hợp không có người dùng đăng nhập
+        }
     }
 
 
@@ -154,37 +163,44 @@ public class ChatActivity extends AppCompatActivity {
         return sdf.format(new Date());
     }
     private void listenForMessages() {
-        String userIDD = currentUser.getUid();
-        db.collection("KhachHang").document(userIDD)
-                .addSnapshotListener((documentSnapshot, error) -> {
-                    if (error != null) {
-                        Log.e("ChatActivity", "Listen failed", error);
-                        return;
-                    }
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = fAuth.getCurrentUser();
 
-                    if (documentSnapshot != null && documentSnapshot.exists()) {
-                        int userID = documentSnapshot.getLong("userID").intValue();
+        if (currentUser != null) {
+            String userIDD = currentUser.getUid();
+            db.collection("KhachHang").document(userIDD)
+                    .addSnapshotListener((documentSnapshot, error) -> {
+                        if (error != null) {
+                            Log.e("ChatActivity", "Listen failed", error);
+                            return;
+                        }
 
-                        db.collection("chat")
-                                .whereEqualTo("shopID", shopID)
-                                .whereEqualTo("userID", userID)
-                                .addSnapshotListener((value, chatError) -> {
-                                    if (chatError != null) {
-                                        Log.e("ChatActivity", "Listen failed", chatError);
-                                        return;
-                                    }
+                        if (documentSnapshot != null && documentSnapshot.exists()) {
+                            int userID = documentSnapshot.getLong("userID").intValue();
 
-                                    for (DocumentChange dc : value.getDocumentChanges()) {
-                                        if (dc.getType() == DocumentChange.Type.ADDED) {
-                                            ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
-                                            chatMessageList.add(message);
-                                            chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
-                                            recyclerView.scrollToPosition(chatMessageList.size() - 1);
+                            db.collection("chat")
+                                    .whereEqualTo("userID", userID)
+                                    .addSnapshotListener((value, chatError) -> {
+                                        if (chatError != null) {
+                                            Log.e("ChatActivity", "Listen failed", chatError);
+                                            return;
                                         }
-                                    }
-                                });
-                    }
-                });
+
+                                        for (DocumentChange dc : value.getDocumentChanges()) {
+                                            if (dc.getType() == DocumentChange.Type.ADDED) {
+                                                ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
+                                                chatMessageList.add(message);
+                                                chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                                                recyclerView.scrollToPosition(chatMessageList.size() - 1);
+                                            }
+                                        }
+                                    });
+                        }
+                    });
+        } else {
+            Log.e("ChatActivity", "FirebaseUser is null");
+            // Xử lý trường hợp currentUser là null
+        }
     }
     private void loadChatHistory() {
         // Retrieve and display chat history using shopID and userID

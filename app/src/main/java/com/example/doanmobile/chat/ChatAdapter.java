@@ -1,5 +1,7 @@
 package com.example.doanmobile.chat;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,38 +10,47 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.doanmobile.KhachHang;
 import com.example.doanmobile.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_SENT = 1;
     private static final int VIEW_TYPE_RECEIVED = 2;
-
+    private int currentUserId;
     private List<ChatMessage> messages;
-    private FirebaseUser currentUser;
 
-    public ChatAdapter(List<ChatMessage> messages, FirebaseUser currentUser) {
+    public ChatAdapter(List<ChatMessage> messages, int currentUserId) {
         this.messages = messages;
-        this.currentUser = currentUser;
+        this.currentUserId = currentUserId;
     }
-
-
-
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext()); // Thêm dòng này để có LayoutInflater
+
         if (viewType == VIEW_TYPE_SENT) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_send_mess, parent, false);
+            view = inflater.inflate(R.layout.item_send_mess, parent, false);
+            Log.d("ChatAdapter", "onCreateViewHolder: viewType = " + viewType);
             return new SentMessageHolder(view);
         } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_received, parent, false);
+            view = inflater.inflate(R.layout.item_received, parent, false);
+            Log.d("ChatAdapter", "reciew: viewType = " + viewType);
             return new ReceivedMessageHolder(view);
         }
     }
@@ -47,6 +58,8 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ChatMessage message = messages.get(position);
+
+        // Đảm bảo rằng currentUserId đã được cập nhật trước khi hiển thị tin nhắn
         if (holder.getItemViewType() == VIEW_TYPE_SENT) {
             ((SentMessageHolder) holder).bind(message);
         } else {
@@ -54,10 +67,16 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-
     @Override
     public int getItemCount() {
         return messages.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        ChatMessage chatMessage = messages.get(position);
+        // Nếu là tin nhắn của userID hiện tại thì trả về VIEW_TYPE_SENT, ngược lại trả về VIEW_TYPE_RECEIVED
+        return (chatMessage.getUserID() == currentUserId) ? VIEW_TYPE_SENT : VIEW_TYPE_RECEIVED;
     }
 
     public static class SentMessageHolder extends RecyclerView.ViewHolder {

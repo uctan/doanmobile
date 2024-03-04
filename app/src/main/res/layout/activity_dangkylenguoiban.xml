@@ -172,20 +172,13 @@
 
             <CheckBox
                 android:id="@+id/nguoibanthuong"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="45dp"
                 android:button="@drawable/cb_icon"
                 android:text="Người bán thường"
                 android:textColor="@color/black" />
 
-            <CheckBox
-                android:id="@+id/nguoibanvip"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_marginLeft="20dp"
-                android:button="@drawable/cb_icon"
-                android:text="Người bán Vip"
-                android:textColor="@color/black" />
+
         </LinearLayout>
 
         <ImageView

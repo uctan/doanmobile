@@ -62,6 +62,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
     SearchView searchView;
     private List<Integer> favoriteProducts = new ArrayList<>();
 
+
     CheckBox cbthapcao, cbcaothap, cbsoluotyeuthich;
 
     @SuppressLint("MissingInflatedId")

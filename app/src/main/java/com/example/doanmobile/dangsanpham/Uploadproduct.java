@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.doanmobile.R;
+import com.example.doanmobile.dangkynguoiban.manhinhnguoiban;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -255,6 +256,8 @@ public class Uploadproduct extends AppCompatActivity {
                     productsCollection.add( product);
                 }
                 Toast.makeText(Uploadproduct.this, "Lưu thông tin", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Uploadproduct.this, manhinhnguoiban.class);
+                startActivity(intent);
                 finish();
             }else {
                 Toast.makeText(Uploadproduct.this, "Lỗi khi lưu thông tin", Toast.LENGTH_SHORT).show();

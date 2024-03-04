@@ -32,7 +32,7 @@ import java.util.Locale;
 
 public class ShopChat extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private ShopChatAdapter shopChatAdapter;
+    private ChatAdapter chatAdapter;
     private List<ChatMessage> chatMessageList;
     private EditText messageEditText;
     private ImageView sendMessageImageView;
@@ -97,11 +97,11 @@ public class ShopChat extends AppCompatActivity {
         sendMessageImageView = findViewById(R.id.imagechat);
 
         chatMessageList = new ArrayList<>();
-        shopChatAdapter = new ShopChatAdapter(chatMessageList, currentUser);
+        chatAdapter = new ChatAdapter(chatMessageList,userID);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(shopChatAdapter);
+        recyclerView.setAdapter(chatAdapter);
         listenForMessages();
         sendMessageImageView.setOnClickListener(v -> {
             // Gọi phương thức để gửi tin nhắn ở đây
@@ -143,7 +143,7 @@ public class ShopChat extends AppCompatActivity {
                                             .add(chatMessage)
                                             .addOnSuccessListener(documentReference -> {
                                                 chatMessageList.add(chatMessage);
-                                                shopChatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                                                chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
                                                 recyclerView.scrollToPosition(chatMessageList.size() - 1);
                                                 messageEditText.setText("");
                                             })
@@ -194,7 +194,7 @@ public class ShopChat extends AppCompatActivity {
                                         if (dc.getType() == DocumentChange.Type.ADDED) {
                                             ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
                                             chatMessageList.add(message);
-                                            shopChatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                                            chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
                                             recyclerView.scrollToPosition(chatMessageList.size() - 1);
                                         }
                                     }
@@ -219,7 +219,7 @@ public class ShopChat extends AppCompatActivity {
                         if (dc.getType() == DocumentChange.Type.ADDED) {
                             ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
                             chatMessageList.add(message);
-                            shopChatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                            chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
                             recyclerView.scrollToPosition(chatMessageList.size() - 1);
                         }
                     }

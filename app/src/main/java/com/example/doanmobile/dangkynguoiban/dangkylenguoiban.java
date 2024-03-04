@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.doanmobile.KhachHang;
 import com.example.doanmobile.R;
+import com.example.doanmobile.dangky;
 import com.example.doanmobile.profileuser;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -34,7 +35,7 @@ import java.util.List;
 public class dangkylenguoiban extends AppCompatActivity {
     ImageView dknguoiban, dongdangkyshop;
     EditText nhaptencuahang, nhaptendiachi, nhapmotacuahang;
-    CheckBox nguoibanthuong, nguoibanvip;
+    CheckBox nguoibanthuong;
     KhachHang khachHang;
 
     @SuppressLint("MissingInflatedId")
@@ -44,27 +45,19 @@ public class dangkylenguoiban extends AppCompatActivity {
         setContentView(R.layout.activity_dangkylenguoiban);
         khachHang = new KhachHang(); // Khởi tạo đối tượng KhachHang
         nguoibanthuong = findViewById(R.id.nguoibanthuong);
-        nguoibanvip = findViewById(R.id.nguoibanvip);
+
         nguoibanthuong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    nguoibanvip.setChecked(false);
+
                     khachHang.setKhachHang(false);
                     khachHang.setNguoiBan(true);
                     khachHang.setNguoiBanVip(false);
                 }
             }
         });
-        nguoibanvip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                nguoibanthuong.setChecked(false);
-                khachHang.setKhachHang(false);
-                khachHang.setNguoiBan(false);
-                khachHang.setNguoiBanVip(true);
-            }
-        });
+
 
         //đóng đăng ký shop
         dongdangkyshop = findViewById(R.id.dongdangkyshop);
@@ -81,7 +74,7 @@ public class dangkylenguoiban extends AppCompatActivity {
         nhaptencuahang = findViewById(R.id.nhaptencuahang);
         nhaptendiachi = findViewById(R.id.nhaptendiachi);
         nguoibanthuong = findViewById(R.id.nguoibanthuong);
-        nguoibanvip = findViewById(R.id.nguoibanvip);
+
 
         //phần nhập dữ liệu
         dknguoiban.setOnClickListener(new View.OnClickListener() {
@@ -92,12 +85,15 @@ public class dangkylenguoiban extends AppCompatActivity {
                 String motacuahang = nhapmotacuahang.getText().toString().trim();
 
                 boolean isNguoiBan = nguoibanthuong.isChecked();
-                boolean isNguoiBanVip = nguoibanvip.isChecked();
+
 
                 FirebaseAuth fAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = fAuth.getCurrentUser();
 
-
+                if(!(nguoibanthuong.isChecked())){
+                    Toast.makeText(dangkylenguoiban.this,"Vui lòng nhấn đăng ký lên người bán",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (user != null) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
