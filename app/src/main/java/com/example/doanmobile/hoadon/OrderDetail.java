@@ -1,7 +1,7 @@
 package com.example.doanmobile.hoadon;
 
 public class OrderDetail {
-    private static int nextorderdetailID = 1;
+
     private int detailID;
     private int soLuong;
     private int orderID;
@@ -12,7 +12,7 @@ public class OrderDetail {
     }
 
     public OrderDetail(int detailID, int soLuong, int orderID, int productID, double giaSanPham) {
-        this.detailID = nextorderdetailID++;
+        this.detailID = detailID;
         this.soLuong = soLuong;
         this.orderID = orderID;
         this.productID = productID;

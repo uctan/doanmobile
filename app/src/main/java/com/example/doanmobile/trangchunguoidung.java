@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.doanmobile.dangsanpham.tranggiaodienbanhang;
 import com.example.doanmobile.hoadon.xemhoadonuser;
+import com.example.doanmobile.livestream.livestream;
 import com.example.doanmobile.yeuthichsanpham.yeuthichsanpham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,7 +33,7 @@ import java.util.List;
 public class trangchunguoidung extends AppCompatActivity {
 
     TextView tennguoidungtrangchu;
-    ImageView profile, bansanphamtrangchu, yeuthichtrangchu, donhang;
+    ImageView profile, bansanphamtrangchu, yeuthichtrangchu, donhang,livenhe;
     //congkhanh
 //thanhsy
     //thong
@@ -44,6 +45,15 @@ public class trangchunguoidung extends AppCompatActivity {
         setContentView(R.layout.activity_trangchunguoidung);
         yeuthichtrangchu = findViewById(R.id.yeuthichtrangchu);
         donhang = findViewById(R.id.donhang);
+        livenhe = findViewById(R.id.livenhe);
+
+        livenhe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(trangchunguoidung.this, livestream.class);
+                startActivity(intent);
+            }
+        });
 
         // lấy tên khách hàng vào trang chủ để hiện tên
         tennguoidungtrangchu = findViewById(R.id.tennguoidungtrangchu);

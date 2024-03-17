@@ -9,10 +9,13 @@ public class Products {
     private double price;
     private String imageURL;
     private int likeCount;
-
+    private double selled;
+    private double soluong;
+    private double reviewcount;
+    private double discount;
     public Products(){}
 
-    public Products(int productID, int shopID, int categoryID, String title, String description, double price, String imageURL, int likeCount) {
+    public Products(int productID, int shopID, int categoryID, String title, String description, double price, String imageURL, int likeCount, double selled, double soluong, double reviewcount, double discount) {
         this.productID = productID;
         this.shopID = shopID;
         this.categoryID = categoryID;
@@ -21,7 +24,45 @@ public class Products {
         this.price = price;
         this.imageURL = imageURL;
         this.likeCount = likeCount;
+        this.selled = selled;
+        this.soluong = soluong;
+        this.reviewcount = reviewcount;
+        this.discount = discount;
     }
+
+
+    public double getSelled() {
+        return selled;
+    }
+
+    public void setSelled(double selled) {
+        this.selled = selled;
+    }
+
+    public double getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(double soluong) {
+        this.soluong = soluong;
+    }
+
+    public double getReviewcount() {
+        return reviewcount;
+    }
+
+    public void setReviewcount(double reviewcount) {
+        this.reviewcount = reviewcount;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
     public int getLikeCount() {
         return likeCount;
     }

@@ -59,6 +59,7 @@ public class CartAdapter extends BaseAdapter {
         TextView productPrice = view.findViewById(R.id.productPrice);
         ImageView removeButton = view.findViewById(R.id.removeButton);
         TextView quantity = view.findViewById(R.id.quantity);
+        TextView productDiscountcart = view.findViewById(R.id.productDiscountcart);
 
         View cong = view.findViewById(R.id.congcart);
         View tru = view.findViewById(R.id.trucart);
@@ -66,6 +67,7 @@ public class CartAdapter extends BaseAdapter {
         productName.setText(cartItem.getTitle());
         productPrice.setText(String.valueOf(cartItem.getPrice()));
         quantity.setText(String.valueOf(cartItem.getQuantity()));
+        productDiscountcart.setText(String.valueOf(cartItem.getDiscount()));
 
         Glide.with(context)
                 .load(cartItem.getImageURL())

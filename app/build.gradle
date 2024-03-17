@@ -35,7 +35,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.firebase:firebase-auth:22.1.2'
+    implementation 'com.google.firebase:firebase-auth:22.3.1'
     implementation 'com.google.firebase:firebase-storage:20.2.1'
     implementation 'com.google.firebase:firebase-firestore:24.8.1'
     testImplementation 'junit:junit:4.13.2'
@@ -45,11 +45,19 @@ dependencies {
     implementation 'androidx.cardview:cardview'
 
     //dangnhapbang google
-    implementation 'com.jpardogo.googleprogressbar:library:1.2.0'
-    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+//    implementation 'com.jpardogo.googleprogressbar:library:1.2.0'
+    implementation 'com.google.android.gms:play-services-auth:21.0.0'
     //them thu vien lam sanpham
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     //momo
     implementation 'com.github.momo-wallet:mobile-sdk:1.0.7'
+    //live
+    implementation 'com.github.ZEGOCLOUD:zego_uikit_prebuilt_live_streaming_android:+'    // Add this line to your module-level build.gradle file's dependencies, usually named [app].
+//    implementation 'com.github.ZEGOCLOUD:zego_uikit_signaling_plugin_android:+'
+    //gio hang
+    implementation 'com.nex3z:notification-badge:1.0.4'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }

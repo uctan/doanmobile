@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="170dp"
-    android:layout_height="180dp"
+    android:layout_height="190dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
@@ -11,7 +11,7 @@
     tools:ignore="InvalidId">
 
     <RelativeLayout
-        android:layout_width="50dp"
+        android:layout_width="150dp"
         android:layout_height="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="8dp"
@@ -22,10 +22,19 @@
             android:background="@drawable/ngoisao"
             />
         <TextView
+            android:id="@+id/trungbinhdanhgia"
             android:layout_width="26dp"
             android:layout_height="16dp"
             android:text="4.8"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="-1dp"
+            />
+        <TextView
+            android:id="@+id/soluongbanduoc"
+            android:layout_width="26dp"
+            android:layout_height="16dp"
+            android:text="4.8"
+            android:layout_marginStart="120dp"
             android:layout_marginTop="-1dp"
             />
         
@@ -62,10 +71,11 @@
             android:gravity="center|left"
             android:textColor="#FF9431"
             />
+
         <TextView
             android:layout_width="30dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="70dp"
             android:text="VNĐ"
             android:textSize="11sp"
             android:gravity="center|left"
@@ -91,5 +101,48 @@
             />
 
     </RelativeLayout>
+    <TextView
+        android:id="@+id/discountsanpham"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="160dp"
+        android:text="25"
+        android:textSize="11sp"
+        android:gravity="center|left"
+        android:textColor="@color/black"
+        />
+    <TextView
+
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="160dp"
+        android:text="%"
+        android:textSize="13sp"
+        android:gravity="center|left"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="160dp"
+        android:text="Số lượng:"
+        android:textSize="11sp"
+        android:gravity="center|left"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:id="@+id/soluonghang"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="160dp"
+        android:text="10"
+        android:textSize="11sp"
+        android:gravity="center|left"
+        android:textColor="@color/black"
+        />
 
 </androidx.cardview.widget.CardView>

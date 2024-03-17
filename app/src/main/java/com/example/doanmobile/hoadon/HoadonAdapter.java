@@ -40,6 +40,7 @@ public class HoadonAdapter extends RecyclerView.Adapter<HoadonAdapter.ViewHolder
         holder.productName.setText(cartItem.getTitle());
         holder.productPrice.setText(String.valueOf(cartItem.getPrice()));
         holder.quantity.setText(String.valueOf(cartItem.getQuantity()));
+        holder.productDiscounthoadon.setText(String.valueOf(cartItem.getDiscount()));
 
         Glide.with(context)
                 .load(cartItem.getImageURL())
@@ -55,7 +56,7 @@ public class HoadonAdapter extends RecyclerView.Adapter<HoadonAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView productName;
         TextView productPrice;
-        TextView quantity;
+        TextView quantity,productDiscounthoadon;
         ImageView productImage;
 
         public ViewHolder(@NonNull View itemView) {
@@ -64,6 +65,7 @@ public class HoadonAdapter extends RecyclerView.Adapter<HoadonAdapter.ViewHolder
             productPrice = itemView.findViewById(R.id.productPricehoadon);
             quantity = itemView.findViewById(R.id.quantity);
             productImage = itemView.findViewById(R.id.productImagehoadon);
+            productDiscounthoadon = itemView.findViewById(R.id.productDiscounthoadon);
         }
     }
 }

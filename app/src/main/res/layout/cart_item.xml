@@ -33,6 +33,23 @@
         android:text="Gia"
         android:textSize="16sp" />
     <TextView
+        android:id="@+id/productDiscountcart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/productImage"
+        android:layout_below="@id/productName"
+        android:layout_marginStart="90dp"
+        android:text="Discount"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/productImage"
+        android:layout_below="@id/productName"
+        android:layout_marginStart="150dp"
+        android:text="%"
+        android:textSize="16sp" />
+    <TextView
         android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

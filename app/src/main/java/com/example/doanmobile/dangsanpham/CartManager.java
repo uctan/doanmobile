@@ -3,7 +3,9 @@ package com.example.doanmobile.dangsanpham;
 import android.content.Intent;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CartManager {
     private List<CartItem> cartItems;
@@ -57,6 +59,13 @@ public class CartManager {
             }
         }
         return null;
+    }
+    public int getUniqueProductCount() {
+        Set<Integer> uniqueProductIds = new HashSet<>();
+        for (CartItem item : cartItems) {
+            uniqueProductIds.add(item.getProductID());
+        }
+        return uniqueProductIds.size();
     }
 
 }

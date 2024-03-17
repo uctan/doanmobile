@@ -139,25 +139,18 @@ public class dangkylenguoiban extends AppCompatActivity {
                                                         DocumentReference shopRef = db.collection("Shop").document(documentId);
 
                                                         shopRef.set(newShop);
+                                                        khachHang.setNguoiBan(true);
+                                                        khachHang.setKhachHang(false);
 
-                                                        db.collection("Shop")
-                                                                .add(newShop)
+                                                        db.collection("KhachHang")
+                                                                .document(user.getUid())
+                                                                .set(khachHang);
 
-                                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                                    @Override
-                                                                    public void onSuccess(DocumentReference documentReference) {
-                                                                        khachHang.setNguoiBan(true);
-                                                                        khachHang.setKhachHang(false);
+                                                        Toast.makeText(dangkylenguoiban.this, "Đăng ký người bán thành công", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(dangkylenguoiban.this, dangkythanhcongthuong.class);
+                                                        startActivity(intent);
 
-                                                                        db.collection("KhachHang")
-                                                                                .document(user.getUid())
-                                                                                .set(khachHang);
 
-                                                                        Toast.makeText(dangkylenguoiban.this, "Đăng ký người bán thành công", Toast.LENGTH_SHORT).show();
-                                                                        Intent intent = new Intent(dangkylenguoiban.this, dangkythanhcongthuong.class);
-                                                                        startActivity(intent);
-                                                                    }
-                                                                });
                                                     }
                                                 });
                                     }

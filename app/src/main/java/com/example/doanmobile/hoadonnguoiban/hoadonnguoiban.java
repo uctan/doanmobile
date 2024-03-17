@@ -110,8 +110,10 @@ public class hoadonnguoiban extends AppCompatActivity {
                     hoadonshopdetailList.add(orderDetail);
 
                     totalAmount += orderDetail.getGiaSanPham();
+                    tongtienhoadon.setText(String.valueOf(totalAmount));
                 }
-                tongtienhoadon.setText(String.valueOf(totalAmount));
+
+                Log.d("tong tien", String.valueOf(totalAmount));
                 hoadonshopdetailadapter.notifyDataSetChanged(); // Cập nhật RecyclerView
             } else {
                 Log.e("LoadOrderDetail", "Error getting order details", detailTask.getException());

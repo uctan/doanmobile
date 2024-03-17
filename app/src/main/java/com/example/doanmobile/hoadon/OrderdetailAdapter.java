@@ -52,6 +52,7 @@ public class OrderdetailAdapter extends RecyclerView.Adapter<OrderdetailAdapter.
 
                     holder. productNamehoadondetail.setText(product.getTitle());
                     holder. productPricehoadondetail.setText(String.valueOf(product.getPrice()));
+                    holder.productDiscounthoadondetail.setText((String.valueOf(product.getDiscount())));
                     Glide.with(context).load(product.getImageURL()).into(holder. productImagehoadondetail);
                 }
             } else {
@@ -66,13 +67,14 @@ public class OrderdetailAdapter extends RecyclerView.Adapter<OrderdetailAdapter.
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
        ImageView productImagehoadondetail;
-       TextView productNamehoadondetail,productPricehoadondetail,quantitydetailorder;
+       TextView productNamehoadondetail,productPricehoadondetail,quantitydetailorder,productDiscounthoadondetail;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             productImagehoadondetail = itemView.findViewById(R.id.productImagehoadondetail);
             productNamehoadondetail = itemView.findViewById(R.id.productNamehoadondetail);
             productPricehoadondetail = itemView.findViewById(R.id.productPricehoadondetail);
             quantitydetailorder = itemView.findViewById(R.id.quantitydetailorder);
+            productDiscounthoadondetail = itemView.findViewById(R.id.productDiscounthoadondetail);
         }
     }
 }

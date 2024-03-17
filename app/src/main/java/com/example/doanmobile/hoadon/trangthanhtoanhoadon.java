@@ -51,12 +51,13 @@ import vn.momo.momo_partner.MoMoParameterNamePayment;
 public class trangthanhtoanhoadon extends AppCompatActivity {
     private List<CartItem> cartItems;
     ImageView quaylaidondathang;
-    TextView soluongsanphamhoadon,tongtinehoadon,tenhoadon,sodienthoaihoadon,ngaydathanghoadon;
+    TextView soluongsanphamhoadon,tongtinehoadon,tenhoadon,sodienthoaihoadon,ngaydathanghoadon,phuongthucvanchuyen,phivanchuyenhoadon;
     CheckBox thanhtoantienmathoadon,thanhtoanhoadonmomo;
     EditText diachihoadon;
     ImageView muahangdonhang;
     private int neworderId = 0;
     int currentDetailID = 1;
+    double phivanchuyen;
     private int userID;
     //thanh toanmomo
     private String amount ;
@@ -79,6 +80,8 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
         thanhtoanhoadonmomo = findViewById(R.id.thanhtoanhoadonmomo);
         diachihoadon = findViewById(R.id.diachihoadon);
         muahangdonhang = findViewById(R.id.muahangdonhang);
+        phuongthucvanchuyen = findViewById(R.id.phuongthucvanchuyen);
+        phivanchuyenhoadon = findViewById(R.id.phivanchuyenhoadon);
         AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT);
 
         quaylaidondathang.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +102,8 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
             recyclerView.setAdapter(hoadonAdapter);
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //layphi van chuyen
+
         //lay tong tien gia san pham
         int totalQuantity = 0;
         int totalPrice = 0 ;
@@ -107,13 +112,25 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
             totalQuantity += item.getQuantity();
             totalPrice += item.getPrice()   ;
         }
+        if (totalPrice < 10000) {
+            phivanchuyen = 20000;
+            phuongthucvanchuyen.setText("Đơn hàng của bạn dưới 10.000. Nên phí vận chuyển là 20.0000");
+        } else if (totalPrice >= 10000 && totalPrice < 100000) {
+            phivanchuyen = 10000;
+            phuongthucvanchuyen.setText("Đơn hàng của bạn dưới 100.000. Nên phí vận chuyển là 10.0000");
+        } else {
+            phivanchuyen = 0;
+            phuongthucvanchuyen.setText("Đơn hàng của bạn được free ship");
+        }
 
+        phivanchuyenhoadon.setText(String.valueOf(phivanchuyen));
+        double tongTienCuoiCung = totalPrice + phivanchuyen;
         // Cập nhật vào TextView
         soluongsanphamhoadon = findViewById(R.id.soluongsanphamhoadon);
         tongtinehoadon = findViewById(R.id.tongtinehoadon);
 
         soluongsanphamhoadon.setText(String.valueOf(totalQuantity));
-        tongtinehoadon.setText(String.valueOf(totalPrice));
+        tongtinehoadon.setText(String.valueOf(tongTienCuoiCung));
 
         //lay ngay dat hang hien tai
         LocalDate currentDate = null;
@@ -202,7 +219,12 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
                                         }
                                     }
 
-                                    Order order = new Order(neworderId, userID, new Date(), diaChi, tongTien, finalHtThanhToan);
+                                    Order order = new Order(neworderId, userID, new Date(), diaChi, tongTienCuoiCung, finalHtThanhToan, phivanchuyen, "", "");
+
+                                 // Thiết lập trạng thái và phương thức vận chuyển
+                                    order.setTrangthai("Đang xử lý");
+                                    order.setPhuongthucvanchuyen("ShoppeExpress");
+
 
                                     int finalNeworderId = neworderId;
                                     db.collection("orders")
@@ -241,30 +263,63 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        int newDetailID = 1;
                         if (!queryDocumentSnapshots.isEmpty()) {
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                 int highestDetailId = document.getLong("detailID").intValue();
-                                newDetailId[0] = highestDetailId + 1;
+                                newDetailID = highestDetailId + 1;
                             }
                         }
 
-                        // Sau khi lấy được newDetailId, tiến hành tạo và lưu OrderDetail
-                        for (int i = 0; i < cartItems.size(); i++) {
-                            CartItem item = cartItems.get(i);
+                        for (CartItem item : cartItems) {
                             OrderDetail orderDetail = new OrderDetail(
-                                    newDetailId[0], // Sử dụng newDetailId mới lấy được
+                                    newDetailID, // Sử dụng newDetailId mới lấy được và tăng giá trị sau mỗi lần sử dụng
                                     item.getQuantity(),
                                     neworderId,
                                     item.getProductID(),
                                     item.getPrice()
                             );
 
+//                         Sau khi lấy được newDetailId, tiến hành tạo và lưu OrderDetail
+
                             db.collection("order_detail")
                                     .add(orderDetail)
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
-                                            // Xử lý khi lưu thông tin chi tiết đơn hàng thành công
+                                            db.collection("Products")
+                                                    .whereEqualTo("productID",item.getProductID())
+                                                    .get()
+                                                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                        @Override
+                                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                             for (QueryDocumentSnapshot document : queryDocumentSnapshots){
+                                                                 double currentSelled = document.getDouble("selled");
+                                                                 double currentSoluong = document.getDouble("soluong");
+                                                                 Map<String, Object> updates = new HashMap<>();
+                                                                 updates.put("selled", currentSelled + 1); // Tăng số lượng đã bán
+                                                                 updates.put("soluong", currentSoluong - 1); // Giảm số lượng tồn kho
+
+                                                                 // Thực hiện cập nhật vào Firestore
+                                                                 db.collection("Products")
+                                                                         .document(document.getId()) // Sử dụng ID của tài liệu hiện tại
+                                                                         .update(updates)
+                                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                             @Override
+                                                                             public void onSuccess(Void aVoid) {
+                                                                                 // Xử lý khi cập nhật thành công
+                                                                             }
+                                                                         })
+                                                                         .addOnFailureListener(new OnFailureListener() {
+                                                                             @Override
+                                                                             public void onFailure(@NonNull Exception e) {
+                                                                                 // Xử lý khi cập nhật không thành công
+                                                                             }
+                                                                         });
+                                                             }
+                                                        }
+                                                    });
+
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -277,8 +332,6 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
                     }
                 });
     }
-
-    // Phương thức để tạo mã chi tiết đơn hàng duy nhất
 
     //thanhtoanmomo
     private void requestPayment(String idDonHang) {
@@ -353,5 +406,4 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
             Log.d("Thanhcong", data.getStringExtra("Không thành công"));
         }
     }
-    //lu vao thong tin chi tiet
 }

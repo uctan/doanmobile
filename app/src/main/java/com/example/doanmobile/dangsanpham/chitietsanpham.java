@@ -36,16 +36,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class chitietsanpham extends AppCompatActivity {
-    TextView detailtensp,detailgia,detailmotasp,detailsoluong,tinhtiengiohangdetail,detailtencuahang;
+    TextView detailtensp,detailgia,detailmotasp,detailsoluong,tinhtiengiohangdetail,detailtencuahang,soluongdetail,giamgiadetail,soluongbandetail,trungbinhdanhgiadetail;
     View detailtru,detailcong,themgiohang;
     ImageView detailanh,backnguoibanchitiet,detailgiohang,nhantinvoishop;
     //Thêm hoặc giảm số lượng sản phẩm
-    double giacade ;
+
     int soLuong = 1;
     FirebaseFirestore db;
 
@@ -53,6 +54,7 @@ public class chitietsanpham extends AppCompatActivity {
     RecyclerView xuathiendanhgiatungsanpham;
     ReViewAdapter reViewAdapter;
     List<Review> reviewList;
+    NotificationBadge soluonggiohang;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,14 @@ public class chitietsanpham extends AppCompatActivity {
         detailgiohang = findViewById(R.id.detailgiohang);
         themgiohang = findViewById(R.id.themgiohang);
         xuathiendanhgiatungsanpham = findViewById(R.id.xuathiendanhgiatungsanpham);
+        soluongdetail = findViewById(R.id.soluongdetail);
+        giamgiadetail = findViewById(R.id.giamgiadetail);
+        soluongbandetail = findViewById(R.id.soluongbandetail);
+        trungbinhdanhgiadetail = findViewById(R.id.trungbinhdanhgiadetail);
+        soluonggiohang = findViewById(R.id.soluonggiohang);
         db = FirebaseFirestore.getInstance();
+
+        //trang hien so luong gio hang
 
         nhantinvoishop = findViewById(R.id.nhantinvoishop);
         //hieện chi tiết sản phẩm
@@ -94,21 +103,23 @@ public class chitietsanpham extends AppCompatActivity {
 
                 detailtensp.setText(bundle.getString("Title"));
                 detailmotasp.setText(bundle.getString("mota"));
+                double soluong = bundle.getDouble("soluong");
+                double discount = bundle.getDouble("discount");
+                double selled = bundle.getDouble("selled");
+                double reviewcount = bundle.getDouble("reviewcount");
+                soluongdetail.setText(String.valueOf(soluong));
+                giamgiadetail.setText(String.valueOf(discount));
+                soluongbandetail.setText(String.valueOf(selled));
+                trungbinhdanhgiadetail.setText(String.valueOf(reviewcount));
 
-                Object giacaObject = bundle.get("Giaca");
-                if (giacaObject != null) {
-                    if (giacaObject instanceof Double) {
-                        double giaca = (Double) giacaObject;
-                        detailgia.setText(String.valueOf(giaca));
-                    } else if (giacaObject instanceof String) {
-                        try {
-                            double giaca = Double.parseDouble((String) giacaObject);
-                            detailgia.setText(String.valueOf(giaca));
-                        } catch (NumberFormatException e) {
-                            // Handle the case where parsing to double fails
-                        }
-                    }
-                }
+                double giaca = bundle.getDouble("Giaca");
+                detailgia.setText(String.valueOf(giaca)); // Hiển thị giá sau khi giảm giá
+
+
+
+
+
+
 
                 Glide.with(this).load(bundle.getString("Image")).into(detailanh);
 
@@ -174,22 +185,15 @@ public class chitietsanpham extends AppCompatActivity {
                     soLuong = 1;
                 }
                 detailsoluong.setText(String.valueOf(soLuong));
-
-                // Lấy giá từ Bundle
+                // Tính lại tổng tiền sau khi thay đổi số lượng
                 Bundle bundle = getIntent().getExtras();
                 if (bundle != null) {
-                    Object giacaObject = bundle.get("Giaca");
-
-                    if (giacaObject instanceof String) {
-                        String giacaString = (String) giacaObject;
-                        double giaca = Double.parseDouble(giacaString.trim());
-                        giacade = soLuong * giaca;
-                        tinhtiengiohangdetail.setText(String.valueOf(giacade));
-                    } else if (giacaObject instanceof Double) {
-                        Double giacaDouble = (Double) giacaObject;
-                        giacade = soLuong * giacaDouble;
-                        tinhtiengiohangdetail.setText(String.valueOf(giacade));
-                    }
+                    double giaca = bundle.getDouble("Giaca");
+                    double discount = bundle.getDouble("discount");
+                    double discountAmount = (discount / 100) * giaca; // Tính số tiền giảm giá
+                    double giacade = giaca - discountAmount; // Tính giá cuối cùng sau khi giảm giá
+                    double totalGia = soLuong * giacade; // Tính tổng giá sản phẩm sau khi giảm giá và nhân với số lượng
+                    tinhtiengiohangdetail.setText(String.valueOf(totalGia));
                 }
             }
         });
@@ -204,19 +208,12 @@ public class chitietsanpham extends AppCompatActivity {
                 // Lấy giá từ Bundle
                 Bundle bundle = getIntent().getExtras();
                 if (bundle != null) {
-                    Object giacaObject = bundle.get("Giaca");
-
-
-                    if (giacaObject instanceof String) {
-                        String giacaString = (String) giacaObject;
-                        double giaca = Double.parseDouble(giacaString.trim());
-                        giacade = soLuong * giaca;
-                        tinhtiengiohangdetail.setText(String.valueOf(giacade));
-                    } else if (giacaObject instanceof Double) {
-                        Double giacaDouble = (Double) giacaObject;
-                        giacade = soLuong * giacaDouble;
-                        tinhtiengiohangdetail.setText(String.valueOf(giacade));
-                    }
+                    double giaca = bundle.getDouble("Giaca");
+                    double discount = bundle.getDouble("discount");
+                    double discountAmount = (discount / 100) * giaca; // Tính số tiền giảm giá
+                    double giacade = giaca - discountAmount; // Tính giá cuối cùng sau khi giảm giá
+                    double totalGia = soLuong * giacade; // Tính tổng giá sản phẩm sau khi giảm giá và nhân với số lượng
+                    tinhtiengiohangdetail.setText(String.valueOf(totalGia));
                 }
             }
         });
@@ -264,18 +261,57 @@ public class chitietsanpham extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                double giaca = bundle.getDouble("Giaca");
+                double discount = bundle.getDouble("discount");
+                double discountAmount = (discount / 100) * giaca; // Tính số tiền giảm giá
+                double giacade = giaca - discountAmount; // Tính giá cuối cùng sau khi giảm giá
+                double totalGia = soLuong * giacade;
+                double soluongMax = bundle.getDouble("soluong");
 
-                CartItem tontai = CartManager.getInstance().getCarrtItemByProductID(bundle.getInt("productID"));
-                if (tontai != null){
-                    tontai.setQuantity(tontai.getQuantity() + soLuong);
+                // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng hay chưa
+                CartItem existingItem = CartManager.getInstance().getCarrtItemByProductID(bundle.getInt("productID"));
+                if (existingItem != null) {
+                    // Tính tổng số lượng hiện tại của sản phẩm trong giỏ hàng và số lượng mới muốn thêm vào
+                    int totalQuantity = existingItem.getQuantity() + soLuong;
+
+                    // Kiểm tra nếu tổng số lượng vượt quá số lượng tối đa
+                    if (totalQuantity > soluongMax) {
+                        Toast.makeText(chitietsanpham.this, "Số lượng sản phẩm vượt quá giới hạn", Toast.LENGTH_SHORT).show();
+                        return; // Kết thúc sự kiện onClick
+                    }
+
+                    // Cập nhật số lượng của sản phẩm trong giỏ hàng và hiển thị thông báo thành công
+                    existingItem.setQuantity(totalQuantity);
+
+                    Toast.makeText(chitietsanpham.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
+                } else {
+
+                    // Thêm sản phẩm vào giỏ hàng nếu chưa tồn tại và tổng số lượng không vượt quá số lượng tối đa
+                    if (soLuong <= soluongMax) {
+                        CartItem cartItem = new CartItem(bundle.getInt("productID"), bundle.getString("Title"), totalGia, bundle.getString("Image"), soLuong,bundle.getDouble("discount"));
+                        CartManager.getInstance().addToCart(cartItem);
+                        Toast.makeText(chitietsanpham.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Hiển thị thông báo cho người dùng nếu số lượng vượt quá giới hạn
+                        Toast.makeText(chitietsanpham.this, "Số lượng sản phẩm vượt quá giới hạn", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else {
-                    CartItem cartItem = new CartItem(bundle.getInt("productID"), bundle.getString("Title"), giacade, bundle.getString("Image"),soLuong);
-                    CartManager.getInstance().addToCart(cartItem);
-                }
-                Toast.makeText(chitietsanpham.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
+                updateCartBadge();
             }
+
         });
+    }
+    private void updateCartBadge() {
+        // Lấy danh sách CartItem từ CartManager
+        int uniqueProductCount = CartManager.getInstance().getUniqueProductCount();
+
+        // Set số lượng sản phẩm lên NotificationBadge
+        if (uniqueProductCount > 0) {
+            soluonggiohang.setVisibility(View.VISIBLE);
+            soluonggiohang.setNumber(uniqueProductCount);
+        } else {
+            soluonggiohang.setVisibility(View.GONE);
+        }
     }
 
 }

@@ -22,14 +22,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class thanhtoanthanhcong extends AppCompatActivity {
 
-    RatingBar  ratingBar;
-    EditText  delaidanhgia;
-    View  vetrangchudanhgia,luudanhgianha;
+    RatingBar ratingBar;
+    EditText delaidanhgia;
+    View vetrangchudanhgia, luudanhgianha;
     float myRating = 0;
     int productID;
 
@@ -37,16 +38,18 @@ public class thanhtoanthanhcong extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanhtoanthanhcong);
+
         ratingBar = findViewById(R.id.ratingBar);
         delaidanhgia = findViewById(R.id.delaidanhgia);
         vetrangchudanhgia = findViewById(R.id.vetrangchudanhgia);
         luudanhgianha = findViewById(R.id.luudanhgianha);
+
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
         FirebaseUser user = fAuth.getCurrentUser();
 
-        //quay tre ve trang chu
+        // Quay trở về trang chủ
         vetrangchudanhgia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,56 +57,17 @@ public class thanhtoanthanhcong extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //danh gia so sao
+
+        // Đánh giá số sao
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
                 myRating = v;
-                Toast.makeText(thanhtoanthanhcong.this, "lựa chọn số sao " + myRating, Toast.LENGTH_SHORT).show();
+                Toast.makeText(thanhtoanthanhcong.this, "Bạn đã chọn số sao: " + myRating, Toast.LENGTH_SHORT).show();
             }
         });
 
-        //luuvao firestore
-        Intent intent = getIntent();
-        if (intent != null) {
-            int orderId = intent.getIntExtra("orderId", -1); // Nhận orderId
-            int detailId = intent.getIntExtra("detailId", -1); // Nhận detailId
-            if (detailId != -1) {
-                // Truy vấn bảng order_detail với điều kiện detailId và orderID
-                fStore.collection("order_detail")
-                        .whereEqualTo("detailID", detailId)
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                                if (!queryDocumentSnapshots.isEmpty()) {
-
-                                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                        int productID = document.getLong("productID").intValue();
-                                        int orderID = document.getLong("orderID").intValue();
-
-                                    }
-                                } else {
-
-                                    Log.d("TAG", "Không tìm thấy dữ liệu cho detailId = " + detailId);
-                                }
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-
-                                Log.d("TAG", "Lỗi khi truy vấn order_detail: " + e.getMessage());
-                            }
-                        });
-            } else {
-                Log.d("TAG", "Không có detailId được truyền từ Intent");
-            }
-        }
-
-
-
+        // Lưu vào Firestore
         luudanhgianha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,46 +84,60 @@ public class thanhtoanthanhcong extends AppCompatActivity {
                                 Intent intent = getIntent();
                                 if (intent != null) {
                                     int orderId = intent.getIntExtra("orderId", -1); // Nhận orderId
-
                                     int detailId = intent.getIntExtra("detailId", -1); // Nhận detailId
                                     if (detailId != -1) {
                                         // Truy vấn bảng order_detail với điều kiện detailId và orderID
                                         fStore.collection("order_detail")
                                                 .whereEqualTo("detailID", detailId)
-
                                                 .get()
                                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                     @Override
                                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
                                                         if (!queryDocumentSnapshots.isEmpty()) {
-
                                                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                                                 String tinnhan = delaidanhgia.getText().toString();
                                                                 int productID = document.getLong("productID").intValue();
                                                                 int orderID = document.getLong("orderID").intValue();
-                                                                Review review = new Review(0, productID, intUserID, rating, tinnhan);
 
+                                                                // Tạo review mới
                                                                 fStore.collection("Reviews")
-                                                                        .add(review)
-                                                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                        .orderBy("reviewID", Query.Direction.DESCENDING)
+                                                                        .limit(1)
+                                                                        .get()
+                                                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                                             @Override
-                                                                            public void onSuccess(DocumentReference documentReference) {
-                                                                                Toast.makeText(thanhtoanthanhcong.this, "Đánh giá đã được lưu thành công!", Toast.LENGTH_SHORT).show();
-                                                                                Intent intent1 = new Intent(thanhtoanthanhcong.this,trangchunguoidung.class);
-                                                                                startActivity(intent1);
-                                                                            }
-                                                                        })
-                                                                        .addOnFailureListener(new OnFailureListener() {
-                                                                            @Override
-                                                                            public void onFailure(@NonNull Exception e) {
-                                                                                Log.w("TAG", "Lỗi khi lưu đánh giá vào Firestore", e);
-                                                                                Toast.makeText(thanhtoanthanhcong.this, "Có lỗi xảy ra khi lưu đánh giá. Vui lòng thử lại sau!", Toast.LENGTH_SHORT).show();
+                                                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                                                int newreviewID = 1;
+                                                                                if (!queryDocumentSnapshots.isEmpty()) {
+                                                                                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                                                                        int highestreviewID = document.getLong("reviewID").intValue();
+                                                                                        newreviewID = highestreviewID + 1;
+                                                                                    }
+                                                                                }
+                                                                                Review review = new Review(newreviewID, productID, intUserID, rating, tinnhan);
+
+                                                                                // Lưu review vào Firestore
+                                                                                fStore.collection("Reviews")
+                                                                                        .add(review)
+                                                                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                                            @Override
+                                                                                            public void onSuccess(DocumentReference documentReference) {
+                                                                                                Toast.makeText(thanhtoanthanhcong.this, "Đánh giá đã được lưu thành công!", Toast.LENGTH_SHORT).show();
+                                                                                                Intent intent1 = new Intent(thanhtoanthanhcong.this, trangchunguoidung.class);
+                                                                                                startActivity(intent1);
+                                                                                            }
+                                                                                        })
+                                                                                        .addOnFailureListener(new OnFailureListener() {
+                                                                                            @Override
+                                                                                            public void onFailure(@NonNull Exception e) {
+                                                                                                Log.w("TAG", "Lỗi khi lưu đánh giá vào Firestore", e);
+                                                                                                Toast.makeText(thanhtoanthanhcong.this, "Có lỗi xảy ra khi lưu đánh giá. Vui lòng thử lại sau!", Toast.LENGTH_SHORT).show();
+                                                                                            }
+                                                                                        });
                                                                             }
                                                                         });
                                                             }
                                                         } else {
-
                                                             Log.d("TAG", "Không tìm thấy dữ liệu cho detailId = " + detailId);
                                                         }
                                                     }
@@ -167,7 +145,6 @@ public class thanhtoanthanhcong extends AppCompatActivity {
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-
                                                         Log.d("TAG", "Lỗi khi truy vấn order_detail: " + e.getMessage());
                                                     }
                                                 });
@@ -175,13 +152,11 @@ public class thanhtoanthanhcong extends AppCompatActivity {
                                         Log.d("TAG", "Không có detailId được truyền từ Intent");
                                     }
                                 }
-
-
-                                // Sử dụng biến productID đã được lấy từ truy vấn Firestore
-
                             } else {
+                                // Xử lý khi không tìm thấy userID trong tài liệu KhachHang
                             }
                         } else {
+                            // Xử lý khi tài liệu không tồn tại
                         }
                     }
                 });

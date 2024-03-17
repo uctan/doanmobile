@@ -1,7 +1,7 @@
 package com.example.doanmobile.danhgiasanpham;
 
 public class Review {
-    private static int nextReviewID = 1;
+
     private int reviewID;
     private int productID;
     private int userID;
@@ -10,7 +10,7 @@ public class Review {
     public Review(){}
 
     public Review(int reviewID, int productID, int userID, float rating, String tinnhan) {
-        this.reviewID = nextReviewID++;
+        this.reviewID = reviewID;
         this.productID = productID;
         this.userID = userID;
         this.rating = rating;

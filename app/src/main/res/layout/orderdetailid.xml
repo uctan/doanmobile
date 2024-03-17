@@ -36,6 +36,23 @@
         android:text="Gia"
         android:textSize="16sp" />
     <TextView
+        android:id="@+id/productDiscounthoadondetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/productImagehoadondetail"
+        android:layout_below="@id/productNamehoadondetail"
+        android:layout_marginStart="116dp"
+        android:text="Gia"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/productImagehoadondetail"
+        android:layout_below="@id/productNamehoadondetail"
+        android:layout_marginStart="136dp"
+        android:text="%"
+        android:textSize="16sp" />
+    <TextView
         android:id="@+id/quantitydetailorder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

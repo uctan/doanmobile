@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -18,12 +19,28 @@
         tools:replace="android:theme"
         tools:targetApi="31">
         <activity
+            android:name=".thongke.thongkesanpham"
+            android:exported="false" />
+        <activity
+            android:name=".dangkynguoibanvip.dangkynguoibanvipthanhcong"
+            android:exported="false" />
+        <activity
+            android:name=".dangkynguoibanvip.dangkynguoibanvip"
+            android:exported="false" />
+        <activity
+            android:name=".livestream.LiveActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".livestream.livestream"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".hoadonnguoiban.shophienthi"
             android:exported="false" />
         <activity
             android:name=".hoadonnguoiban.hoadonnguoiban"
             android:exported="false" />
-
         <activity
             android:name=".DanhGiaSPcuaShop.XemDanhGiaCuaShop"
             android:exported="false" />
@@ -62,9 +79,6 @@
             android:exported="false" />
         <activity
             android:name=".yeuthichsanpham.yeuthichsanpham"
-            android:exported="false" />
-        <activity
-            android:name=".DanhGiaSP.TrangDanhGia"
             android:exported="false" />
         <activity
             android:name=".dangsanpham.chitietsanpham"
@@ -119,9 +133,7 @@
             android:exported="false" />
         <activity
             android:name=".dangkynguoiban.manhinhnguoiban"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

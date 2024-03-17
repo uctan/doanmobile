@@ -57,6 +57,13 @@
                         android:layout_marginStart="380dp"
                         android:layout_marginTop="22dp"
                         android:background="@drawable/giohangden" />
+                    <com.nex3z.notificationbadge.NotificationBadge
+                        android:id="@+id/soluonggiohang"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="390dp"
+                        android:layout_marginTop="0dp"
+                        />
 
                 </RelativeLayout>
             </RelativeLayout>
@@ -83,6 +90,28 @@
                     android:textStyle="bold"
                     tools:ignore="InvalidId" />
                 <TextView
+
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="210dp"
+                    android:layout_marginStart="300dp"
+                    android:text="Số lượng:"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    tools:ignore="InvalidId" />
+                <TextView
+                    android:id="@+id/soluongdetail"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="210dp"
+                    android:layout_marginStart="365dp"
+                    android:text="10"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    tools:ignore="InvalidId" />
+                <TextView
                     android:id="@+id/detailgia"
                     android:layout_width="110dp"
                     android:layout_height="30dp"
@@ -103,6 +132,30 @@
                     android:textStyle="bold"
                     android:textColor="#F88735"
                     />
+                <TextView
+                    android:id="@+id/giamgiadetail"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="250dp"
+                    android:layout_marginStart="190dp"
+                    android:gravity="center"
+                    android:text="10"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="250dp"
+                    android:layout_marginStart="225dp"
+                    android:gravity="center"
+                    android:text="%"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    />
+
                 <View
                     android:layout_width="118dp"
                     android:layout_height="40dp"
@@ -144,47 +197,38 @@
                     android:layout_marginStart="40dp"
                     android:src="@drawable/ngoisao"
                     />
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_marginTop="300dp"
-                    android:layout_marginStart="70dp"
-                    android:src="@drawable/ngoisao"
-                    />
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_marginTop="300dp"
-                    android:layout_marginStart="100dp"
-                    android:src="@drawable/ngoisao"
-                    />
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_marginTop="300dp"
-                    android:layout_marginStart="130dp"
-                    android:src="@drawable/ngoisao"
-                    />
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_marginTop="300dp"
-                    android:layout_marginStart="160dp"
-                    android:src="@drawable/ngoisao"
-                    />
+
                 <TextView
+                    android:id="@+id/trungbinhdanhgiadetail"
                     android:layout_width="21dp"
                     android:layout_height="18dp"
                     android:layout_marginTop="302dp"
-                    android:layout_marginStart="190dp"
+                    android:layout_marginStart="70dp"
                     android:text="4.8"
+                    />
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="302dp"
+                    android:layout_marginStart="100dp"
+                    android:textSize="14dp"
+                    android:text="Đã bán:"
+                    />
+                <TextView
+                    android:id="@+id/soluongbandetail"
+                    android:layout_width="40dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="302dp"
+                    android:layout_marginStart="150dp"
+                    android:textSize="14dp"
+                    android:text="10"
                     />
                 <ImageView
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_marginTop="300dp"
                     android:layout_marginStart="380dp"
-                    android:src="@drawable/traitimbth"
+                    android:src="@drawable/traitimdo"
                     />
             </RelativeLayout>
 

@@ -119,7 +119,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         productCollection = FirebaseFirestore.getInstance().collection("Products");
         AlertDialog.Builder builder = new AlertDialog.Builder(tranggiaodienbanhang.this);
         builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
+//   
         AlertDialog dialog = builder.create();
         dialog.show();
         loadFavoriteProducts();

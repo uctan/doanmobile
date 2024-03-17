@@ -53,7 +53,7 @@ public class dangnhap extends AppCompatActivity {
 
         dialog = new Dialog(dangnhap.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_wait);
+//        dialog.setContentView(R.layout.dialog_wait);
         dialog.setCanceledOnTouchOutside(false);
 
         Emaildangnhap = findViewById(R.id. Emaildangnhap);

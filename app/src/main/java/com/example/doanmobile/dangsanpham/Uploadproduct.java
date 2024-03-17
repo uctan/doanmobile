@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.doanmobile.R;
 import com.example.doanmobile.dangkynguoiban.manhinhnguoiban;
+import com.example.doanmobile.dangkynguoiban.quanlysanphamthemsanpham;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -49,6 +51,7 @@ public class Uploadproduct extends AppCompatActivity {
 
     ImageView uploadImage;
     EditText uploadtensanpham,uploadmotasanpham,uploadgiacasanpham;
+    EditText uploaddiscountsanpham,uploadsoluongsanpham;
     Spinner categorysanphamnha;
     Button luusanpham;
     FirebaseFirestore db;
@@ -60,7 +63,7 @@ public class Uploadproduct extends AppCompatActivity {
 
     private int shopID;
     private int categoryID;
-    private static int currentProductID = 0;
+
 
     Uri uri;
     @SuppressLint("MissingInflatedId")
@@ -74,8 +77,34 @@ public class Uploadproduct extends AppCompatActivity {
         uploadmotasanpham = findViewById(R.id.uploadmotasanpham);
         uploadgiacasanpham = findViewById(R.id.uploadgiacasanpham);
         categorysanphamnha = findViewById(R.id.categorysanphamnha);
+        uploaddiscountsanpham = findViewById(R.id.uploaddiscountsanpham);
+        uploadsoluongsanpham = findViewById(R.id.uploadsoluongsanpham);
         luusanpham = findViewById(R.id.luusanpham);
         db = FirebaseFirestore.getInstance();
+        //neu vip se xuat hien disscoutn
+        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (user1 != null) {
+            String userId = user1.getUid();
+            DocumentReference userRef = db.collection("KhachHang").document(userId);
+            userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        boolean isNguoiBan = documentSnapshot.getBoolean("nguoiBan");
+
+                        // Nếu là người bán, hiển thị View dangkynguoibanvip và ẩn View livestream
+                        if (isNguoiBan) {
+                            uploaddiscountsanpham.setVisibility(View.GONE);
+                        } else {
+                            
+                        }
+
+                        // Chuyển giá trị isNguoiBan thành chuỗi và in vào log
+                        Log.d("nguoiban", String.valueOf(isNguoiBan));
+                    }
+                }
+            });
+        }
         //danh mục sản phâẩm
         danhSachDanhMuc = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, danhSachDanhMuc);
@@ -117,10 +146,6 @@ public class Uploadproduct extends AppCompatActivity {
         });
         categorysanphamnha.setAdapter(adapter);
 
-
-
-
-        // Thêm đoạn code sau vào phương thức onCreate
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Category")
                 .get()
@@ -176,6 +201,19 @@ public class Uploadproduct extends AppCompatActivity {
         String title = uploadtensanpham.getText().toString();
         String mota = uploadmotasanpham.getText().toString();
         double price = Double.parseDouble(uploadgiacasanpham.getText().toString());
+        double soluong = Double.parseDouble(uploadsoluongsanpham.getText().toString());
+
+        double selled = 0;
+        double reviewcount = 0;
+        double discount;
+        String discountInput = uploaddiscountsanpham.getText().toString();
+        if (!discountInput.isEmpty()) {
+            discount = Double.parseDouble(discountInput);
+        } else {
+            // Nếu không nhập, gán giá trị mặc định cho discount là 0.0
+            discount = 0.0;
+        }
+
         db = FirebaseFirestore.getInstance();
 
         String selectedCategory = categorysanphamnha.getSelectedItem().toString(); // Lấy tên danh mục
@@ -213,57 +251,85 @@ public class Uploadproduct extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(Uploadproduct.this);
             builder.setCancelable(false);
-            builder.setView(R.layout.progress_layout);
-            AlertDialog dialog = builder.create();
-            dialog.show();
+//
+
 
             storageReference.putFile(uri).addOnSuccessListener(taskSnapshot -> {
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                 uriTask.addOnCompleteListener(task -> {
                     Uri urlImage = task.getResult();
                     imageURL = urlImage.toString();
-                    currentProductID++; // Tăng giá trị currentProductID
-                    uploadData(title, mota, price, currentProductID, categoryID, shopID); // Truyền currentProductID vào hàm uploadData
-                    if (!isFinishing()) {
-                        dialog.show();
-                    }
+                    CollectionReference productsCollection = db.collection("Products");
+                    productsCollection.orderBy("productID", Query.Direction.DESCENDING)
+                            .limit(1)
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                int newproductID = 1;
+                                if (!queryDocumentSnapshots.isEmpty()) {
+                                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                        int highestProductID = document.getLong("productID").intValue();
+                                        newproductID = highestProductID + 1;
+                                    }
+                                }
+                                uploadData(title, mota, price, 0, categoryID, shopID, soluong, selled, reviewcount, discount);
+                            });
+
                 });
             }).addOnFailureListener(e -> {
-                dialog.dismiss();
+
                 Toast.makeText(Uploadproduct.this, "Lỗi khi tải lên hình ảnh", Toast.LENGTH_SHORT).show();
             });
         }
     }
-    public  void uploadData (String title,String mota, double price,int productID, int categoryID,int shopID)
-    {
+    public void uploadData(String title, String mota, double price, int productID, int categoryID, int shopID,double soluong,double selled, double reviewcount,double discount) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference productsCollection = db.collection("Products");
-        currentProductID++;
-        Products product = new Products(currentProductID, shopID, categoryID, title, mota, price, imageURL,0);
-        String currentDate = DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
-        Query query = productsCollection.whereEqualTo("title", currentDate);
-        query.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-                QuerySnapshot querySnapshot = task.getResult();
-                if (querySnapshot != null && !querySnapshot.isEmpty())
-                {
-                    DocumentReference docRef = querySnapshot.getDocuments().get(0).getReference();
-                    docRef.update("title",title);
-                    docRef.update("mota",mota);
-                    docRef.update("price",price);
-                }else {
-                    // Sản phẩm chưa tồn tại, thêm mới
-                    productsCollection.add( product);
-                }
-                Toast.makeText(Uploadproduct.this, "Lưu thông tin", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Uploadproduct.this, manhinhnguoiban.class);
-                startActivity(intent);
-                finish();
-            }else {
-                Toast.makeText(Uploadproduct.this, "Lỗi khi lưu thông tin", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(e -> {
-            Toast.makeText(Uploadproduct.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        });
+
+        // Thêm bộ lọc và sắp xếp cho collection
+        productsCollection.orderBy("productID", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    int newproductID = 1;
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            int highestProductID = document.getLong("productID").intValue();
+                            newproductID = highestProductID + 1;
+                        }
+                    }
+
+                    Products product = new Products(newproductID, shopID, categoryID, title, mota, price, imageURL, 0, selled, soluong, reviewcount, discount);
+
+                    String currentDate = DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
+
+                    // Query tại đây với điều kiện phù hợp
+                    Query query = productsCollection.whereEqualTo("title", currentDate);
+                    query.get().addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                DocumentSnapshot docSnapshot = querySnapshot.getDocuments().get(0);
+                                DocumentReference docRef = docSnapshot.getReference();
+                                docRef.update("title", title);
+                                docRef.update("mota", mota);
+                                docRef.update("price", price);
+                            } else {
+                                // Sản phẩm chưa tồn tại, thêm mới
+                                productsCollection.add(product);
+                            }
+                            Toast.makeText(Uploadproduct.this, "Lưu thông tin", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Uploadproduct.this, quanlysanphamthemsanpham.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(Uploadproduct.this, "Lỗi khi lưu thông tin", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(Uploadproduct.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(Uploadproduct.this, "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
+                });
     }
 }

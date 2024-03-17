@@ -5,12 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".dangkynguoiban.quanlysanphamthemsanpham">
-
-    <Button
-        android:id="@+id/themsanphamcuahang"
+    <RelativeLayout android:id="@+id/yeuthich"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="35dp" />
+        android:layout_height="wrap_content" >
+        <RelativeLayout android:id="@+id/page_giohang_ek1"
+            android:layout_marginTop="50dp"
+            android:layout_width="450dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            >
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="44dp"
+                android:text="Quản lý sản phẩm của Shop"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginTop="2dp"
+                android:textColor="#FF9431"
+                />
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="320dp"
+                android:background="@drawable/close"
+                android:id="@+id/backqlysanphamshop"
+                />
+        </RelativeLayout>
+        <Button
+            android:id="@+id/themsanphamcuahang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/orange"
+            android:text="Thêm sản phẩm"
+            android:src="@color/orange"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="35dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewqlysanphamshop"
+            android:layout_width="450dp"
+            android:layout_height="550dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginStart="10dp"
+            />
+
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

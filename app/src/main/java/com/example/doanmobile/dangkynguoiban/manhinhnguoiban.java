@@ -13,8 +13,11 @@ import android.widget.Toast;
 import com.example.doanmobile.DanhGiaSPcuaShop.XemDanhGiaCuaShop;
 import com.example.doanmobile.R;
 import com.example.doanmobile.chat.NguoidungvoiShopActivity;
+import com.example.doanmobile.dangkynguoibanvip.dangkynguoibanvip;
 import com.example.doanmobile.dangnhap;
 import com.example.doanmobile.hoadonnguoiban.hoadonnguoiban;
+import com.example.doanmobile.livestream.livestream;
+import com.example.doanmobile.thongke.thongkesanpham;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +32,7 @@ public class manhinhnguoiban extends AppCompatActivity {
     View quanlysanphamcuahang;
     View nhantinvoikhachhang;
     View quanlyhoadoncuahang;
-    View dangxuatnguoiban,Xemdanhgia;
+    View dangxuatnguoiban,Xemdanhgia,thongkechart;
     View livestream;
     View dangkynguoibanvip;
 
@@ -46,6 +49,28 @@ public class manhinhnguoiban extends AppCompatActivity {
         Xemdanhgia = findViewById(R.id.Xemdanhgia);
         livestream = findViewById(R.id.livestream);
         dangkynguoibanvip = findViewById(R.id.dangkynguoibanvip);
+        thongkechart = findViewById(R.id.thongkechart);
+        thongkechart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(manhinhnguoiban.this, thongkesanpham.class);
+                startActivity(intent);
+            }
+        });
+        livestream.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(manhinhnguoiban.this,com.example.doanmobile.livestream.livestream.class);
+                startActivity(intent);
+            }
+        });
+        dangkynguoibanvip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(manhinhnguoiban.this,com.example.doanmobile.dangkynguoibanvip.dangkynguoibanvip.class);
+                startActivity(intent);
+            }
+        });
 
         Xemdanhgia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,9 +105,6 @@ public class manhinhnguoiban extends AppCompatActivity {
                     }
                 }
             });
-
-
-
         }
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

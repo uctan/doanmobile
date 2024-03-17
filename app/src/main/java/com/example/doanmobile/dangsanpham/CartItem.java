@@ -9,14 +9,16 @@ public class CartItem implements Parcelable {
     private double price;
     private String imageURL;
     private int quantity;
+    private double discount;
 
 
-    public CartItem(int productID, String title, double price, String imageURL, int quantity) {
+    public CartItem(int productID, String title, double price, String imageURL, int quantity,double discount) {
         this.productID = productID;
         this.title = title;
         this.price = price;
         this.imageURL = imageURL;
         this.quantity=quantity;
+        this.discount = discount;
     }
 
     @Override
@@ -31,6 +33,7 @@ public class CartItem implements Parcelable {
         dest.writeDouble(price);
         dest.writeString(imageURL);
         dest.writeInt(quantity);
+        dest.writeDouble(discount);
     }
 
     protected CartItem(Parcel in) {
@@ -39,6 +42,7 @@ public class CartItem implements Parcelable {
         price = in.readDouble();
         imageURL = in.readString();
         quantity = in.readInt();
+        discount = in.readDouble();
     }
 
     public static final Parcelable.Creator<CartItem> CREATOR = new Parcelable.Creator<CartItem>() {
@@ -52,6 +56,14 @@ public class CartItem implements Parcelable {
             return new CartItem[size];
         }
     };
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
 
     public int getProductID() {
         return productID;

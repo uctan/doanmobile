@@ -24,14 +24,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Upload data"
+                android:text="Upload sản phẩm"
                 android:textSize="30sp"
                 android:textAlignment="center"
 
                 />
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="120dp"
                 android:src="@drawable/cuahang"
                 android:id="@+id/uploadImage"
                 android:layout_marginTop="10dp"
@@ -64,6 +64,24 @@
                 android:hint="giá cả"
                 android:layout_gravity="start|center_vertical"
                 />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/uploadsoluongsanpham"
+                android:padding="16dp"
+                android:layout_marginTop="20dp"
+                android:hint="Số lượng"
+                android:layout_gravity="start|center_vertical"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/uploaddiscountsanpham"
+                android:padding="16dp"
+                android:layout_marginTop="20dp"
+                android:hint="Discount"
+                android:layout_gravity="start|center_vertical"
+                />
             <Spinner
                 android:id="@+id/categorysanphamnha"
                 android:layout_width="match_parent"
@@ -73,7 +91,8 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="save"
+                android:text="Lưu sản phẩm"
+                android:background="@color/orange"
                 android:id="@+id/luusanpham"
                 />
 

@@ -132,7 +132,7 @@ public class ChatActivity extends AppCompatActivity {
                                             .add(chatMessage)
                                             .addOnSuccessListener(documentReference -> {
                                                 chatMessageList.add(chatMessage);
-                                                chatMessage.setUserID(userId);
+//                                                chatMessage.setUserID(userId);
                                                 chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
                                                 recyclerView.scrollToPosition(chatMessageList.size() - 1);
                                                 messageEditText.setText("");
@@ -190,10 +190,14 @@ public class ChatActivity extends AppCompatActivity {
                                             if (dc.getType() == DocumentChange.Type.ADDED) {
                                                 ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
                                                 chatMessageList.add(message);
+                                                Collections.reverse(chatMessageList); // Đảo ngược danh sách để hiển thị theo thứ tự đúng
                                                 chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
                                                 recyclerView.scrollToPosition(chatMessageList.size() - 1);
                                             }
                                         }
+
+
+
                                     });
                         }
                     });
@@ -207,17 +211,20 @@ public class ChatActivity extends AppCompatActivity {
         db.collection("chat")
                 .whereEqualTo("shopID", shopID)
                 .whereEqualTo("userID", userID)
+                .orderBy("datetime",Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         Log.e("ChatActivity", "Listen failed", error);
                         return;
                     }
-
+                    chatMessageList.clear();
                     for (DocumentChange dc : value.getDocumentChanges()) {
                         if (dc.getType() == DocumentChange.Type.ADDED) {
                             ChatMessage message = dc.getDocument().toObject(ChatMessage.class);
                             chatMessageList.add(message);
-                            chatAdapter.notifyItemInserted(chatMessageList.size() - 1);
+                            Collections.reverse(chatMessageList); // Đảo ngược danh sách để hiển thị theo thứ tự đúng
+
+                            chatAdapter.notifyDataSetChanged(); // Thông báo cho adapter rằng dữ liệu đã thay đổi
                             recyclerView.scrollToPosition(chatMessageList.size() - 1);
                         }
                     }

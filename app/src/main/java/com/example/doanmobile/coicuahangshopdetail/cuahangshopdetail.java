@@ -122,7 +122,7 @@ public class cuahangshopdetail extends AppCompatActivity {
         productCollection = FirebaseFirestore.getInstance().collection("Products");
         AlertDialog.Builder builder = new AlertDialog.Builder(cuahangshopdetail.this);
         builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
+//        builder.setView(R.layout.progress_layout);
         AlertDialog dialog = builder.create();
         dialog.show();
         loadFavoriteProducts();

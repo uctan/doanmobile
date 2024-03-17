@@ -46,7 +46,8 @@ public class ProductAdapter extends RecyclerView.Adapter<sanphamHolder> {
     private List<Integer> favoriteProducts;
     private sanphamHolder holder;
     private FirebaseFirestore db;
-
+    private double totalStars;
+    private double reviewCount;
 
     public ProductAdapter (Context  context,List<Products> productsList){
         this.context = context;
@@ -70,6 +71,12 @@ public class ProductAdapter extends RecyclerView.Adapter<sanphamHolder> {
         Glide.with(context).load(data.getImageURL()).into(holder.anhsanpham);
         holder.tensanphamnha.setText(data.getTitle());
         holder.giasanphamnha.setText(String.valueOf(data.getPrice()));
+        holder.trungbinhdanhgia.setText(String.valueOf(data.getReviewcount()));
+        calculateAndSetAverageRating(data.getProductID(), holder.trungbinhdanhgia);
+        holder.discountsanpham.setText(String.valueOf(data.getDiscount()));
+        holder.soluonghang.setText(String.valueOf(data.getSoluong()));
+        holder.soluongbanduoc.setText(String.valueOf(data.getSelled()));
+
         //lam chuc nang yeu thich san pham
         final boolean[] isFavorite = {false};
         if (favoriteProducts.contains(data.getProductID())) {
@@ -136,8 +143,19 @@ public class ProductAdapter extends RecyclerView.Adapter<sanphamHolder> {
                     int shopId = data.getShopID();
                     intent.putExtra("shopId", shopId);
                     intent.putExtra("Giaca", giaCa);
+                    double soluong = data.getSoluong();
+                    intent.putExtra("soluong", soluong);
+                    double discount = data.getDiscount();
+                    intent.putExtra("discount", discount);
+                    double selled = data.getSelled();
+                    intent.putExtra("selled", selled);
+                    double reviewcount = data.getReviewcount();
+                    intent.putExtra("reviewcount", reviewcount);
+                    double soluongbanduoc = data.getReviewcount();
+                    intent.putExtra("selled", soluongbanduoc);
                     int productID = data.getProductID();
                     intent.putExtra("productID",productID);
+                    intent.putExtra("mota", data.getDescription());
                     context.startActivity(intent);}
                 else{
                     Toast.makeText(context, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
@@ -278,11 +296,68 @@ public class ProductAdapter extends RecyclerView.Adapter<sanphamHolder> {
             }
         });
     }
+    //tinh trung binh danh gia
+    private void calculateAndSetAverageRating(int productID, TextView trungbinhdanhgia) {
+        // Lấy tham chiếu đến bảng Reviews
+        CollectionReference reviewsCollection = db.collection("Reviews");
+        Query reviewQuery = reviewsCollection.whereEqualTo("productID", productID);
+
+        // Reset totalStars và reviewCount trước mỗi lần tính toán
+        totalStars = 0.0;
+        reviewCount = 0.0;
+
+        // Truy vấn Firestore để lấy danh sách đánh giá
+        reviewQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    // Lấy số sao từ mỗi đánh giá
+                    double stars = document.getDouble("rating");
+                    // Tính tổng số sao
+                    totalStars += stars;
+                    // Tăng số lượng đánh giá
+                    reviewCount++;
+                }
+
+                // Nếu có ít nhất một đánh giá, tính trung bình đánh giá và cập nhật vào TextView
+                if (reviewCount > 0) {
+                    double averageRating = totalStars / reviewCount;
+                    trungbinhdanhgia.setText(String.valueOf(averageRating));
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    CollectionReference productsCollection = db.collection("Products");
+
+                    // Tìm các tài liệu thỏa mãn điều kiện productID
+                    Query query = productsCollection.whereEqualTo("productID", productID);
+
+                    query.get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task1.getResult()) {
+                                // Cập nhật trường trungbinhdanhgia trong tài liệu sản phẩm
+                                documentSnapshot.getReference().update("reviewcount", averageRating)
+                                        .addOnSuccessListener(aVoid -> Log.d(TAG, "Cập nhật trungbinhdanhgia thành công"))
+                                        .addOnFailureListener(e -> Log.e(TAG, "Lỗi khi cập nhật trungbinhdanhgia", e));
+                            }
+                        } else {
+                            Log.e(TAG, "Error getting product document", task1.getException());
+                        }
+                    });
+
+
+                } else {
+                    // Nếu không có đánh giá nào, hiển thị trạng thái không có đánh giá
+                    trungbinhdanhgia.setText("0");
+                }
+            } else {
+                Log.e(TAG, "Error getting reviews", task.getException());
+                // Nếu có lỗi, hiển thị trạng thái không có đánh giá
+
+            }
+        });
+    }
 }
 
 class sanphamHolder extends  RecyclerView.ViewHolder{
     ImageView  anhsanpham;
-    TextView tensanphamnha,giasanphamnha,soluotthich;
+    TextView tensanphamnha,giasanphamnha,soluotthich,trungbinhdanhgia,discountsanpham,soluongbanduoc,soluonghang;
     CardView recCard;
     ImageButton traitimbth;
 
@@ -294,7 +369,10 @@ class sanphamHolder extends  RecyclerView.ViewHolder{
         recCard = itemView.findViewById(R.id.recCard);
         traitimbth = itemView.findViewById(R.id.traitimbth);
         soluotthich = itemView.findViewById(R.id.soluotthich);
-
+        trungbinhdanhgia = itemView.findViewById(R.id.trungbinhdanhgia);
+        discountsanpham = itemView.findViewById(R.id.discountsanpham);
+        soluongbanduoc = itemView.findViewById(R.id.soluongbanduoc);
+        soluonghang = itemView.findViewById(R.id.soluonghang);
 
     }
 }
