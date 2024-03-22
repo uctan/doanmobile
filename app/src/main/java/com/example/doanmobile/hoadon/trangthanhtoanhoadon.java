@@ -184,10 +184,10 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
 
                 if (thanhtoantienmathoadon.isChecked()) {
                     htThanhToan = "Tiền mặt";
-                    Intent intent = new Intent(trangthanhtoanhoadon.this, thanhtoanthanhcong.class);
-                    intent.putExtra("orderId", neworderId);
-                    intent.putExtra("detailId", currentDetailID);
-                    startActivity(intent);
+//                    Intent intent = new Intent(trangthanhtoanhoadon.this, thanhtoanthanhcong.class);
+//                    intent.putExtra("orderId", neworderId);
+//                    intent.putExtra("detailId", currentDetailID);
+//                    startActivity(intent);
                 } else if (thanhtoanhoadonmomo.isChecked()) {
                     htThanhToan = "Momo";
                     amount = String.valueOf(tongTien);
@@ -221,7 +221,7 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
 
                                     Order order = new Order(neworderId, userID, new Date(), diaChi, tongTienCuoiCung, finalHtThanhToan, phivanchuyen, "", "");
 
-                                 // Thiết lập trạng thái và phương thức vận chuyển
+                                    // Thiết lập trạng thái và phương thức vận chuyển
                                     order.setTrangthai("Đang xử lý");
                                     order.setPhuongthucvanchuyen("ShoppeExpress");
 
@@ -232,6 +232,7 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
                                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                 @Override
                                                 public void onSuccess(DocumentReference documentReference) {
+
                                                     luuThongTinChiTietDonHang(finalNeworderId, cartItems);
                                                 }
                                             })
@@ -280,6 +281,9 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
                                     item.getPrice()
                             );
 
+                            Intent intent = new Intent(trangthanhtoanhoadon.this, thanhtoanthanhcong.class);
+                            intent.putExtra("detailId", newDetailID);
+                            startActivity(intent);
 //                         Sau khi lấy được newDetailId, tiến hành tạo và lưu OrderDetail
 
                             db.collection("order_detail")
@@ -293,30 +297,30 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
                                                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                         @Override
                                                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                             for (QueryDocumentSnapshot document : queryDocumentSnapshots){
-                                                                 double currentSelled = document.getDouble("selled");
-                                                                 double currentSoluong = document.getDouble("soluong");
-                                                                 Map<String, Object> updates = new HashMap<>();
-                                                                 updates.put("selled", currentSelled + 1); // Tăng số lượng đã bán
-                                                                 updates.put("soluong", currentSoluong - 1); // Giảm số lượng tồn kho
+                                                            for (QueryDocumentSnapshot document : queryDocumentSnapshots){
+                                                                double currentSelled = document.getDouble("selled");
+                                                                double currentSoluong = document.getDouble("soluong");
+                                                                Map<String, Object> updates = new HashMap<>();
+                                                                updates.put("selled", currentSelled + 1); // Tăng số lượng đã bán
+                                                                updates.put("soluong", currentSoluong - 1); // Giảm số lượng tồn kho
 
-                                                                 // Thực hiện cập nhật vào Firestore
-                                                                 db.collection("Products")
-                                                                         .document(document.getId()) // Sử dụng ID của tài liệu hiện tại
-                                                                         .update(updates)
-                                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                             @Override
-                                                                             public void onSuccess(Void aVoid) {
-                                                                                 // Xử lý khi cập nhật thành công
-                                                                             }
-                                                                         })
-                                                                         .addOnFailureListener(new OnFailureListener() {
-                                                                             @Override
-                                                                             public void onFailure(@NonNull Exception e) {
-                                                                                 // Xử lý khi cập nhật không thành công
-                                                                             }
-                                                                         });
-                                                             }
+                                                                // Thực hiện cập nhật vào Firestore
+                                                                db.collection("Products")
+                                                                        .document(document.getId()) // Sử dụng ID của tài liệu hiện tại
+                                                                        .update(updates)
+                                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                            @Override
+                                                                            public void onSuccess(Void aVoid) {
+                                                                                // Xử lý khi cập nhật thành công
+                                                                            }
+                                                                        })
+                                                                        .addOnFailureListener(new OnFailureListener() {
+                                                                            @Override
+                                                                            public void onFailure(@NonNull Exception e) {
+                                                                                // Xử lý khi cập nhật không thành công
+                                                                            }
+                                                                        });
+                                                            }
                                                         }
                                                     });
 
@@ -379,10 +383,7 @@ public class trangthanhtoanhoadon extends AppCompatActivity {
             if(data != null) {
 
                 if(data.getIntExtra("status", -1) == 0) {
-                    Intent intent = new Intent(trangthanhtoanhoadon.this, thanhtoanthanhcong.class);
-                    intent.putExtra("orderId", neworderId);
-                    intent.putExtra("detailId", currentDetailID);
-                    startActivity(intent);
+                    luuThongTinChiTietDonHang(neworderId, cartItems);
                     Log.d("Thanhcong", data.getStringExtra("message"));
 
                     if(data.getStringExtra("data") != null && !data.getStringExtra("data").equals("")) {

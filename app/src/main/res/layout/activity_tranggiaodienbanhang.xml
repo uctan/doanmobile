@@ -202,7 +202,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="170dp"
                 android:layout_marginTop="750dp"
                 >
                 <CheckBox
@@ -220,11 +220,20 @@
                     android:layout_marginStart="250dp"
                     />
                 <CheckBox
+                    android:id="@+id/countreviewtimkiem"
                     android:layout_width="200dp"
                     android:layout_height="50dp"
                     android:text="Tìm kiếm theo đánh giá sản phẩm"
                     android:layout_marginStart="250dp"
                     android:layout_marginTop="60dp"
+                    />
+                <CheckBox
+                    android:id="@+id/timkiemtheosoluongban"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:text="Tìm kiếm theo số lượng bán"
+                    android:layout_marginStart="250dp"
+                    android:layout_marginTop="120dp"
                     />
                 <CheckBox
                     android:id="@+id/cbcaothap"
@@ -234,7 +243,14 @@
                     android:text="Tìm kiếm theo giá từ cao lên thấp"
                     android:layout_marginStart="35dp"
                     />
-
+                <CheckBox
+                    android:id="@+id/timkiemdiscount"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="120dp"
+                    android:text="Tìm kiếm theo Discount"
+                    android:layout_marginStart="35dp"
+                    />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -242,7 +258,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="390dp"
-                android:layout_marginTop="880dp"
+                android:layout_marginTop="950dp"
                 />
         </RelativeLayout>
     </ScrollView>

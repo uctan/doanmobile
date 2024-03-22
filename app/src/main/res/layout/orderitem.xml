@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="260dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ordercardnhe"
     app:cardCornerRadius="8dp">
@@ -52,11 +52,62 @@
         android:textStyle="bold"
         />
     <TextView
+        android:layout_width="170dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="140dp"
+        android:text="Phương thức vận chuyển:"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/phuongthucorder"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="140dp"
+        android:text="Phương thức vận chuyển:"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="110dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="170dp"
+        android:text="Phí vận chuyển:"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/phiorder"
+        android:layout_width="110dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="170dp"
+        android:text="1000000"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="110dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="200dp"
+        android:text="Trang thái:"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/trangthaiorder"
+        android:layout_width="170dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="200dp"
+        android:text="1000000"
+        android:textStyle="bold"
+        />
+    <TextView
         android:id="@+id/tongtiennguoimuaorder"
         android:layout_width="200dp"
         android:layout_height="20dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="230dp"
         android:textStyle="bold"
         />
     <!--        android:text="Tongtien"-->

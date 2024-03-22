@@ -37,7 +37,7 @@ public class dangkylenguoiban extends AppCompatActivity {
     EditText nhaptencuahang, nhaptendiachi, nhapmotacuahang;
     CheckBox nguoibanthuong;
     KhachHang khachHang;
-
+    ShopRepository shopRepository;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,9 @@ public class dangkylenguoiban extends AppCompatActivity {
         khachHang = new KhachHang(); // Khởi tạo đối tượng KhachHang
         nguoibanthuong = findViewById(R.id.nguoibanthuong);
 
+        // Khởi tạo ShopRepository
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        shopRepository = new FirebaseShopRepository(db);
         nguoibanthuong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -107,38 +110,15 @@ public class dangkylenguoiban extends AppCompatActivity {
                                     if (documentSnapshot.exists()) {
 
                                         KhachHang khachHang = documentSnapshot.toObject(KhachHang.class);
-
-
-
                                         int userId = documentSnapshot.getLong("userID").intValue();
                                         Shop newShop = new Shop();
                                         newShop.setShopName(tencuahang);
                                         newShop.setDiaChi(diachicuahang);
                                         newShop.setMoTa(motacuahang);
                                         newShop.setUserId(userId);
-
-                                        db.collection("Shop")
-                                                .orderBy("shopId", Query.Direction.DESCENDING)
-                                                .limit(1)
-                                                .get()
-                                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                    @Override
-                                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                        int newshopId = 1;
-                                                        if (!queryDocumentSnapshots.isEmpty()) {
-                                                            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                                                int highestShopId = document.getLong("shopId").intValue();
-                                                                newshopId = highestShopId + 1;
-                                                            }
-                                                        }
-
-
-                                                        newShop.setShopId(newshopId);
-                                                        String documentId = user.getUid();
-
-                                                        DocumentReference shopRef = db.collection("Shop").document(documentId);
-
-                                                        shopRef.set(newShop);
+                                        shopRepository.addShop(newShop, new Callback<Boolean>() {
+                                            @Override
+                                            public void onSuccess(Boolean result) {
                                                         khachHang.setNguoiBan(true);
                                                         khachHang.setKhachHang(false);
 
@@ -149,10 +129,15 @@ public class dangkylenguoiban extends AppCompatActivity {
                                                         Toast.makeText(dangkylenguoiban.this, "Đăng ký người bán thành công", Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(dangkylenguoiban.this, dangkythanhcongthuong.class);
                                                         startActivity(intent);
+                                            }
+
+                                            @Override
+                                            public void onError(String errorMessage) {
+
+                                            }
+                                        });
 
 
-                                                    }
-                                                });
                                     }
                                 }
                             });

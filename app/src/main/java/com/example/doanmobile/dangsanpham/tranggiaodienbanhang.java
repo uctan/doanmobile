@@ -63,7 +63,7 @@ public class tranggiaodienbanhang extends AppCompatActivity {
     private List<Integer> favoriteProducts = new ArrayList<>();
 
 
-    CheckBox cbthapcao, cbcaothap, cbsoluotyeuthich;
+    CheckBox cbthapcao, cbcaothap, cbsoluotyeuthich,countreviewtimkiem,timkiemdiscount,timkiemtheosoluongban;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -77,6 +77,9 @@ public class tranggiaodienbanhang extends AppCompatActivity {
         cbthapcao = findViewById(R.id.cbthapcao);
         cbcaothap = findViewById(R.id.cbcaothap);
         cbsoluotyeuthich = findViewById(R.id.cbsoluotyeuthich);
+        countreviewtimkiem = findViewById(R.id.countreviewtimkiem);
+        timkiemdiscount = findViewById(R.id.timkiemdiscount);
+        timkiemtheosoluongban = findViewById(R.id.timkiemtheosoluongban);
 
         //lấy user
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -226,8 +229,59 @@ public class tranggiaodienbanhang extends AppCompatActivity {
                 }
             }
         });
+        //timkiem theo discount
+        timkiemdiscount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    sortByDiscount();
+                }
+            }
+        });
+        timkiemtheosoluongban.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked){
+                    sortsoluongban();
+                }
+            }
+        });
+        countreviewtimkiem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked){
+                    sortdanhgiasanpham();
+                }
+            }
+        });
     }
-
+    private  void sortByDiscount() {
+        Collections.sort(productsList, new Comparator<Products>() {
+            @Override
+            public int compare(Products product1, Products products2) {
+                return Double.compare(products2.getDiscount(),product1.getDiscount());
+            }
+        });
+        productAdapter.notifyDataSetChanged();
+    }
+    private void sortsoluongban(){
+        Collections.sort(productsList, new Comparator<Products>() {
+            @Override
+            public int compare(Products product1, Products products2) {
+                return Double.compare(products2.getSelled(),product1.getSelled());
+            }
+        });
+        productAdapter.notifyDataSetChanged();
+    }
+    private void sortdanhgiasanpham(){
+        Collections.sort(productsList, new Comparator<Products>() {
+            @Override
+            public int compare(Products product1, Products products2) {
+                return Double.compare(products2.getReviewcount(),product1.getReviewcount());
+            }
+        });
+        productAdapter.notifyDataSetChanged();
+    }
     //tim kiem theo san pham yeu thich
     private void sortByLikeCount() {
         // Sắp xếp danh sách sản phẩm theo số lượt yêu thích (likeCount)

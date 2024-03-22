@@ -46,6 +46,9 @@ public class shophienthiAdapter extends RecyclerView.Adapter<shophienthiAdapter.
         holder.ngaynguoimuaorder.setText(formattedDate);
         holder.hinhthucnguoimuaorder.setText(order.getHtThanhToan());
         holder.diachinguoimuaorder.setText(order.getDiaChi());
+        holder.phiorder.setText(String.valueOf(order.getPhivanchuyen()));
+        holder.phuongthucorder.setText(order.getPhuongthucvanchuyen());
+        holder.trangthaiorder.setText(order.getTrangthai());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         int userID = order.getUserID();
         CollectionReference shopCollectionRef1 = db.collection("KhachHang");
@@ -69,7 +72,7 @@ public class shophienthiAdapter extends RecyclerView.Adapter<shophienthiAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tennguoimuaorder, ngaynguoimuaorder, hinhthucnguoimuaorder, diachinguoimuaorder;
+        TextView tennguoimuaorder, ngaynguoimuaorder, hinhthucnguoimuaorder, diachinguoimuaorder,phuongthucorder,phiorder,trangthaiorder;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +80,9 @@ public class shophienthiAdapter extends RecyclerView.Adapter<shophienthiAdapter.
             ngaynguoimuaorder = itemView.findViewById(R.id.ngaynguoimuaorder);
             hinhthucnguoimuaorder = itemView.findViewById(R.id.hinhthucnguoimuaorder);
             diachinguoimuaorder = itemView.findViewById(R.id.diachinguoimuaorder);
+            phuongthucorder = itemView.findViewById(R.id.phuongthucorder);
+            phiorder = itemView.findViewById(R.id.phiorder);
+            trangthaiorder = itemView.findViewById(R.id.trangthaiorder);
         }
     }
 }

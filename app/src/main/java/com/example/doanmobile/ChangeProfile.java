@@ -23,7 +23,7 @@ public class ChangeProfile extends AppCompatActivity {
     EditText edtHoten,edtEmail,edtpass,edtsdt;
     Button btnChangeProfile;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
-    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+    FirebaseFirestore fStore = FirebaseFirestoreSingleton.getInstance(); // Sử dụng singleton
 
     ImageView btnBackprofile;
 
@@ -88,8 +88,8 @@ public class ChangeProfile extends AppCompatActivity {
         map.put("email",email);
         map.put("soDienThoai",sdt);
         map.put("matKhau",pass);
-       // khachHang.setEmail(email);
-       // khachHang.setMatKhau(pass);
+        // khachHang.setEmail(email);
+        // khachHang.setMatKhau(pass);
         fStore.collection("KhachHang")
                 .document(user.getUid())
                 .update(map)

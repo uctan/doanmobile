@@ -47,6 +47,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.ngaynguoimuaorder.setText(formattedDate);
         holder.hinhthucnguoimuaorder.setText(order.getHtThanhToan());
         holder.diachinguoimuaorder.setText(order.getDiaChi());
+        holder.phiorder.setText(String.valueOf(order.getPhivanchuyen()));
+        holder.phuongthucorder.setText(order.getPhuongthucvanchuyen());
+        holder.trangthaiorder.setText(order.getTrangthai());
         holder.tongtiennguoimuaorder.setText(String.valueOf(order.getTongTien()));
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         int userID = order.getUserID();
@@ -78,7 +81,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         return orderList.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tennguoimuaorder, ngaynguoimuaorder,hinhthucnguoimuaorder,diachinguoimuaorder,tongtiennguoimuaorder;
+        TextView tennguoimuaorder, ngaynguoimuaorder,hinhthucnguoimuaorder,diachinguoimuaorder,tongtiennguoimuaorder,phuongthucorder,phiorder,trangthaiorder;
         CardView ordercardnhe;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +91,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             diachinguoimuaorder = itemView.findViewById(R.id.diachinguoimuaorder);
             tongtiennguoimuaorder = itemView.findViewById(R.id.tongtiennguoimuaorder);
             ordercardnhe = itemView.findViewById(R.id.ordercardnhe);
+            phuongthucorder = itemView.findViewById(R.id.phuongthucorder);
+            phiorder = itemView.findViewById(R.id.phiorder);
+            trangthaiorder = itemView.findViewById(R.id.trangthaiorder);
         }
     }
 }

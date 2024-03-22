@@ -33,13 +33,36 @@
                     android:background="@drawable/close"
                     android:id="@+id/backdonhangshopchart"
                     />
+
             </RelativeLayout>
+            <CheckBox
+                android:id="@+id/chartcot"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginStart="20dp"
+                android:text="Chọn biểu đồ hình cột"
+                />
+            <CheckBox
+                android:id="@+id/chartduong"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginStart="250dp"
+                android:text="Chọn biểu đồ hình đường"
+                />
          <com.github.mikephil.charting.charts.BarChart
              android:id="@+id/chart"
              android:layout_width="match_parent"
-             android:layout_height="410dp"
-             android:layout_marginTop="110dp"
+             android:layout_height="440dp"
+             android:layout_marginTop="240dp"
              />
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/linechartnha"
+                android:layout_width="match_parent"
+                android:layout_height="410dp"
+                android:layout_marginTop="240dp"
+                />
             <TextView
                 android:layout_width="220dp"
                 android:layout_height="44dp"
@@ -47,14 +70,14 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="530dp"
+                android:layout_marginTop="730dp"
                 android:textColor="@color/black"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewChart"
                 android:layout_width="450dp"
                 android:layout_height="200dp"
-                android:layout_marginTop="570dp"
+                android:layout_marginTop="770dp"
                 android:layout_marginStart="10dp"
                 />
         </RelativeLayout>

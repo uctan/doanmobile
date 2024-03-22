@@ -165,10 +165,10 @@
                         <ImageView
                             android:id="@+id/livenhe"
                             android:layout_width="88dp"
-                            android:layout_height="142dp"
+                            android:layout_height="120dp"
                             android:scaleType="center"
                             android:layout_marginStart="20dp"
-                            android:src="@drawable/hotdog" />
+                            android:src="@drawable/livenguoidung"/>
 
                         <ImageView
                             android:layout_width="88dp"

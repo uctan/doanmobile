@@ -48,6 +48,7 @@ public class dangkynguoibanvip extends AppCompatActivity {
     private String merchantCode = "MOMOC2IC20220510";
     private String merchantNameLabel = "HoangNgoc";
     private String description = "mua hàng online";
+    private NguoibanvipBuilder nguoibanvipBuilder;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -87,13 +88,12 @@ public class dangkynguoibanvip extends AppCompatActivity {
         }
 
 
-
         dknguoibanvip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (nguoibanvipvip.isChecked()) {
                     amount = "150000"; // Thay đổi thành giá trị mới
-
+//                    saveDataToFirestore();
                     // Gọi hàm thanh toán MoMo
                     requestPayment(merchantName);
                 } else {
@@ -104,10 +104,10 @@ public class dangkynguoibanvip extends AppCompatActivity {
         });
 
     }
+
     private void requestPayment(String idDonHang) {
         AppMoMoLib.getInstance().setAction(AppMoMoLib.ACTION.PAYMENT);
         AppMoMoLib.getInstance().setActionType(AppMoMoLib.ACTION_TYPE.GET_TOKEN);
-
 
 
         Map<String, Object> eventValue = new HashMap<>();
@@ -120,7 +120,7 @@ public class dangkynguoibanvip extends AppCompatActivity {
         eventValue.put(MoMoParameterNamePayment.FEE, fee);
         eventValue.put(MoMoParameterNamePayment.MERCHANT_NAME_LABEL, merchantNameLabel);
 
-        eventValue.put(MoMoParameterNamePayment.REQUEST_ID,  merchantCode+"-"+ UUID.randomUUID().toString());
+        eventValue.put(MoMoParameterNamePayment.REQUEST_ID, merchantCode + "-" + UUID.randomUUID().toString());
         eventValue.put(MoMoParameterNamePayment.PARTNER_CODE, "MOMOC2IC20220510");
 
         JSONObject objExtraData = new JSONObject();
@@ -142,27 +142,28 @@ public class dangkynguoibanvip extends AppCompatActivity {
         //Request momo app
         AppMoMoLib.getInstance().requestMoMoCallBack(this, eventValue);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
-            if(data != null) {
+        if (requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
+            if (data != null) {
 
-                if(data.getIntExtra("status", -1) == 0) {
+                if (data.getIntExtra("status", -1) == 0) {
 
                     Log.d("Thanhcong", data.getStringExtra("message"));
 
                     saveDataToFirestore();
-                    if(data.getStringExtra("data") != null && !data.getStringExtra("data").equals("")) {
+                    if (data.getStringExtra("data") != null && !data.getStringExtra("data").equals("")) {
                         // TODO:
 
                     } else {
                         Log.d("Thanhcong", data.getStringExtra("Không nhận được thông tin"));
                     }
-                } else if(data.getIntExtra("status", -1) == 1) {
-                    String message = data.getStringExtra("message") != null?data.getStringExtra("message"):"Thất bại";
+                } else if (data.getIntExtra("status", -1) == 1) {
+                    String message = data.getStringExtra("message") != null ? data.getStringExtra("message") : "Thất bại";
                     Log.d("Thanhcong", data.getStringExtra("Không thành công"));
-                } else if(data.getIntExtra("status", -1) == 2) {
+                } else if (data.getIntExtra("status", -1) == 2) {
                     Log.d("Thanhcong", data.getStringExtra("Không thành công"));
                 } else {
                     Log.d("Thanhcong", data.getStringExtra("Không thành công"));
@@ -174,6 +175,7 @@ public class dangkynguoibanvip extends AppCompatActivity {
             Log.d("Thanhcong", data.getStringExtra("Không thành công"));
         }
     }
+
     private void saveDataToFirestore() {
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fAuth.getCurrentUser();
@@ -197,7 +199,16 @@ public class dangkynguoibanvip extends AppCompatActivity {
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         if (documentSnapshot.exists()) {
                                             int shopID = documentSnapshot.getLong("shopId").intValue();
-                                            Nguoibanvip nguoibanvip1 = new Nguoibanvip(0, shopID, 150000);
+
+                                            // Khởi tạo nguoibanvipBuilder
+                                            nguoibanvipBuilder = new ConcreteNguoibanvipBuilder();
+
+                                            // Sử dụng nguoibanvipBuilder để xây dựng đối tượng nguoibanvip
+                                            Nguoibanvip nguoibanvip1 = nguoibanvipBuilder
+                                                    .setNguoibanvipID(0)
+                                                    .setShopID(shopID)
+                                                    .setPrice(150000)
+                                                    .build();
 
                                             FirebaseFirestore.getInstance().collection("NguoiBanVip")
                                                     .add(nguoibanvip1)

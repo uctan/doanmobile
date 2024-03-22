@@ -24,8 +24,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.doanmobile.R;
-import com.example.doanmobile.dangkynguoiban.manhinhnguoiban;
 import com.example.doanmobile.dangkynguoiban.quanlysanphamthemsanpham;
+import com.example.doanmobile.taicautrucproduct.ConcreteProductPrototype;
+import com.example.doanmobile.taicautrucproduct.ProductPrototype;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -44,7 +45,9 @@ import com.google.firebase.storage.StorageReference;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Uploadproduct extends AppCompatActivity {
@@ -64,7 +67,6 @@ public class Uploadproduct extends AppCompatActivity {
     private int shopID;
     private int categoryID;
 
-
     Uri uri;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -81,6 +83,7 @@ public class Uploadproduct extends AppCompatActivity {
         uploadsoluongsanpham = findViewById(R.id.uploadsoluongsanpham);
         luusanpham = findViewById(R.id.luusanpham);
         db = FirebaseFirestore.getInstance();
+
         //neu vip se xuat hien disscoutn
         FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         if (user1 != null) {
@@ -284,6 +287,7 @@ public class Uploadproduct extends AppCompatActivity {
     public void uploadData(String title, String mota, double price, int productID, int categoryID, int shopID,double soluong,double selled, double reviewcount,double discount) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference productsCollection = db.collection("Products");
+        ConcreteProductPrototype prototypeProduct = new ConcreteProductPrototype(title, mota, price, categoryID, shopID, soluong, selled, reviewcount, discount);
 
         // Thêm bộ lọc và sắp xếp cho collection
         productsCollection.orderBy("productID", Query.Direction.DESCENDING)
@@ -298,8 +302,27 @@ public class Uploadproduct extends AppCompatActivity {
                         }
                     }
 
-                    Products product = new Products(newproductID, shopID, categoryID, title, mota, price, imageURL, 0, selled, soluong, reviewcount, discount);
 
+                    ConcreteProductPrototype product = new ConcreteProductPrototype();
+                    product.setProductID(newproductID);
+                    product.setShopID(prototypeProduct.getShopID());
+                    product.setCategoryID(prototypeProduct.getCategoryID());
+                    product.setTitle(prototypeProduct.getTitle());
+                    product.setDescription(prototypeProduct.getDescription());
+                    product.setPrice(prototypeProduct.getPrice());
+                    product.setSoluong(prototypeProduct.getSoluong());
+                    product.setSelled(prototypeProduct.getSelled());
+                    product.setReviewcount(prototypeProduct.getReviewcount());
+                    product.setDiscount(prototypeProduct.getDiscount());
+                    product.setImageURL(imageURL);
+                    // Tạo một bản sao của đối tượng prototypeProduct
+                    ProductPrototype clonedProduct = null;
+                    try {
+                        clonedProduct = prototypeProduct.clone();
+                        clonedProduct.setProductID(newproductID);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     String currentDate = DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
 
                     // Query tại đây với điều kiện phù hợp

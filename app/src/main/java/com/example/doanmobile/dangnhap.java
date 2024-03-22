@@ -45,6 +45,7 @@ public class dangnhap extends AppCompatActivity {
     private  static final String TAG = "GOOGLEAUTH";
     private  static final int RC_SIGN_IN = 1;
     Dialog dialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,6 @@ public class dangnhap extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        dialog.setContentView(R.layout.dialog_wait);
         dialog.setCanceledOnTouchOutside(false);
-
         Emaildangnhap = findViewById(R.id. Emaildangnhap);
         Matkhaudangnhap = findViewById(R.id. Matkhaudangnhap);
         btnDangNhap = findViewById(R.id.btnDangNhap);

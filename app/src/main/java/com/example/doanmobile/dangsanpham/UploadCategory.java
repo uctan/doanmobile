@@ -24,7 +24,8 @@ public class UploadCategory extends AppCompatActivity {
 
     EditText uploadtheloai;
     Button luuButton, boquaButton;
-
+    private CategoryManager categoryManager;
+    private CategoryObserver categoryObserver;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -34,6 +35,11 @@ public class UploadCategory extends AppCompatActivity {
         uploadtheloai = findViewById(R.id.uploadtheloai);
         luuButton = findViewById(R.id.luuButton);
         boquaButton = findViewById(R.id.boquaButton);
+
+        categoryManager = new CategoryManager();
+        categoryObserver = new CategoryObserver();
+
+
         boquaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,52 +53,9 @@ public class UploadCategory extends AppCompatActivity {
             public void onClick(View view) {
                 String categoryName = uploadtheloai.getText().toString();
                 if (!categoryName.isEmpty()) {
-                    // Lưu Category lên Firestore
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    Category category = new Category(0, categoryName); // categoryID tạm thời là 0
+                    categoryManager.addCategory(category,view.getContext());
 
-                    db.collection("Category")
-                            .orderBy("categoryID", Query.Direction.DESCENDING)
-                            .limit(1)
-                            .get()
-                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    int newcategoryID = 1;
-                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                            int highestCategoryID = document.getLong("categoryID").intValue();
-                                            newcategoryID = highestCategoryID + 1;
-                                        }
-                                    }
-
-                                    // Tạo một đối tượng Category với categoryID mới
-                                    Category category = new Category(newcategoryID, categoryName);
-
-                                    // Thêm category vào Firestore
-                                    db.collection("Category")
-                                            .add(category)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(UploadCategory.this,"Thêm thể loại sản phẩm thành công",Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(UploadCategory.this,Uploadproduct.class);
-                                                    startActivity(intent);
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    // Xử lý khi có lỗi xảy ra
-                                                }
-                                            });
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Xử lý khi có lỗi xảy ra
-                                }
-                            });
                 }
             }
         });
